@@ -1,9 +1,28 @@
 import { getProviders, getSession } from 'next-auth/react'
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from 'next'
 import ProviderButton from '@/components/ProviderButton'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
+import { useEffect } from 'react'
 
 const Signin = ({ providers }: ServerSideProps) => {
+  const router = useRouter()
+  const { error } = router.query
+
+  useEffect(() => {
+    console.log(error)
+    if (error === 'OAuthAccountNotLinked') {
+      toast(
+        'You already have an account with same email address. Please sign in with that account.',
+        { type: 'error', autoClose: false, position: 'top-center' }
+      )
+    }
+  })
+
   if (!providers) {
     return <div>No Providers</div>
   }
@@ -22,6 +41,7 @@ const Signin = ({ providers }: ServerSideProps) => {
         ))}
       </div>
       <p className='gray-5 mt-2'>watashi.app</p>
+      {/* <ToastContainer /> */}
     </div>
   )
 }
