@@ -43,6 +43,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  bio           String?
+  gender        Gender?
   status        Status    @default(ACTIVE)
   accounts      Account[]
   sessions      Session[]
@@ -56,7 +58,13 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
 enum Status {
-  BLOCKED
   ACTIVE
+  BLOCKED
 }

@@ -3,10 +3,19 @@
 @tailwind utilities;
 
 @layer components {
+  label {
+    @apply text-sm text-gray-500;
+  }
   .input-field {
-    @apply rounded-lg bg-gray-100 p-2 ring-0;
+    @apply rounded-lg bg-gray-100 p-2 ring-0 focus:outline-1 focus:outline-pink-500;
+  }
+  .btn-outline {
+    @apply rounded bg-white p-2 text-black shadow-md ring-1 ring-black hover:bg-blue-100 hover:ring-blue-500;
   }
   .btn {
-    @apply rounded bg-white p-2 text-black shadow-md ring-1 ring-black hover:bg-blue-100 hover:ring-blue-500;
+    @apply rounded-3xl bg-pink-600 px-5 py-2 text-sm text-white shadow-md;
+  }
+  .btn-secondary {
+    @apply rounded-3xl bg-white px-5 py-2 text-sm text-pink-500  shadow-md ring-1 ring-pink-500;
   }
 }

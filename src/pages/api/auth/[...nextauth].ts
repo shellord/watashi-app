@@ -3,6 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
+import { generateAvatar } from '@/lib/avatar'
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -24,17 +25,22 @@ export default NextAuth({
 
   callbacks: {
     async session({ session, user, token }) {
-      session.user = { user }
+      session.user = user
       return session
     },
   },
   events: {
     createUser: async ({ user }) => {
-      const { id } = user
+      const { id, name } = user
+      const image = generateAvatar(name as string)
+      const prefix = name?.split(' ')[0]
+      const suffix = Math.random().toString().substring(2, 4)
+      const random_username = prefix + suffix
       await prisma.user.update({
         where: { id },
         data: {
-          username: Math.random().toString(36).substring(2, 7),
+          username: random_username,
+          image,
         },
       })
     },

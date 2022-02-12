@@ -1,13 +1,12 @@
-import NextAuth from 'next-auth'
-
+import NextAuth, { DefaultSession } from 'next-auth'
+import type { Status } from '@/types/user'
 declare module 'next-auth' {
   interface User {
-    id?: string | undefined
-    username?: string | null | undefined
-    name?: string | null | undefined
-    email?: string | null | undefined
-    image?: string | null | undefined
-    status?: 'PENDING' | 'ACTIVE' | 'BLOCKED'
+    id?: string
+    username?: string
+    name?: string | null
+    email?: string | null
+    status?: Status
   }
   interface Session {
     user: User

@@ -1,13 +1,82 @@
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault()
-  console.log(event.currentTarget)
-}
-const NewUser = () => {
+import { getSession } from 'next-auth/react'
+import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
+import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
+import { FcEditImage } from 'react-icons/fc'
+import Image from 'next/image'
+import { useMutation } from 'react-query'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+
+import Modal from '@/components/Modal'
+import PhotoUpload from '@/components/PhotoUpload'
+import { updateUser } from '@/lib/api/user'
+
+const NewUser = ({ user }: ServerSideProps) => {
+  const [showMainModal, setShowMainModal] = useState(false)
+  const [showUploadModal, setshowUploadModal] = useState(false)
+  const mutation = useMutation(updateUser, {
+    onSuccess: () => {
+      toast('Your profile has been updated!', {
+        type: 'success',
+      })
+    },
+    onError: (error: Error) => {
+      toast(error.message, {
+        type: 'error',
+      })
+    },
+  })
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const { name, username, gender, bio } = event.currentTarget.elements as any
+    mutation.mutate({
+      name: name.value,
+      username: username.value,
+      gender: gender.value,
+      bio: bio.value,
+    })
+  }
+
   return (
-    <div className='mt-2 flex flex-col bg-white p-10 shadow-sm'>
-      <p className='text-xl font-bold'>Welcome to watashi.app</p>
-      <form onSubmit={handleSubmit} className='mt-3 w-1/2'>
-        <div className='flex items-center justify-between'>
+    <div className='shadow-s mt-2 bg-white px-5 py-5 sm:px-10'>
+      <p className='text-md text-center text-sm font-semibold'>
+        Setup your profile
+      </p>
+      <form onSubmit={handleSubmit} className='mt-3'>
+        <div className='flex justify-center'>
+          <button
+            className='relative h-24 w-24'
+            onClick={() => setShowMainModal(true)}
+            type='button'
+          >
+            <Image
+              src={user?.image?.toString() as string}
+              alt='avatar'
+              layout='fill'
+              className='rounded-full shadow'
+            />
+            <span className='absolute right-0 bottom-0'>
+              <FcEditImage size={30} />
+            </span>
+          </button>
+        </div>
+        <div className='flex flex-col'>
+          <label htmlFor='name' className='flex'>
+            Name
+          </label>
+          <input
+            id='name'
+            className='input-field flex'
+            type='text'
+            placeholder='Name'
+            defaultValue={user?.name?.toString()}
+            maxLength={20}
+            autoComplete='off'
+            required
+          />
+        </div>
+        <div className='mt-2 flex flex-col'>
           <label htmlFor='username' className='flex'>
             Username
           </label>
@@ -16,30 +85,143 @@ const NewUser = () => {
             className='input-field flex'
             type='text'
             placeholder='Username'
-            required
+            defaultValue={user?.username?.toString()}
             maxLength={20}
+            autoComplete='off'
+            required
           />
         </div>
-        <div className='mt-2 flex items-center justify-between'>
-          <label htmlFor='username' className='flex flex-1'>
+        <div className='mt-2 flex flex-col'>
+          <label htmlFor='bio' className='flex flex-1'>
             Bio
           </label>
           <textarea
-            id='username'
-            className='input-field flex'
-            placeholder='Username'
-            required
-            maxLength={20}
+            id='bio'
+            className='input-field flex resize-none'
+            placeholder='Write something about yourself'
+            rows={3}
+            maxLength={200}
           />
         </div>
-        <div className='flex'>
+        <div className='mt-2 flex flex-col text-sm'>
+          <label htmlFor='bio' className='flex flex-1'>
+            Gender
+          </label>
+          <ul className='inline-flex space-x-1'>
+            <li>
+              <input
+                type='radio'
+                value='MALE'
+                name='gender'
+                className='peer appearance-none'
+                id='male'
+                defaultChecked
+              />
+              <label
+                htmlFor='male'
+                className='flex cursor-pointer items-center rounded-l bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+              >
+                <BsGenderMale />
+                <span className='ml-2'>Male</span>
+              </label>
+            </li>
+            <li>
+              <input
+                type='radio'
+                value='FEMALE'
+                name='gender'
+                className='peer appearance-none'
+                id='female'
+              />
+              <label
+                htmlFor='female'
+                className='flex cursor-pointer items-center rounded-none bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+              >
+                <BsGenderFemale />
+                <span className='ml-2'>Female</span>
+              </label>
+            </li>
+            <li>
+              <input
+                type='radio'
+                value='OTHER'
+                name='gender'
+                className='peer appearance-none'
+                id='other'
+              />
+              <label
+                htmlFor='other'
+                className='flex cursor-pointer items-center rounded-r bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+              >
+                <BsGenderTrans />
+                <span className='ml-2'>Other</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div className='flex justify-end'>
           <button type='submit' className='btn mt-5'>
-            Create Account
+            Save
           </button>
         </div>
       </form>
+      <Modal showModal={showMainModal} setShowModal={setShowMainModal}>
+        <div className='absolute top-36  w-full max-w-xl p-5'>
+          <div className='flex  flex-col rounded-lg bg-white px-10 text-center'>
+            <button
+              className='py-3'
+              onClick={() => {
+                setShowMainModal(false)
+                setshowUploadModal(true)
+              }}
+              type='button'
+            >
+              Choose from gallery{' '}
+            </button>
+            <button
+              className='border-t-[0.05rem] border-b-[0.05rem] py-3'
+              type='button'
+            >
+              Remove Profile Picture
+            </button>
+            <button
+              className='py-3'
+              onClick={() => setShowMainModal(false)}
+              type='button'
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
+      <Modal showModal={showUploadModal} setShowModal={setshowUploadModal}>
+        <PhotoUpload setshowUploadModal={setshowUploadModal} />
+      </Modal>
     </div>
   )
 }
 
+type ServerSideProps = InferGetServerSidePropsType<typeof getServerSideProps>
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+      props: {},
+    }
+  }
+  const { user } = session
+  return {
+    props: {
+      session,
+      user,
+    },
+  }
+}
 export default NewUser
