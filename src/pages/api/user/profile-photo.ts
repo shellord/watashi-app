@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import axios from 'axios'
 import { prisma } from '@/lib/prisma'
+import { generateAvatar } from '@/lib/avatar'
 
 const API_ENDPOINT = 'https://api.cloudinary.com/v1_1/watashi-app/upload'
 const UPLOAD_PRESET = 'gzshbsoo'
@@ -34,6 +35,7 @@ export default async function handler(
         res.status(500).json({ error: 'Something went wrong' })
       }
       break
+
     default:
       res.status(400).json({ error: 'Bad Method' })
   }

@@ -41,7 +41,6 @@ const Signin = ({ providers }: ServerSideProps) => {
         ))}
       </div>
       <p className='gray-5 mt-2'>watashi.app</p>
-      {/* <ToastContainer /> */}
     </div>
   )
 }

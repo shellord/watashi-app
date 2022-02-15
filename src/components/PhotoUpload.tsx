@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { Point, Area } from 'react-easy-crop/types'
 import { MdClose } from 'react-icons/md'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
 
 import { updateProfilePhoto } from '@/lib/api/user'
@@ -21,17 +21,29 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
     x: 0,
     y: 0,
   })
+  const queryClient = useQueryClient()
 
   const mutation = useMutation(updateProfilePhoto, {
-    onSuccess: () => {
-      toast('Profile Photo updated!', {
+    onMutate: () => {
+      toast.loading('Uploading your photo...', {
+        type: 'info',
+        toastId: 'uploading-photo',
+      })
+    },
+    onSuccess: (response) => {
+      toast.update('uploading-photo', {
+        render: 'Photo successfully uploaded!',
         type: 'success',
+        isLoading: false,
       })
       setshowUploadModal(false)
+      queryClient.invalidateQueries('currentUser')
     },
     onError: (error: Error) => {
-      toast(error.message, {
+      toast.update('uploading-photo', {
+        render: `Error: ${error.message}`,
         type: 'error',
+        isLoading: false,
       })
     },
   })
@@ -93,6 +105,7 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
               containerStyle: {
                 borderRadius: '100%',
                 width: '100%',
+                backgroundColor: 'gray',
               },
               mediaStyle: {
                 border: 0,

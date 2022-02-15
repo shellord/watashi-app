@@ -17,7 +17,7 @@ export default async function handler(
       const user = await prisma.user.findFirst({
         where: { id: session.user.id },
       })
-      res.status(200).json({ user })
+      res.status(200).json(user)
       break
     case 'PUT':
       const { name, username, bio, gender } = req.body
