@@ -3,7 +3,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
 import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
 import { FcEditImage } from 'react-icons/fc'
 import Image from 'next/image'
-import { useMutation, useQueryClient } from 'react-query'
+import { useQueryClient } from 'react-query'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
@@ -11,8 +11,9 @@ import Head from 'next/head'
 
 import Modal from '@/components/Modal'
 import PhotoUpload from '@/components/PhotoUpload'
-import { updateUser, deleteProfilePhoto } from '@/lib/api/user'
 import useCurrentUser from '@/hooks/useCurrentUser'
+import { useUpdateUser } from '@/hooks/useUpdateUser'
+import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 
 const NewUser = () => {
   const [showMainModal, setShowMainModal] = useState(false)
@@ -20,47 +21,42 @@ const NewUser = () => {
   const router = useRouter()
   const [user, loading] = useCurrentUser()
   const queryClient = useQueryClient()
-
-  const updateUserMutation = useMutation(updateUser, {
-    onSuccess: (response) => {
-      toast('Your profile has been updated!', {
-        type: 'success',
-      })
-      queryClient.invalidateQueries('currentUser')
-      router.push('/')
-    },
-    onError: (error: Error) => {
-      toast(error.message, {
-        type: 'error',
-      })
-    },
-  })
-
-  const deleteProfilePhotoMutation = useMutation(deleteProfilePhoto, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries('currentUser')
-    },
-    onError: (error: Error) => {
-      toast(error.message, {
-        type: 'error',
-      })
-    },
-  })
+  const updateUserMutation = useUpdateUser()
+  const deleteProfilePhotoMutation = useDeleteProfilePhoto()
 
   const deleteProfilePhotoHandler = () => {
-    deleteProfilePhotoMutation.mutate(user?.name as string)
+    deleteProfilePhotoMutation.mutate(user?.name as string, {
+      onError: (error: Error) => {
+        toast.error(error.message)
+      },
+    })
     setShowMainModal(false)
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const { name, username, gender, bio } = event.currentTarget.elements as any
-    updateUserMutation.mutate({
-      name: name.value,
-      username: username.value,
-      gender: gender.value,
-      bio: bio.value,
-    })
+    updateUserMutation.mutate(
+      {
+        name: name.value,
+        username: username.value,
+        gender: gender.value,
+        bio: bio.value,
+      },
+      {
+        onSuccess: () => {
+          toast('Your profile has been updated!', {
+            type: 'success',
+          })
+          router.push('/')
+        },
+        onError: (error: Error) => {
+          toast(error.message, {
+            type: 'error',
+          })
+        },
+      }
+    )
   }
 
   if (!user) {

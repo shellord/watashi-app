@@ -15,8 +15,8 @@ const Modal = ({ showModal, setShowModal, children }: Props) => {
 
   return (
     <div
-      className={`duration-400 fixed top-0  left-0 z-20  flex h-full w-full justify-center bg-black/50  ${
-        !showModal ? 'z-[-10] opacity-0' : 'opacity-100'
+      className={`fixed top-0 left-0  z-20 flex  h-full w-full justify-center bg-black/50  transition-all  ease-in-out  ${
+        !showModal ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
       onClick={closeModal}
       ref={modalRef}

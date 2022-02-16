@@ -1,6 +1,6 @@
 import { api } from '@/lib/api'
 import { User } from '@/types/user'
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { generateAvatar } from '@/lib/avatar'
 
 export const fetchUser = async (): Promise<User | null> => {
@@ -14,7 +14,7 @@ export const fetchUser = async (): Promise<User | null> => {
 
 export const updateUser = async ({ name, username, bio, gender }: User) => {
   try {
-    const res = await axios.put('/api/user', {
+    const res = await axios.put<User>('/api/user', {
       name,
       username,
       bio,
