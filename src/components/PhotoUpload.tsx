@@ -30,11 +30,12 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
         toastId: 'uploading-photo',
       })
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       toast.update('uploading-photo', {
         render: 'Photo successfully uploaded!',
         type: 'success',
         isLoading: false,
+        autoClose: 3000,
       })
       setshowUploadModal(false)
       queryClient.invalidateQueries('currentUser')

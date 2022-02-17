@@ -9,8 +9,8 @@ type Props = {
 const Modal = ({ showModal, setShowModal, children }: Props) => {
   const modalRef = useRef(null)
 
-  const closeModal = (e: React.MouseEvent) => {
-    modalRef.current === e.target && setShowModal(false)
+  const closeModal = (event: React.MouseEvent) => {
+    modalRef.current === event.target && setShowModal(false)
   }
 
   return (
