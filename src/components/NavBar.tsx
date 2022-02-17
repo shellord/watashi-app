@@ -3,7 +3,7 @@ import { AiOutlineHome } from 'react-icons/ai'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSearchOutline } from 'react-icons/io5'
 
-import useCurrentUser from '@/hooks/useCurrentUser'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import ProfileMenu from '@/components/ProfileMenu'
 
 const NavBar = () => {
@@ -37,7 +37,7 @@ const NavBar = () => {
                   <IoMdNotificationsOutline size={28} />
                 </a>
               </Link>
-              <ProfileMenu image={user?.image as string} />
+              <ProfileMenu user={user} />
             </div>
           ) : (
             <Link href='/signin'>

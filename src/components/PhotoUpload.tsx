@@ -2,11 +2,10 @@ import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { Point, Area } from 'react-easy-crop/types'
 import { MdClose } from 'react-icons/md'
-import { useMutation, useQueryClient } from 'react-query'
-import { toast } from 'react-toastify'
+import { useQueryClient } from 'react-query'
 
-import { updateProfilePhoto } from '@/lib/api/user'
 import { getCroppedImg } from '@/lib/cropImage'
+import { useUpdateProfilePhoto } from '@/hooks/useUpdateProfilePhoto'
 
 type Props = {
   setshowUploadModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,31 +22,7 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
   })
   const queryClient = useQueryClient()
 
-  const mutation = useMutation(updateProfilePhoto, {
-    onMutate: () => {
-      toast.loading('Uploading your photo...', {
-        type: 'info',
-        toastId: 'uploading-photo',
-      })
-    },
-    onSuccess: () => {
-      toast.update('uploading-photo', {
-        render: 'Photo successfully uploaded!',
-        type: 'success',
-        isLoading: false,
-        autoClose: 3000,
-      })
-      setshowUploadModal(false)
-      queryClient.invalidateQueries('currentUser')
-    },
-    onError: (error: Error) => {
-      toast.update('uploading-photo', {
-        render: `Error: ${error.message}`,
-        type: 'error',
-        isLoading: false,
-      })
-    },
-  })
+  const updateProfilePhotoMutation = useUpdateProfilePhoto()
 
   const onCropComplete = useCallback(
     (croppedArea: Area, croppedAreaPixels: Area) => {
@@ -58,11 +33,21 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
   const uploadImage = useCallback(async () => {
     try {
       const dataUri = await getCroppedImg(imageSrc, croppedAreaPixels)
-      if (dataUri) mutation.mutate(dataUri)
+      if (dataUri)
+        updateProfilePhotoMutation.mutate(dataUri, {
+          onSuccess: () => {
+            setshowUploadModal(false)
+          },
+        })
     } catch (e) {
       console.error(e)
     }
-  }, [croppedAreaPixels, imageSrc, mutation])
+  }, [
+    croppedAreaPixels,
+    imageSrc,
+    updateProfilePhotoMutation,
+    setshowUploadModal,
+  ])
 
   function readFile(file: any) {
     return new Promise((resolve) => {

@@ -3,64 +3,36 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
 import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
 import { FcEditImage } from 'react-icons/fc'
 import Image from 'next/image'
-import { useQueryClient } from 'react-query'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import Modal from '@/components/Modal'
 import PhotoUpload from '@/components/PhotoUpload'
-import useCurrentUser from '@/hooks/useCurrentUser'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useUpdateUser } from '@/hooks/useUpdateUser'
 import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 
 const NewUser = () => {
   const [showMainModal, setShowMainModal] = useState(false)
   const [showUploadModal, setshowUploadModal] = useState(false)
-  const router = useRouter()
   const [user, loading] = useCurrentUser()
-  const queryClient = useQueryClient()
   const updateUserMutation = useUpdateUser()
   const deleteProfilePhotoMutation = useDeleteProfilePhoto()
 
   const deleteProfilePhotoHandler = () => {
-    deleteProfilePhotoMutation.mutate(user?.name as string, {
-      onError: (error: Error) => {
-        toast.error(error.message)
-      },
-    })
+    deleteProfilePhotoMutation.mutate(user?.name as string)
     setShowMainModal(false)
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const { name, username, gender, bio } = event.currentTarget.elements as any
-    updateUserMutation.mutate(
-      {
-        name: name.value,
-        username: username.value,
-        gender: gender.value,
-        bio: bio.value,
-      },
-      {
-        onSuccess: () => {
-          toast('Your profile has been updated!', {
-            type: 'success',
-          })
-          router.push('/')
-        },
-        onError: (error: Error) => {
-          toast(error.message, {
-            type: 'error',
-          })
-        },
-      }
-    )
-  }
-
-  if (!user) {
-    return <div>Loading</div>
+    updateUserMutation.mutate({
+      name: name.value,
+      username: username.value,
+      gender: gender.value,
+      bio: bio.value,
+    })
   }
 
   return (
@@ -68,7 +40,7 @@ const NewUser = () => {
       <Head>
         <title>Welcome to Watashi</title>
       </Head>
-      <div className='shadow-s mt-2 bg-white px-5 py-5 sm:px-10'>
+      <div className='shadow-s mt-2 rounded bg-white px-5 py-5 sm:px-10'>
         <p className='text-md text-center text-sm font-semibold'>
           Setup your profile
         </p>
@@ -79,12 +51,15 @@ const NewUser = () => {
               onClick={() => setShowMainModal(true)}
               type='button'
             >
-              <Image
-                src={user?.image as string}
-                alt='avatar'
-                layout='fill'
-                className='rounded-full shadow'
-              />
+              {!loading && user?.image && (
+                <Image
+                  src={user?.image as string}
+                  alt='avatar'
+                  layout='fill'
+                  className='rounded-full shadow'
+                />
+              )}
+
               <span className='absolute right-0 bottom-0'>
                 <FcEditImage size={30} />
               </span>
@@ -232,8 +207,6 @@ const NewUser = () => {
   )
 }
 
-type ServerSideProps = InferGetServerSidePropsType<typeof getServerSideProps>
-
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
@@ -247,11 +220,9 @@ export const getServerSideProps = async (
       props: {},
     }
   }
-  const { user } = session
   return {
     props: {
       session,
-      user,
     },
   }
 }

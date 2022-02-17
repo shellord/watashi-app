@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { deleteProfilePhoto } from '@/lib/api/user'
+import { toast } from 'react-toastify'
 
 export const useDeleteProfilePhoto = () => {
   const queryClient = useQueryClient()
@@ -7,6 +8,8 @@ export const useDeleteProfilePhoto = () => {
     onSuccess: (response) => {
       queryClient.invalidateQueries('currentUser')
     },
-    onError: (error: Error) => {},
+    onError: (error: Error) => {
+      toast.error(error.message)
+    },
   })
 }

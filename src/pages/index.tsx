@@ -1,6 +1,7 @@
-import type { NextPage, GetServerSidePropsContext } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { getSession } from 'next-auth/react'
 
 const Home: NextPage = () => {
   return (
@@ -18,6 +19,22 @@ const Home: NextPage = () => {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default Home

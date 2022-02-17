@@ -2,12 +2,17 @@ import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 import React, { useCallback, useRef, useState } from 'react'
 import { FiLogOut } from 'react-icons/fi'
+import Link from 'next/link'
+
+import type { User } from '@/types/user'
 
 type Props = {
-  image: string
+  user: User
 }
 
-const ProfileMenu = ({ image }: Props) => {
+const ProfileMenu = ({ user }: Props) => {
+  const { username, image } = user
+
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -27,7 +32,7 @@ const ProfileMenu = ({ image }: Props) => {
     <div className='relative' ref={menuRef}>
       <button className='flex' onClick={() => setShowMenu(!showMenu)}>
         <Image
-          src={image}
+          src={image as string}
           width={25}
           height={25}
           className='rounded-full'
@@ -42,17 +47,19 @@ const ProfileMenu = ({ image }: Props) => {
         }`}
       >
         <div className='my-2'>
-          <button className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
-            <div className='relative h-6 w-6'>
-              <Image
-                src={image}
-                layout='fill'
-                className='rounded-full'
-                alt='avatar'
-              />
-            </div>
-            <span className='ml-2'>Profile</span>
-          </button>
+          <Link href={`/${username}`}>
+            <a className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
+              <div className='relative h-6 w-6'>
+                <Image
+                  src={image as string}
+                  layout='fill'
+                  className='rounded-full'
+                  alt='avatar'
+                />
+              </div>
+              <span className='ml-2'>Profile</span>
+            </a>
+          </Link>
           <button
             className='flex w-full items-center justify-center py-2 px-4  text-left hover:bg-gray-200'
             onClick={() => signOut()}
