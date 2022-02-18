@@ -6,9 +6,9 @@ import '@/styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import MainLayout from '@/components/layouts/MainLayout'
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>

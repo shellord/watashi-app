@@ -22,7 +22,7 @@ const NavBar = () => {
         >
           {!loading && user ? (
             <div className='flex items-center space-x-4'>
-              <Link href='#'>
+              <Link href='/'>
                 <a>
                   <AiOutlineHome size={28} />
                 </a>
@@ -32,7 +32,7 @@ const NavBar = () => {
                   <IoSearchOutline size={28} />
                 </a>
               </Link>
-              <Link href='#'>
+              <Link href='/test'>
                 <a>
                   <IoMdNotificationsOutline size={28} />
                 </a>
