@@ -7,6 +7,7 @@ export const useCurrentUser = (
 ) => {
   const query = useQuery(['currentUser'], fetchCurrentUser, {
     ...options,
+    staleTime: Infinity,
   })
-  return [query.data, query.status === 'loading'] as const
+  return { data: query.data, loading: query.status === 'loading' } as const
 }

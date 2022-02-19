@@ -8,7 +8,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import ProfileMenu from '@/components/ProfileMenu'
 
 const NavBar = () => {
-  const [user, loading] = useCurrentUser()
+  const { data: user, loading } = useCurrentUser()
 
   return (
     <div className='sticky top-0 z-10  bg-white shadow-sm'>

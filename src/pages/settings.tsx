@@ -13,7 +13,7 @@ import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 const NewUser = () => {
   const [showMainModal, setShowMainModal] = useState(false)
   const [showUploadModal, setshowUploadModal] = useState(false)
-  const [user, loading] = useCurrentUser()
+  const { data: user, loading } = useCurrentUser()
   const updateUserMutation = useUpdateUser()
   const deleteProfilePhotoMutation = useDeleteProfilePhoto()
 

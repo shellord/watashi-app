@@ -18,7 +18,7 @@ export default async function handler(
         const user = await prisma.user.findFirst({
           where: { id: session.user.id },
         })
-        res.status(200).json(user)
+        return res.status(200).json(user)
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           if (error.code === 'P2002') {
@@ -26,7 +26,7 @@ export default async function handler(
           }
           return res.status(400).json({ error: error.message })
         }
-        res.status(500).json({ error: 'Database Error' })
+        return res.status(500).json({ error: 'Database Error' })
       }
       break
     case 'PUT':
