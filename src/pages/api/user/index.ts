@@ -14,10 +14,20 @@ export default async function handler(
   }
   switch (req.method) {
     case 'GET':
-      const user = await prisma.user.findFirst({
-        where: { id: session.user.id },
-      })
-      res.status(200).json(user)
+      try {
+        const user = await prisma.user.findFirst({
+          where: { id: session.user.id },
+        })
+        res.status(200).json(user)
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          if (error.code === 'P2002') {
+            return res.status(400).json({ error: 'Username already taken!' })
+          }
+          return res.status(400).json({ error: error.message })
+        }
+        res.status(500).json({ error: 'Database Error' })
+      }
       break
     case 'PUT':
       const { name, username, bio, gender } = req.body
@@ -46,5 +56,7 @@ export default async function handler(
         }
         res.status(500).json({ error: 'Database Error' })
       }
+    default:
+      res.status(405).json({ error: 'Method Not Allowed' })
   }
 }

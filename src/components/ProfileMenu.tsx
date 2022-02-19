@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 import React, { useCallback, useRef, useState } from 'react'
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut, FiSettings } from 'react-icons/fi'
 import Link from 'next/link'
 
 import type { User } from '@/types/user'
@@ -40,7 +40,7 @@ const ProfileMenu = ({ user }: Props) => {
         />
       </button>
       <div
-        className={`absolute right-1 mt-4 flex w-28 flex-col  bg-white shadow-lg transition-all ${
+        className={`absolute right-1 mt-4 flex flex-col  bg-white shadow-lg transition-all ${
           showMenu
             ? 'translate-y-0 translate-x-0 opacity-100'
             : '-translate-y-2 translate-x-3 opacity-0'
@@ -48,16 +48,26 @@ const ProfileMenu = ({ user }: Props) => {
       >
         <div className='my-2'>
           <Link href={`/${username}`}>
-            <a className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
-              <div className='relative h-6 w-6'>
-                <Image
-                  src={image as string}
-                  layout='fill'
-                  className='rounded-full'
-                  alt='avatar'
-                />
+            <a>
+              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
+                <div className='relative h-6 w-6'>
+                  <Image
+                    src={image as string}
+                    layout='fill'
+                    className='rounded-full'
+                    alt='avatar'
+                  />
+                </div>
+                <span className='ml-2'>Profile</span>
               </div>
-              <span className='ml-2'>Profile</span>
+            </a>
+          </Link>
+          <Link href={`/settings`}>
+            <a>
+              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
+                <FiSettings size={20} />
+                <span className='ml-2'>Settings</span>
+              </div>
             </a>
           </Link>
           <button

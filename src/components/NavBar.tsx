@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { AiOutlineHome } from 'react-icons/ai'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSearchOutline } from 'react-icons/io5'
+import { IoAddCircleOutline } from 'react-icons/io5'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import ProfileMenu from '@/components/ProfileMenu'
@@ -30,6 +31,11 @@ const NavBar = () => {
               <Link href='#'>
                 <a>
                   <IoSearchOutline size={28} />
+                </a>
+              </Link>
+              <Link href='#'>
+                <a>
+                  <IoAddCircleOutline size={28} />
                 </a>
               </Link>
               <Link href='/test'>

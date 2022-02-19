@@ -3,8 +3,17 @@ import { User } from '@/types/user'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { generateAvatar } from '@/lib/avatar'
 
-export const fetchUser = async (): Promise<User | null> => {
+export const fetchCurrentUser = async (): Promise<User | null> => {
   const res = await fetch('/api/user')
+  const user = await res.json()
+  if (user.error) {
+    return null
+  }
+  return user
+}
+
+export const fetchUser = async (username: string): Promise<User | null> => {
+  const res = await fetch(`/api/user/${username}`)
   const user = await res.json()
   if (user.error) {
     return null

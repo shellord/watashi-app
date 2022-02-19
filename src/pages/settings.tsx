@@ -1,5 +1,3 @@
-import { getSession } from 'next-auth/react'
-import { GetServerSidePropsContext } from 'next'
 import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
 import { FcEditImage } from 'react-icons/fc'
 import Image from 'next/image'
@@ -42,7 +40,7 @@ const NewUser = () => {
       </Head>
       <div className='shadow-s mt-2 rounded bg-white px-5 py-5 sm:px-10'>
         <p className='text-md text-center text-sm font-semibold'>
-          Setup your profile
+          Edit your profile
         </p>
         <form onSubmit={handleSubmit} className='mt-3'>
           <div className='flex justify-center'>
@@ -105,6 +103,7 @@ const NewUser = () => {
               placeholder='Write something about yourself'
               rows={3}
               maxLength={200}
+              defaultValue={user?.bio?.toString()}
             />
           </div>
           <div className='mt-2 flex flex-col text-sm'>
@@ -119,7 +118,7 @@ const NewUser = () => {
                   name='gender'
                   className='peer appearance-none'
                   id='male'
-                  defaultChecked
+                  defaultChecked={user?.gender === 'MALE'}
                 />
                 <label
                   htmlFor='male'
@@ -136,6 +135,7 @@ const NewUser = () => {
                   name='gender'
                   className='peer appearance-none'
                   id='female'
+                  defaultChecked={user?.gender === 'FEMALE'}
                 />
                 <label
                   htmlFor='female'
@@ -152,6 +152,7 @@ const NewUser = () => {
                   name='gender'
                   className='peer appearance-none'
                   id='other'
+                  defaultChecked={user?.gender === 'OTHER'}
                 />
                 <label
                   htmlFor='other'
@@ -207,23 +208,4 @@ const NewUser = () => {
   )
 }
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { req } = context
-  const session = await getSession({ req })
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-      },
-      props: {},
-    }
-  }
-  return {
-    props: {
-      session,
-    },
-  }
-}
 export default NewUser
