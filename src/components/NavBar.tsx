@@ -8,8 +8,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import ProfileMenu from '@/components/ProfileMenu'
 
 const NavBar = () => {
-  const { data: user, loading } = useCurrentUser()
-
+  const { user, status } = useCurrentUser()
   return (
     <div className='sticky top-0 z-10  bg-white shadow-sm'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
@@ -18,10 +17,10 @@ const NavBar = () => {
         </Link>
         <div
           className={`relative ${
-            loading ? 'top-[-1em] opacity-0' : 'opacity-1 top-0'
+            status !== 'success' ? 'top-[-1em] opacity-0' : 'opacity-1 top-0'
           } transition-all duration-300`}
         >
-          {!loading && user ? (
+          {status === 'success' && user ? (
             <div className='flex items-center space-x-4'>
               <Link href='/'>
                 <a>

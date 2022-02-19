@@ -9,5 +9,5 @@ export const useCurrentUser = (
     ...options,
     staleTime: Infinity,
   })
-  return { data: query.data, loading: query.status === 'loading' } as const
+  return { user: query.data, status: query.status } as const
 }

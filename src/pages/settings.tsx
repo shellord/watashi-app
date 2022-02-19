@@ -13,7 +13,7 @@ import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 const NewUser = () => {
   const [showMainModal, setShowMainModal] = useState(false)
   const [showUploadModal, setshowUploadModal] = useState(false)
-  const { data: user, loading } = useCurrentUser()
+  const { user, status } = useCurrentUser()
   const updateUserMutation = useUpdateUser()
   const deleteProfilePhotoMutation = useDeleteProfilePhoto()
 
@@ -49,7 +49,7 @@ const NewUser = () => {
               onClick={() => setShowMainModal(true)}
               type='button'
             >
-              {!loading && user?.image && (
+              {status === 'success' && user?.image && (
                 <Image
                   src={user?.image as string}
                   alt='avatar'
