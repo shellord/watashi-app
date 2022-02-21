@@ -9,6 +9,7 @@ import ProfileMenu from '@/components/ProfileMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
+
   return (
     <div className='sticky top-0 z-10  bg-white shadow-sm'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>

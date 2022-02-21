@@ -1,8 +1,9 @@
 import { useGetUser } from '@/hooks/useGetUser'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
+
 import ProfileInfoSection from '@/components/ProfileInfoSection'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
-import { stat } from 'fs'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -20,9 +21,14 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className='mt-2 shadow'>
-      <ProfileInfoSection user={user} />
-    </div>
+    <>
+      <Head>
+        <title>{user?.username}</title>
+      </Head>
+      <div className='mt-2 shadow'>
+        <ProfileInfoSection user={user} />
+      </div>
+    </>
   )
 }
 

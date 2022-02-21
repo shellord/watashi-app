@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { Point, Area } from 'react-easy-crop/types'
 import { MdClose } from 'react-icons/md'
-import { useQueryClient } from 'react-query'
 
 import { getCroppedImg } from '@/lib/cropImage'
 import { useUpdateProfilePhoto } from '@/hooks/useUpdateProfilePhoto'
@@ -20,7 +19,6 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
     x: 0,
     y: 0,
   })
-  const queryClient = useQueryClient()
 
   const updateProfilePhotoMutation = useUpdateProfilePhoto()
 
