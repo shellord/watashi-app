@@ -33,7 +33,7 @@ const NavBar = () => {
                   <IoSearchOutline size={28} />
                 </a>
               </Link>
-              <Link href='#'>
+              <Link href='/add-content'>
                 <a>
                   <IoAddCircleOutline size={28} />
                 </a>
@@ -47,7 +47,7 @@ const NavBar = () => {
             </div>
           ) : (
             <Link href='/signin'>
-              <a className='inline text-lg font-bold text-blue-500'>Sign in</a>
+              <a className='inline text-lg font-bold text-pink-500'>Sign in</a>
             </Link>
           )}
         </div>

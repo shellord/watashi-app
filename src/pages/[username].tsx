@@ -4,6 +4,7 @@ import Head from 'next/head'
 
 import ProfileInfoSection from '@/components/ProfileInfoSection'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
+import FavouriteListSection from '@/components/FavouriteListSection'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -25,9 +26,12 @@ const ProfilePage = () => {
       <Head>
         <title>{user?.username}</title>
       </Head>
-      <div className='mt-2 shadow'>
+      <div className='mt-2'>
         <ProfileInfoSection user={user} />
       </div>
+      {/* <div className='mt-1'>
+        <FavouriteListSection />
+      </div> */}
     </>
   )
 }

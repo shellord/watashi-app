@@ -3,6 +3,7 @@ import { FcEditImage } from 'react-icons/fc'
 import Image from 'next/image'
 import { useState } from 'react'
 import Head from 'next/head'
+import { NextPage } from 'next'
 
 import Modal from '@/components/Modal'
 import PhotoUpload from '@/components/PhotoUpload'
@@ -10,7 +11,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useUpdateUser } from '@/hooks/useUpdateUser'
 import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 
-const NewUser = () => {
+const NewUser: NextPage = () => {
   const [showMainModal, setShowMainModal] = useState(false)
   const [showUploadModal, setshowUploadModal] = useState(false)
   const { user, status } = useCurrentUser()

@@ -43,7 +43,7 @@ const ProfileMenu = ({ user }: Props) => {
         className={`absolute right-1 mt-4 flex flex-col  bg-white shadow-lg transition-all ${
           showMenu
             ? 'translate-y-0 translate-x-0 opacity-100'
-            : '-translate-y-2 translate-x-3 opacity-0'
+            : 'pointer-events-none -translate-y-2 translate-x-3 opacity-0'
         }`}
       >
         <div className='my-2'>
