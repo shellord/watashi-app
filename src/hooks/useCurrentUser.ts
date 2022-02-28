@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions } from 'react-query'
 import { User } from '@/types/user'
-import { fetchCurrentUser } from '@/lib/api/user'
+import { fetchCurrentUser } from '@/lib/client/user'
 
 export const useCurrentUser = (
   options?: UseQueryOptions<User | null, unknown, User | null, string[]>

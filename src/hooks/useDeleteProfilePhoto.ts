@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { deleteProfilePhoto } from '@/lib/api/user'
+import { deleteProfilePhoto } from '@/lib/client/user'
 import { toast } from 'react-toastify'
 
 export const useDeleteProfilePhoto = () => {

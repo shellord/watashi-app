@@ -26,7 +26,7 @@ const ProfilePage = () => {
       <Head>
         <title>{user?.username}</title>
       </Head>
-      <div className='mt-2'>
+      <div className='mt-2 shadow '>
         <ProfileInfoSection user={user} />
       </div>
       {/* <div className='mt-1'>

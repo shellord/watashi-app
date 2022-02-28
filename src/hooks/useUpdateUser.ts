@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
-import { updateUser } from '@/lib/api/user'
+import { updateUser } from '@/lib/client/user'
 
 export const useUpdateUser = () => {
   const router = useRouter()

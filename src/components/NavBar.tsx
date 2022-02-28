@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { AiOutlineHome } from 'react-icons/ai'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { IoSearchOutline } from 'react-icons/io5'
 import { IoAddCircleOutline } from 'react-icons/io5'
@@ -23,17 +22,12 @@ const NavBar = () => {
         >
           {status === 'success' && user ? (
             <div className='flex items-center space-x-4'>
-              <Link href='/'>
-                <a>
-                  <AiOutlineHome size={28} />
-                </a>
-              </Link>
               <Link href='#'>
                 <a>
                   <IoSearchOutline size={28} />
                 </a>
               </Link>
-              <Link href='/add-content'>
+              <Link href='/my-list'>
                 <a>
                   <IoAddCircleOutline size={28} />
                 </a>

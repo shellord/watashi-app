@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
 
-import { updateProfilePhoto } from '@/lib/api/user'
+import { updateProfilePhoto } from '@/lib/client/user'
 
 export const useUpdateProfilePhoto = () => {
   const queryClient = useQueryClient()

@@ -6,6 +6,9 @@
   label {
     @apply text-sm text-gray-500;
   }
+  .heading {
+    @apply text-lg font-semibold;
+  }
   .input-field {
     @apply rounded-lg bg-gray-100 p-2 ring-0 focus:outline-1 focus:outline-pink-500;
   }
@@ -18,4 +21,8 @@
   .btn-secondary {
     @apply rounded-3xl bg-white px-5 py-2 text-sm text-pink-500  shadow-md ring-1 ring-pink-500;
   }
+}
+
+body {
+  @apply bg-gray-100;
 }

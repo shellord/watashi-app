@@ -1,24 +1,21 @@
-import { api } from '@/lib/api'
 import { User } from '@/types/user'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError } from 'axios'
 import { generateAvatar } from '@/lib/avatar'
 
 export const fetchCurrentUser = async (): Promise<User | null> => {
-  const res = await fetch('/api/user')
-  const user = await res.json()
-  if (user.error) {
-    return null
+  const user = await axios.get('/api/user')
+  if (user.status === 200) {
+    return user.data
   }
-  return user
+  return null
 }
 
 export const fetchUser = async (username: string): Promise<User | null> => {
-  const res = await fetch(`/api/user/${username}`)
-  const user = await res.json()
-  if (user.error) {
-    return null
+  const res = await axios.get(`/api/user/${username}`)
+  if (res.status === 200) {
+    return res.data
   }
-  return user
+  return null
 }
 
 export const updateUser = async ({ name, username, bio, gender }: User) => {
@@ -43,7 +40,7 @@ export const updateUser = async ({ name, username, bio, gender }: User) => {
 
 export const updateProfilePhoto = async (dataUri: string) => {
   try {
-    const response = await api.put('/user/profile-photo', {
+    const response = await axios.put('/user/profile-photo', {
       dataUri,
     })
     return response
