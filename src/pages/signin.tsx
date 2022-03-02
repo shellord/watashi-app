@@ -4,7 +4,7 @@ import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from 'next'
-import ProviderButton from '@/components/ProviderButton'
+import ProviderButton from '@/components/ui/ProviderButton'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'

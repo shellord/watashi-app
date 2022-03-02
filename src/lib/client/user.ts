@@ -40,7 +40,7 @@ export const updateUser = async ({ name, username, bio, gender }: User) => {
 
 export const updateProfilePhoto = async (dataUri: string) => {
   try {
-    const response = await axios.put('/user/profile-photo', {
+    const response = await axios.put('/api/user/profile-photo', {
       dataUri,
     })
     return response

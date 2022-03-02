@@ -2,9 +2,8 @@ import { useGetUser } from '@/hooks/useGetUser'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import ProfileInfoSection from '@/components/ProfileInfoSection'
+import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
-import FavouriteListSection from '@/components/FavouriteListSection'
 
 const ProfilePage = () => {
   const router = useRouter()

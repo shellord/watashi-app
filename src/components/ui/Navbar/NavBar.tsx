@@ -4,7 +4,7 @@ import { IoSearchOutline } from 'react-icons/io5'
 import { IoAddCircleOutline } from 'react-icons/io5'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
-import ProfileMenu from '@/components/ProfileMenu'
+import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
@@ -37,7 +37,7 @@ const NavBar = () => {
                   <IoMdNotificationsOutline size={28} />
                 </a>
               </Link>
-              <ProfileMenu user={user} />
+              <NavbarMenu user={user} />
             </div>
           ) : (
             <Link href='/signin'>

@@ -11,7 +11,7 @@ const MyList = () => {
     <div className='rounded bg-white p-2 shadow'>
       <div className='flex items-center justify-between border-b pb-2'>
         <p className='heading'>My List</p>
-        <Link href='/add-list'>
+        <Link href='/create-list'>
           <a>
             <button className='btn'>Add New</button>
           </a>
