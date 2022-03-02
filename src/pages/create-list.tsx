@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 
-import StepOne from '@/components/CreateList/StepOne'
-import StepTwo from '@/components/CreateList/StepTwo'
+import StepOne from '@/components/list/StepOne'
+import StepTwo from '@/components/list/StepTwo'
 import { List } from '@/types/list'
 
 const AddList: NextPage = () => {

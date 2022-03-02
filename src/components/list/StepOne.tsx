@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import { MdMusicNote, MdOutlineMovie, MdTv } from 'react-icons/md'
 import { BsBook } from 'react-icons/bs'
 
-import CategoryButton from '@/components/CreateList/CategoryButton'
+import CategoryButton from '@/components/list/CategoryButton'
 import { List } from '@/types/list'
 
 type Props = {
