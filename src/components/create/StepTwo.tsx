@@ -1,9 +1,8 @@
-import { useState } from 'react'
-
 import ItemCard from '@/components/list/ItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchTMDB from '@/hooks/useSearchTMDB'
+import { useState } from 'react'
 import type { List } from '@/types/list'
 
 type Props = {
