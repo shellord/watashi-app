@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-gray-100 antialiased;
+}
+
 @layer components {
   label {
     @apply text-sm text-gray-500;
@@ -21,8 +25,4 @@
   .btn-secondary {
     @apply rounded-3xl bg-white px-5 py-2 text-sm text-pink-500  shadow-md ring-1 ring-pink-500;
   }
-}
-
-body {
-  @apply bg-gray-100;
 }

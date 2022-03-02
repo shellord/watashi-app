@@ -15,7 +15,7 @@ const ListItemCard = ({ title, image }: Props) => {
       <div className='relative h-44 overflow-hidden rounded-lg shadow-sm'>
         <Image src={imageUrl} layout='fill' alt='poster' />
       </div>
-      <p>{title}</p>
+      <p className='font-semibold'>{title}</p>
     </div>
   )
 }
