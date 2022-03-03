@@ -1,40 +1,87 @@
 import { useState } from 'react'
+import { BiArrowBack } from 'react-icons/bi'
 
 import ItemCard from '@/components/list/ItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchTMDB from '@/hooks/useSearchTMDB'
-import type { List } from '@/types/list'
+import PlusIcon from '@/components/list/PlusIcon'
+import DeleteIcon from '@/components/list/DeleteIcon'
+import type { Category, ListItem } from '@/types/list'
 
 type Props = {
-  selected: List
+  selected: Category
+  list: ListItem[]
+  setList: React.Dispatch<React.SetStateAction<ListItem[]>>
+  setStep: React.Dispatch<React.SetStateAction<number>>
 }
 
-const StepTwo = ({ selected }: Props) => {
+const StepTwo = ({ selected, setStep, list, setList }: Props) => {
   const [searchQuery, setSearchQuery] = useState('')
-
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
-
   const { data } = useSearchTMDB(debouncedSearchQuery)
 
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
   }
+
+  const addToList = (item: ListItem) => {
+    if (list.includes(item)) return
+    setList([...list, item])
+  }
+  const removeFromList = (item: ListItem) => {
+    setList(list.filter((i) => i.id !== item.id))
+  }
+
   return (
-    <div className='rounded bg-white p-2 shadow'>
-      <div className='mt-2 border-b pb-2'>
+    <>
+      <button onClick={() => setStep(1)}>
+        <BiArrowBack size={22} />
+      </button>
+
+      {list.length === 0 && (
+        <div className='flex h-44 items-center justify-center'>
+          <p className=''>Search and add to list!</p>
+        </div>
+      )}
+
+      {list.length > 0 && (
+        <div className='flex items-start overflow-x-auto'>
+          {list.map((item) => (
+            <button
+              key={item.id}
+              className='relative'
+              onClick={() => removeFromList(item)}
+            >
+              <div className='absolute z-10 flex w-full justify-end'>
+                <DeleteIcon />
+              </div>
+              <ItemCard title={item.title} image={item.poster_path} />
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className='mt-2 pb-2'>
         <SearchListBar selected={selected} onChange={onSearchChange} />
       </div>
 
-      <div className='flex overflow-x-auto'>
+      <div className='flex items-start overflow-x-auto'>
         {data &&
           data.map((item) => (
-            <div key={item.id}>
+            <button
+              onClick={() => addToList(item)}
+              key={item.id}
+              className='relative'
+            >
+              <div className='absolute z-10 flex w-full justify-end'>
+                <PlusIcon />
+              </div>
               <ItemCard title={item.title} image={item.poster_path} />
-            </div>
+            </button>
           ))}
       </div>
-    </div>
+    </>
   )
 }
 

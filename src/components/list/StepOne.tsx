@@ -1,29 +1,46 @@
 import { MdMusicNote, MdOutlineMovie, MdTv } from 'react-icons/md'
 import { BsBook } from 'react-icons/bs'
+import Link from 'next/link'
 
 import CategoryButton from '@/components/list/CategoryButton'
-import { List } from '@/types/list'
+import { Category } from '@/types/list'
+import { BiArrowBack } from 'react-icons/bi'
 
 type Props = {
-  setSelected: React.Dispatch<React.SetStateAction<List>>
+  setSelected: React.Dispatch<React.SetStateAction<Category>>
+  setListName: React.Dispatch<React.SetStateAction<string>>
 }
 
-const StepOne = ({ setSelected }: Props) => {
+const StepOne = ({ setSelected, setListName }: Props) => {
   return (
-    <div className='rounded bg-white p-2 shadow'>
-      <div className='mt-3'>
-        <label htmlFor='list-name'>
-          <p>Enter the List Name</p>
-        </label>
-        <input
-          type='text'
-          id='list-name'
-          className='input-field w-1/2'
-          placeholder='List'
-          defaultValue='My List'
-        />
+    <>
+      <div className='mb-3 flex '>
+        <Link href='/my-list'>
+          <a>
+            <BiArrowBack size={22} />
+          </a>
+        </Link>
+        <p className='flex w-full justify-center font-semibold'>
+          Create a new list
+        </p>
       </div>
-      <div className='my-3 grid grid-cols-4 gap-1 md:grid-cols-4'>
+      <label htmlFor='list-name'>
+        <p>Enter the list name</p>
+      </label>
+      <input
+        type='text'
+        id='list-name'
+        className='input-field w-full sm:w-1/2'
+        placeholder='My Favourite List'
+        defaultValue='My List'
+        onChange={(event) => setListName(event.target.value)}
+      />
+      <div className='my-2 mt-3'>
+        <label>
+          <p>Select the list category</p>
+        </label>
+      </div>
+      <div className='grid grid-cols-2 gap-1 md:grid-cols-4'>
         <CategoryButton
           icon={MdOutlineMovie}
           label='Movie'
@@ -46,7 +63,7 @@ const StepOne = ({ setSelected }: Props) => {
           onClick={() => setSelected('book')}
         />
       </div>
-    </div>
+    </>
   )
 }
 
