@@ -7,11 +7,11 @@ import { Category } from '@/types/list'
 import { BiArrowBack } from 'react-icons/bi'
 
 type Props = {
-  setSelected: React.Dispatch<React.SetStateAction<Category>>
+  setCategory: React.Dispatch<React.SetStateAction<Category>>
   setListName: React.Dispatch<React.SetStateAction<string>>
 }
 
-const StepOne = ({ setSelected, setListName }: Props) => {
+const StepOne = ({ setCategory, setListName }: Props) => {
   return (
     <>
       <div className='mb-3 flex '>
@@ -32,7 +32,6 @@ const StepOne = ({ setSelected, setListName }: Props) => {
         id='list-name'
         className='input-field w-full sm:w-1/2'
         placeholder='My Favourite List'
-        defaultValue='My List'
         onChange={(event) => setListName(event.target.value)}
       />
       <div className='my-2 mt-3'>
@@ -45,22 +44,22 @@ const StepOne = ({ setSelected, setListName }: Props) => {
           icon={MdOutlineMovie}
           label='Movie'
           checked
-          onClick={() => setSelected('movie')}
+          onClick={() => setCategory('MOVIE')}
         />
         <CategoryButton
           icon={MdTv}
           label='TV'
-          onClick={() => setSelected('tv')}
+          onClick={() => setCategory('TV')}
         />
         <CategoryButton
           icon={MdMusicNote}
           label='Music'
-          onClick={() => setSelected('music')}
+          onClick={() => setCategory('MUSIC')}
         />
         <CategoryButton
           icon={BsBook}
           label='Book'
-          onClick={() => setSelected('book')}
+          onClick={() => setCategory('BOOK')}
         />
       </div>
     </>

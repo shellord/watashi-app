@@ -20,14 +20,10 @@ export default async function handler(
         return res.status(200).json(user)
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-          if (error.code === 'P2002') {
-            return res.status(400).json({ error: 'Username already taken!' })
-          }
           return res.status(400).json({ error: error.message })
         }
         return res.status(500).json({ error: 'Database Error' })
       }
-      break
     case 'PUT':
       const { name, username, bio, gender } = req.body
       if (!name || !username) {

@@ -48,6 +48,7 @@ model User {
   status        Status    @default(ACTIVE)
   accounts      Account[]
   sessions      Session[]
+  list          List[]
 }
 
 model VerificationToken {
@@ -56,6 +57,24 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model List {
+  id      String @id @default(cuid())
+  name    String @unique
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  items   Item[]
+}
+
+model Item {
+  id         String   @id @default(cuid())
+  itemId     String
+  title      String
+  posterPath String
+  category   Category
+  listId     String
+  list       List     @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {
@@ -67,4 +86,11 @@ enum Gender {
 enum Status {
   ACTIVE
   BLOCKED
+}
+
+enum Category {
+  MOVIE
+  MUSIC
+  BOOK
+  TV
 }

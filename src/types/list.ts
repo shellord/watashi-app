@@ -1,4 +1,4 @@
-export type Category = 'movie' | 'music' | 'book' | 'tv'
+export type Category = 'MOVIE' | 'MUSIC' | 'BOOK' | 'TV'
 
 export type ListItem = {
   id: number

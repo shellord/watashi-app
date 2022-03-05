@@ -8,16 +8,16 @@ import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
-
+  console.log(status)
   return (
-    <div className='sticky top-0 z-10  bg-white shadow-sm'>
+    <div className='sticky top-0 z-20  bg-white shadow-sm'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
         <Link href='/'>
           <a className='inline text-2xl font-bold'>watashi</a>
         </Link>
         <div
           className={`relative ${
-            status !== 'success' ? 'top-[-1em] opacity-0' : 'opacity-1 top-0'
+            status === 'loading' ? 'top-[-1em] opacity-0' : 'opacity-1 top-0'
           } transition-all duration-300`}
         >
           {status === 'success' && user ? (

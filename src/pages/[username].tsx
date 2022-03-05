@@ -25,7 +25,7 @@ const ProfilePage = () => {
       <Head>
         <title>{user?.username}</title>
       </Head>
-      <div className='mt-2 shadow '>
+      <div className='mt-2 overflow-hidden rounded shadow'>
         <ProfileInfoSection user={user} />
       </div>
       {/* <div className='mt-1'>
