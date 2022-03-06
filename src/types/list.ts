@@ -1,7 +1,5 @@
-export type Category = 'MOVIE' | 'MUSIC' | 'BOOK' | 'TV'
-
 export type ListItem = {
-  id: number
+  id: string
   title: string
   poster_path: string
 }

@@ -18,7 +18,7 @@ export const tmdb = async (
   }
 }
 
-export const getDetails = async (apiKey: string, itemId: number) => {
+export const getDetails = async (apiKey: string, itemId: string) => {
   const url = `https://api.themoviedb.org/3/movie/${itemId}?api_key=${apiKey}`
   const res = await axios.get(url)
   if (res.status === 200) {
@@ -27,7 +27,7 @@ export const getDetails = async (apiKey: string, itemId: number) => {
   return null
 }
 
-export const getDetailsOfMovies = async (apiKey: string, itemIds: number[]) => {
+export const getDetailsOfMovies = async (apiKey: string, itemIds: string[]) => {
   const results: ListItem[] = []
   try {
     await Promise.all(

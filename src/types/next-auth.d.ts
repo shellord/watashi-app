@@ -1,5 +1,5 @@
 import NextAuth, { DefaultSession } from 'next-auth'
-import type { Status } from '@/types/user'
+import type { Status } from '@prisma/client'
 declare module 'next-auth' {
   interface User {
     id?: string

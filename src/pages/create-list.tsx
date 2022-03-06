@@ -5,13 +5,16 @@ import { toast } from 'react-toastify'
 
 import StepOne from '@/components/list/StepOne'
 import StepTwo from '@/components/list/StepTwo'
-import type { Category, ListItem } from '@/types/list'
+import { useCreateList } from '@/hooks/useCreateList'
+import type { Category } from '@prisma/client'
+import type { ListItem } from '@/types/list'
 
 const AddList: NextPage = () => {
   const [category, setCategory] = useState<Category>('MOVIE')
   const [step, setStep] = useState(1)
   const [listName, setlistName] = useState('')
   const [list, setList] = useState<ListItem[]>([])
+  const createListMutation = useCreateList()
 
   const handleStep = (step: number) => {
     if (listName.length < 3) {
@@ -23,7 +26,12 @@ const AddList: NextPage = () => {
   }
 
   const createListHandler = () => {
-    console.log(list)
+    const listIds = list.map(({ id }) => id.toString())
+    createListMutation.mutate({
+      name: listName,
+      category,
+      items: listIds,
+    })
   }
 
   return (

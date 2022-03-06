@@ -3,14 +3,12 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
-import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 const ProfilePage = () => {
   const router = useRouter()
   const { username } = router.query as { username: string }
 
   const { user, status } = useGetUser(username)
-  const { user: currentUser, status: currentUserStatus } = useCurrentUser()
 
   if (status === 'success' && !user) {
     return (

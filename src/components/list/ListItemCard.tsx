@@ -11,7 +11,7 @@ const ListItemCard = ({ title, image }: Props) => {
   const imageUrl = image ? `${IMAGE_URL}${image}` : '/images/150.png'
 
   return (
-    <div className='relative m-3 w-32'>
+    <div className='relative w-32'>
       <div className='relative h-44 overflow-hidden rounded-lg shadow-sm'>
         <Image src={imageUrl} layout='fill' alt='poster' />
       </div>

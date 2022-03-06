@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 
-import ItemCard from '@/components/list/ItemCard'
+import ItemCard from '@/components/list/ListItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchTMDB from '@/hooks/useSearchTMDB'
 import PlusIcon from '@/components/list/PlusIcon'
 import DeleteIcon from '@/components/list/DeleteIcon'
-import type { Category, ListItem } from '@/types/list'
+import type { Category } from '@prisma/client'
+import type { ListItem } from '@/types/list'
 
 type Props = {
   selected: Category
@@ -56,7 +57,9 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
               <div className='absolute z-10 flex w-full justify-end'>
                 <DeleteIcon />
               </div>
-              <ItemCard title={item.title} image={item.poster_path} />
+              <div className='p-3'>
+                <ItemCard title={item.title} image={item.poster_path} />
+              </div>
             </button>
           ))}
         </div>
@@ -77,7 +80,9 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
               <div className='absolute z-10 flex w-full justify-end'>
                 <PlusIcon />
               </div>
-              <ItemCard title={item.title} image={item.poster_path} />
+              <div className='p-3'>
+                <ItemCard title={item.title} image={item.poster_path} />
+              </div>
             </button>
           ))}
       </div>

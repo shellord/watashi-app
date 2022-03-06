@@ -1,24 +1,39 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
 
-import { getDetailsOfMovies, getDetails } from '@/lib/tmdb'
+import { getDetailsOfMovies } from '@/lib/tmdb'
+import { Prisma } from '@prisma/client'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const session = await getSession({ req })
-  // if (!session) {
-  //   return res.status(401).json({ error: 'Unauthorized' })
-  // }
+  if (!session) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+
   switch (req.method) {
     case 'GET':
-      return res.status(200).json({ message: 'hello' })
+      try {
+        const list = await prisma.list.findMany({
+          where: { ownerId: session.user.id },
+          include: {
+            items: true,
+          },
+        })
+        return res.status(200).json(list)
+      } catch (error) {
+        return res.status(500).json({ error: 'Database Error' })
+      }
 
     case 'POST':
-      const { category, items } = req.body
+      const { name, category, items } = req.body as {
+        name: string
+        category: string
+        items: string[]
+      }
       if (!category) {
         return res.status(400).json({ error: 'Category should not be blank' })
       }
@@ -28,11 +43,31 @@ export default async function handler(
             process.env.TMDB_API_KEY!,
             items
           )
+          await prisma.list.create({
+            data: {
+              name,
+              category,
+              items: {
+                create: results.map((item) => ({
+                  itemId: item.id,
+                  title: item.title,
+                  posterPath: item.poster_path,
+                })),
+              },
+              owner: {
+                connect: {
+                  id: session?.user.id,
+                },
+              },
+            },
+          })
 
           res.status(200).json(results)
         } catch (error) {
-          if (error instanceof Error)
-            res.status(500).json({ error: error.message })
+          if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            return res.status(400).json({ error: error.message })
+          }
+          return res.status(500).json({ error: 'Database Error' })
         }
       }
   }

@@ -1,6 +1,4 @@
-export type Gender = 'MALE' | 'FEMALE' | 'OTHER'
-
-export type Status = 'ACTIVE' | 'BLOCKED'
+import { Gender, Status } from '@prisma/client'
 
 export type User = {
   id?: string

@@ -60,21 +60,21 @@ model VerificationToken {
 }
 
 model List {
-  id      String @id @default(cuid())
-  name    String @unique
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  items   Item[]
+  id       String   @id @default(cuid())
+  name     String
+  category Category
+  items    Item[]
+  ownerId  String
+  owner    User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Item {
-  id         String   @id @default(cuid())
+  id         String @id @default(cuid())
   itemId     String
   title      String
   posterPath String
-  category   Category
   listId     String
-  list       List     @relation(fields: [listId], references: [id], onDelete: Cascade)
+  list       List   @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {

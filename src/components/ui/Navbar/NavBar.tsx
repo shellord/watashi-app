@@ -8,7 +8,6 @@ import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
-  console.log(status)
   return (
     <div className='sticky top-0 z-20  bg-white shadow-sm'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
