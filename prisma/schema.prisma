@@ -69,12 +69,12 @@ model List {
 }
 
 model Item {
-  id         String @id @default(cuid())
+  id         String  @id @default(cuid())
   itemId     String
   title      String
-  posterPath String
+  posterPath String?
   listId     String
-  list       List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+  list       List    @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {

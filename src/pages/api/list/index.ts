@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react'
 import { prisma } from '@/lib/prisma'
 
 import { getDetailsOfMovies } from '@/lib/tmdb'
-import { Prisma } from '@prisma/client'
+import { Prisma, Category } from '@prisma/client'
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +12,12 @@ export default async function handler(
   const session = await getSession({ req })
   if (!session) {
     return res.status(401).json({ error: 'Unauthorized' })
+  }
+
+  const { name, category, items } = req.body as {
+    name: string
+    category: Category
+    items: string[]
   }
 
   switch (req.method) {
@@ -29,11 +35,6 @@ export default async function handler(
       }
 
     case 'POST':
-      const { name, category, items } = req.body as {
-        name: string
-        category: string
-        items: string[]
-      }
       if (!category) {
         return res.status(400).json({ error: 'Category should not be blank' })
       }
@@ -69,6 +70,32 @@ export default async function handler(
           }
           return res.status(500).json({ error: 'Database Error' })
         }
+      }
+    case 'PUT':
+      try {
+        const results = await getDetailsOfMovies(
+          process.env.TMDB_API_KEY!,
+          items
+        )
+        await prisma.list.update({
+          where: {
+            id: req.query.id as string,
+          },
+          data: {
+            name,
+            items: {
+              deleteMany: {},
+              create: results.map((item) => ({
+                itemId: item.id,
+                title: item.title,
+                posterPath: item.poster_path,
+              })),
+            },
+          },
+        })
+        res.status(200).json({ message: 'Success' })
+      } catch (error) {
+        return res.status(500).json({ error: 'Database Error' })
       }
   }
 }

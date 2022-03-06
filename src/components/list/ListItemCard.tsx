@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 type Props = {
   title: string
-  image: string
+  image: string | null
 }
 
 const IMAGE_URL = `https://image.tmdb.org/t/p/w500/`

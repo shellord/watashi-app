@@ -1,12 +1,6 @@
-import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
-import { FcEditImage } from 'react-icons/fc'
-import { useState } from 'react'
 import Head from 'next/head'
 import { NextPage } from 'next'
 
-import { useCurrentUser } from '@/hooks/useCurrentUser'
-import { useUpdateUser } from '@/hooks/useUpdateUser'
-import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 import EditProfile from '@/components/Profile/EditProfile'
 
 const NewUser: NextPage = () => {
