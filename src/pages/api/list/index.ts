@@ -44,26 +44,27 @@ export default async function handler(
             process.env.TMDB_API_KEY!,
             items
           )
-          await prisma.list.create({
+
+          await prisma.user.update({
+            where: { id: session.user.id },
             data: {
-              name,
-              category,
-              items: {
-                create: results.map((item) => ({
-                  itemId: item.id,
-                  title: item.title,
-                  posterPath: item.poster_path,
-                })),
-              },
-              owner: {
-                connect: {
-                  id: session?.user.id,
+              list: {
+                create: {
+                  name,
+                  category,
+                  items: {
+                    create: results.map((item) => ({
+                      itemId: item.id,
+                      title: item.title,
+                      posterPath: item.poster_path,
+                    })),
+                  },
                 },
               },
             },
           })
 
-          res.status(200).json(results)
+          return res.status(200).json(results)
         } catch (error) {
           if (error instanceof Prisma.PrismaClientKnownRequestError) {
             return res.status(400).json({ error: error.message })
@@ -77,22 +78,31 @@ export default async function handler(
           process.env.TMDB_API_KEY!,
           items
         )
-        await prisma.list.update({
-          where: {
-            id: req.query.id as string,
-          },
+
+        await prisma.user.update({
+          where: { id: session.user.id },
           data: {
-            name,
-            items: {
-              deleteMany: {},
-              create: results.map((item) => ({
-                itemId: item.id,
-                title: item.title,
-                posterPath: item.poster_path,
-              })),
+            list: {
+              update: {
+                data: {
+                  name: name,
+                  items: {
+                    deleteMany: {},
+                    create: results.map((item) => ({
+                      itemId: item.id,
+                      title: item.title,
+                      posterPath: item.poster_path,
+                    })),
+                  },
+                },
+                where: {
+                  id: req.query.id as string,
+                },
+              },
             },
           },
         })
+
         res.status(200).json({ message: 'Success' })
       } catch (error) {
         return res.status(500).json({ error: 'Database Error' })
