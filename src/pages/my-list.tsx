@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { useCurrentUserList } from '@/hooks/useCurrentUserList'
 import ListItemCard from '@/components/list/ListItemCard'
+import SkeletonList from '@/components/skeletons/SkeletonList'
 
 const EmptyList = () => (
   <div className='mt-3 flex h-52 items-center justify-center'>
@@ -10,7 +11,7 @@ const EmptyList = () => (
 )
 
 const MyList = () => {
-  const { data: lists } = useCurrentUserList()
+  const { data: lists, status } = useCurrentUserList()
 
   return (
     <div className='rounded bg-white p-2 shadow'>
@@ -22,7 +23,12 @@ const MyList = () => {
           </a>
         </Link>
       </div>
-      {!lists && <EmptyList />}
+      {!lists && status !== 'loading' && <EmptyList />}
+      {status === 'loading' && (
+        <div className='mt-4'>
+          <SkeletonList />
+        </div>
+      )}
       {lists && (
         <div className='mt-3 space-y-3'>
           {lists.map((list) => (
