@@ -74,6 +74,7 @@ export default async function handler(
         }
       }
     }
+
     case 'PUT': {
       const { name, items } = req.body as {
         name: string
@@ -114,8 +115,9 @@ export default async function handler(
         return res.status(500).json({ error: 'Database Error' })
       }
     }
+
     case 'DELETE': {
-      const { id } = req.body as { id: string }
+      const { id } = req.query as { id: string }
       try {
         await prisma.user.update({
           where: { id: session.user.id },

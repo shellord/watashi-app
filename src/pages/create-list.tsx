@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 import StepOne from '@/components/list/StepOne'
 import StepTwo from '@/components/list/StepTwo'
@@ -15,6 +16,7 @@ const AddList: NextPage = () => {
   const [listName, setlistName] = useState('')
   const [list, setList] = useState<ListItem[]>([])
   const createListMutation = useCreateList()
+  const router = useRouter()
 
   const handleStep = (step: number) => {
     if (listName.length < 3) {
@@ -26,12 +28,24 @@ const AddList: NextPage = () => {
   }
 
   const createListHandler = () => {
+    if (list.length < 1) {
+      return toast('List must have at least 1 item', {
+        type: 'error',
+      })
+    }
     const listIds = list.map(({ id }) => id)
-    createListMutation.mutate({
-      name: listName,
-      category,
-      items: listIds,
-    })
+    createListMutation.mutate(
+      {
+        name: listName,
+        category,
+        items: listIds,
+      },
+      {
+        onSuccess: () => {
+          router.push('/my-list')
+        },
+      }
+    )
   }
 
   return (

@@ -14,16 +14,21 @@ import useSearchTMDB from '@/hooks/useSearchTMDB'
 import PlusIcon from '@/components/list/PlusIcon'
 import { ListItem } from '@/types/list'
 import { useUpdateList } from '@/hooks/useUpdateList'
+import Modal from '@/components/ui/Modal'
+import DeleteListModal from '@/components/list/DeleteListModal'
+import { useDeleteList } from '@/hooks/useDeleteList'
 
 const EditList: NextPage = () => {
   const { data: lists, status } = useCurrentUserList()
   const router = useRouter()
   const [list, setList] = useState<ListItem[]>([])
   const [listName, setlistName] = useState('')
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
   const { data } = useSearchTMDB(debouncedSearchQuery)
   const updateListMutation = useUpdateList()
+  const deleteListMutation = useDeleteList()
 
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
@@ -56,12 +61,19 @@ const EditList: NextPage = () => {
     const newList = list.filter((i) => i.id !== item.id)
     setList(newList)
   }
-  console.log(list)
-  const onSaveHandler = async () => {
+
+  const onDeleteHandler = () => {
     if (!listToEdit) return
-    console.log(list)
+    deleteListMutation.mutate({
+      id: listToEdit.id,
+    })
+    setShowDeleteModal(false)
+    router.back()
+  }
+
+  const onSaveHandler = () => {
+    if (!listToEdit) return
     const listIds = list.map((item) => item.id)
-    console.log(listIds)
     updateListMutation.mutate({
       id: listToEdit.id,
       name: listName,
@@ -140,11 +152,23 @@ const EditList: NextPage = () => {
             ))}
         </div>
 
-        <div className='mt-5 flex justify-end'>
+        <div className='mt-5 flex justify-between'>
+          <button
+            className='btn bg-red-500'
+            onClick={() => setShowDeleteModal(true)}
+          >
+            Delete
+          </button>
           <button className='btn' onClick={onSaveHandler}>
             Save
           </button>
         </div>
+        <Modal showModal={showDeleteModal} setShowModal={setShowDeleteModal}>
+          <DeleteListModal
+            setShowDeleteModal={setShowDeleteModal}
+            onDelete={onDeleteHandler}
+          />
+        </Modal>
       </div>
     </>
   )

@@ -76,4 +76,23 @@ export const fetchList = async () => {
   }
 }
 
+export const deleteList = async ({ id }: { id: string }) => {
+  try {
+    const res = await axios.delete('/api/list', {
+      params: {
+        id,
+      },
+    })
+    return res.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.error)
+      }
+    }
+    throw Error('Something went wrong')
+  }
+}
+
 export const fetchUserList = async (username: string) => {}
