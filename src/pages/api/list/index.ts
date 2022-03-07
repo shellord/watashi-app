@@ -14,14 +14,8 @@ export default async function handler(
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  const { name, category, items } = req.body as {
-    name: string
-    category: Category
-    items: string[]
-  }
-
   switch (req.method) {
-    case 'GET':
+    case 'GET': {
       try {
         const list = await prisma.list.findMany({
           where: { ownerId: session.user.id },
@@ -33,8 +27,15 @@ export default async function handler(
       } catch (error) {
         return res.status(500).json({ error: 'Database Error' })
       }
+    }
 
-    case 'POST':
+    case 'POST': {
+      const { name, category, items } = req.body as {
+        name: string
+        category: Category
+        items: string[]
+      }
+
       if (!category) {
         return res.status(400).json({ error: 'Category should not be blank' })
       }
@@ -72,7 +73,12 @@ export default async function handler(
           return res.status(500).json({ error: 'Database Error' })
         }
       }
-    case 'PUT':
+    }
+    case 'PUT': {
+      const { name, items } = req.body as {
+        name: string
+        items: string[]
+      }
       try {
         const results = await getDetailsOfMovies(
           process.env.TMDB_API_KEY!,
@@ -107,5 +113,25 @@ export default async function handler(
       } catch (error) {
         return res.status(500).json({ error: 'Database Error' })
       }
+    }
+    case 'DELETE': {
+      const { id } = req.body as { id: string }
+      try {
+        await prisma.user.update({
+          where: { id: session.user.id },
+          data: {
+            list: {
+              delete: {
+                id,
+              },
+            },
+          },
+        })
+        return res.status(200).json({ message: 'Success' })
+      } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: 'Database Error' })
+      }
+    }
   }
 }
