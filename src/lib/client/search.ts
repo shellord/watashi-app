@@ -1,8 +1,8 @@
 import axios from 'axios'
-import type { Movie } from '@/types/tmdb'
+import type { ListItem } from '@/types/list'
 
 export const searchMovie = async (query: string) => {
-  const res = await axios.get<Movie[]>('/api/search/movie', {
+  const res = await axios.get<ListItem[]>('/api/search/movie', {
     params: {
       query,
     },

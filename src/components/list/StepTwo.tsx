@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 
-import ItemCard from '@/components/list/ListItemCard'
+import ListItemCard from '@/components/list/ListItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchTMDB from '@/hooks/useSearchTMDB'
@@ -47,7 +47,7 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
       )}
 
       {list.length > 0 && (
-        <div className='flex items-start overflow-x-auto'>
+        <div className='mt-3 flex items-start space-x-3 overflow-x-auto'>
           {list.map((item) => (
             <button
               key={item.id}
@@ -57,8 +57,8 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
               <div className='absolute z-10 flex w-full justify-end'>
                 <DeleteIcon />
               </div>
-              <div className='p-3'>
-                <ItemCard title={item.title} image={item.poster_path} />
+              <div>
+                <ListItemCard title={item.title} image={item.poster_path} />
               </div>
             </button>
           ))}
@@ -69,7 +69,7 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
         <SearchListBar selected={selected} onChange={onSearchChange} />
       </div>
 
-      <div className='flex items-start overflow-x-auto'>
+      <div className='mt-3 flex items-start space-x-3 overflow-x-auto'>
         {data &&
           data.map((item) => (
             <button
@@ -77,11 +77,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
               key={item.id}
               className='relative'
             >
-              <div className='absolute z-10 flex w-full justify-end'>
+              <div className='absolute z-10 flex w-full justify-end '>
                 <PlusIcon />
               </div>
-              <div className='p-3'>
-                <ItemCard title={item.title} image={item.poster_path} />
+              <div>
+                <ListItemCard title={item.title} image={item.poster_path} />
               </div>
             </button>
           ))}

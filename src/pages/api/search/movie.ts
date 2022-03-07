@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { tmdb } from '@/lib/tmdb'
 import { AxiosError } from 'axios'
 import { getSession } from 'next-auth/react'
-import type { Movie } from '@/types/tmdb'
+import type { ListItem } from '@/types/list'
 
 const API_KEY = process.env.TMDB_API_KEY!
 
@@ -20,8 +20,8 @@ export default async function handler(
 
   try {
     const tmdbResults = await tmdb(API_KEY, query, false, 'movie')
-    const list: Movie[] = tmdbResults.results.map((item: Movie) => ({
-      id: item.id,
+    const list: ListItem[] = tmdbResults.results.map((item: any) => ({
+      id: item.id.toString(),
       title: item.title,
       poster_path: item.poster_path,
     }))

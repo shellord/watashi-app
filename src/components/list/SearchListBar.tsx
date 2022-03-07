@@ -1,16 +1,16 @@
 import { BiSearch } from 'react-icons/bi'
-import type { List } from '@/types/list'
+import type { Category } from '@prisma/client'
 
 type Props = {
-  selected: List
+  selected: Category
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const placeHolders: Record<List, string> = {
-  movie: 'Search movie',
-  tv: 'Search TV series',
-  music: 'Search music',
-  book: 'Search book',
+const placeHolders: Record<Category, string> = {
+  MOVIE: 'Search movie',
+  TV: 'Search TV series',
+  MUSIC: 'Search music',
+  BOOK: 'Search book',
 }
 
 const SearchListBar = ({ selected, onChange }: Props) => {

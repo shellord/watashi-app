@@ -26,7 +26,7 @@ const AddList: NextPage = () => {
   }
 
   const createListHandler = () => {
-    const listIds = list.map(({ id }) => id.toString())
+    const listIds = list.map(({ id }) => id)
     createListMutation.mutate({
       name: listName,
       category,

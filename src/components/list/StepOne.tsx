@@ -3,7 +3,7 @@ import { BsBook } from 'react-icons/bs'
 import Link from 'next/link'
 
 import CategoryButton from '@/components/list/CategoryButton'
-import { Category } from '@/types/list'
+import { Category } from '@prisma/client'
 import { BiArrowBack } from 'react-icons/bi'
 
 type Props = {

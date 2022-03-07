@@ -7,6 +7,12 @@ export type CreateList = {
   items: string[]
 }
 
+export type UpdateList = {
+  id: string
+  name: string
+  items: string[]
+}
+
 export const createList = async ({ name, category, items }: CreateList) => {
   try {
     const res = await axios.post('/api/list', {
@@ -26,6 +32,31 @@ export const createList = async ({ name, category, items }: CreateList) => {
   }
 }
 
+export const updateList = async ({ id, name, items }: UpdateList) => {
+  try {
+    const res = await axios.put(
+      '/api/list',
+      {
+        name,
+        items,
+      },
+      {
+        params: {
+          id,
+        },
+      }
+    )
+    return res.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.error)
+      }
+    }
+    throw Error('Something went wrong')
+  }
+}
 export const fetchList = async () => {
   try {
     const res = await axios.get<

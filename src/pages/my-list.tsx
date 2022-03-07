@@ -12,7 +12,6 @@ const EmptyList = () => (
 
 const MyList = () => {
   const { data: lists, status } = useCurrentUserList()
-
   return (
     <div className='rounded bg-white p-2 shadow'>
       <div className='flex items-center justify-between border-b pb-2'>
