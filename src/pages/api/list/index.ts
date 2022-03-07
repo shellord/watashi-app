@@ -110,7 +110,7 @@ export default async function handler(
           },
         })
 
-        res.status(200).json({ message: 'Success' })
+        return res.status(200).json({ message: 'Success' })
       } catch (error) {
         return res.status(500).json({ error: 'Database Error' })
       }

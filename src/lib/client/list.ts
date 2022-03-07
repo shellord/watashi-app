@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { List, Item } from '@prisma/client'
+import { List, Item, Category } from '@prisma/client'
 
 export type CreateList = {
   name: string
@@ -11,6 +11,15 @@ export type UpdateList = {
   id: string
   name: string
   items: string[]
+}
+
+export type UserList = {
+  list: {
+    name: string
+    id: string
+    category: Category
+    items: Item[]
+  }[]
 }
 
 export const createList = async ({ name, category, items }: CreateList) => {
@@ -95,4 +104,17 @@ export const deleteList = async ({ id }: { id: string }) => {
   }
 }
 
-export const fetchUserList = async (username: string) => {}
+export const fetchUserList = async (username: string) => {
+  try {
+    const res = await axios.get<UserList>(`/api/list/${username}`)
+    return res.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.error)
+      }
+    }
+    throw Error('Something went wrong')
+  }
+}

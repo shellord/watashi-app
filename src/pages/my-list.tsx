@@ -22,7 +22,7 @@ const MyList = () => {
           </a>
         </Link>
       </div>
-      {!lists && status !== 'loading' && <EmptyList />}
+      {lists && lists?.length === 0 && <EmptyList />}
       {status === 'loading' && (
         <div className='mt-4'>
           <SkeletonList />
