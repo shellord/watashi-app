@@ -14,7 +14,6 @@ const Signin = ({ providers }: ServerSideProps) => {
   const { error } = router.query
 
   useEffect(() => {
-    console.log(error)
     if (error === 'OAuthAccountNotLinked') {
       toast(
         'You already have an account with same email address. Please sign in with that account.',
