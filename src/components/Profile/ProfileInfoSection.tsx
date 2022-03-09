@@ -6,9 +6,15 @@ type Props = {
   user: User
   isSameUser: boolean
   onFollow: () => void
+  isFollowing: boolean
 }
 
-const ProfileInfoSection = ({ user, isSameUser, onFollow }: Props) => {
+const ProfileInfoSection = ({
+  user,
+  isSameUser,
+  onFollow,
+  isFollowing,
+}: Props) => {
   return (
     <div className='bg-white pb-2'>
       <div className='relative flex flex-col items-center'>
@@ -40,7 +46,14 @@ const ProfileInfoSection = ({ user, isSameUser, onFollow }: Props) => {
           </div>
         </div>
         <div className='mt-3'>
-          {!isSameUser && (
+          {!isSameUser && isFollowing && (
+            <div>
+              <button className='btn' onClick={onFollow}>
+                Following
+              </button>
+            </div>
+          )}
+          {!isSameUser && !isFollowing && (
             <button className='btn' onClick={onFollow}>
               Follow
             </button>

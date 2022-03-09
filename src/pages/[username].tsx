@@ -7,6 +7,7 @@ import { useGetUserList } from '@/hooks/useGetUserList'
 import ListItemCard from '@/components/list/ListItemCard'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useFollowUser } from '@/hooks/useFollowUser'
+import { useGetFollows } from '@/hooks/useGetFollows'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -16,6 +17,9 @@ const ProfilePage = () => {
   const { data: lists, status: listStatus } = useGetUserList(username)
   const { user: currentUser, status: currentUserStatus } = useCurrentUser()
   const followUserMutation = useFollowUser()
+
+  const userId = user?.id as string
+  const { data: follows, status: followsStatus } = useGetFollows(userId)
 
   const onFollowHandler = () => {
     if (!user || !user.id) return
@@ -36,11 +40,12 @@ const ProfilePage = () => {
         <title>{user?.username}</title>
       </Head>
       <div className='mt-2 overflow-hidden rounded shadow'>
-        {user && user.id && currentUser && currentUser.id && (
+        {user && user.id && currentUser && currentUser.id && follows && (
           <ProfileInfoSection
             user={user}
             isSameUser={user.id === currentUser.id}
             onFollow={onFollowHandler}
+            isFollowing={follows.followers.includes(currentUser.id)}
           />
         )}
       </div>
