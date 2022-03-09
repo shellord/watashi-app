@@ -13,6 +13,42 @@ export default async function handler(
   }
 
   switch (req.method) {
+    case 'GET': {
+      const { id } = req.query as { id: string }
+      try {
+        const following = await prisma.follows.findMany({
+          where: {
+            follower: {
+              id,
+            },
+          },
+          select: {
+            followingId: true,
+          },
+        })
+        const followers = await prisma.follows.findMany({
+          where: {
+            following: {
+              id,
+            },
+          },
+          select: {
+            followerId: true,
+          },
+        })
+        const followingIds = following.map(({ followingId }) => followingId)
+        const followerIds = followers.map(({ followerId }) => followerId)
+        return res
+          .status(200)
+          .json({ following: followingIds, followers: followerIds })
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return res.status(400).json({ error: error.message })
+        }
+        return res.status(500).json({ error: 'Database Error' })
+      }
+    }
+
     case 'DELETE': {
       try {
         const { id } = req.query as { id: string }
