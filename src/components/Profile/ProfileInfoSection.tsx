@@ -3,16 +3,18 @@ import Image from 'next/image'
 import { User } from '@/types/user'
 
 type Props = {
-  user: User | null | undefined
+  user: User
+  isSameUser: boolean
+  onFollow: () => void
 }
 
-const ProfileInfoSection = ({ user }: Props) => {
+const ProfileInfoSection = ({ user, isSameUser, onFollow }: Props) => {
   return (
     <div className='bg-white pb-2'>
       <div className='relative flex flex-col items-center'>
         <div className='flex h-28 w-full bg-gray-300' />
         <div className='absolute top-[3.5rem]'>
-          {user?.image && (
+          {user.image && (
             <Image
               src={user?.image as string}
               alt='avatar'
@@ -36,6 +38,13 @@ const ProfileInfoSection = ({ user }: Props) => {
             <span className='text-sm font-semibold'>0</span>
             <span className='text-sm'>Following</span>
           </div>
+        </div>
+        <div className='mt-3'>
+          {!isSameUser && (
+            <button className='btn' onClick={onFollow}>
+              Follow
+            </button>
+          )}
         </div>
       </div>
     </div>

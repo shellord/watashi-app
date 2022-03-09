@@ -9,6 +9,7 @@ export const useGetUser = (
   const query = useQuery(['user', username], () => fetchUser(username), {
     ...options,
     enabled: !!username,
+    retry: false,
   })
   return { user: query.data, status: query.status } as const
 }

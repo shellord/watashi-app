@@ -3,17 +3,26 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
-import { useCurrentUserList } from '@/hooks/useGetUserList'
+import { useGetUserList } from '@/hooks/useGetUserList'
 import ListItemCard from '@/components/list/ListItemCard'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
+import { useFollowUser } from '@/hooks/useFollowUser'
 
 const ProfilePage = () => {
   const router = useRouter()
   const { username } = router.query as { username: string }
 
   const { user, status } = useGetUser(username)
-  const { data: lists, status: listStatus } = useCurrentUserList(username)
+  const { data: lists, status: listStatus } = useGetUserList(username)
+  const { user: currentUser, status: currentUserStatus } = useCurrentUser()
+  const followUserMutation = useFollowUser()
 
-  if (status === 'success' && !user) {
+  const onFollowHandler = () => {
+    if (!user || !user.id) return
+    followUserMutation.mutate(user.id)
+  }
+
+  if (!user && status !== 'loading') {
     return (
       <div className='flex h-56 items-center justify-center bg-white p-2'>
         <h1 className='text-xl'>User doesn&apos;t Exist!</h1>
@@ -27,9 +36,15 @@ const ProfilePage = () => {
         <title>{user?.username}</title>
       </Head>
       <div className='mt-2 overflow-hidden rounded shadow'>
-        <ProfileInfoSection user={user} />
+        {user && user.id && currentUser && currentUser.id && (
+          <ProfileInfoSection
+            user={user}
+            isSameUser={user.id === currentUser.id}
+            onFollow={onFollowHandler}
+          />
+        )}
       </div>
-      {lists && (
+      {lists && lists.list.length > 0 && (
         <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
           {lists.list.map((list) => (
             <div key={list.id}>
