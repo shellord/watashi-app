@@ -17,7 +17,7 @@ const PhotoModal = ({
   return (
     <Modal showModal={showMainModal} setShowModal={setShowMainModal}>
       <div className='absolute top-36  w-full max-w-xl p-5'>
-        <div className='flex  flex-col rounded-lg bg-white px-10 text-center'>
+        <div className='flex flex-col rounded-lg bg-white px-10 text-center'>
           <button
             className='py-3'
             onClick={() => {

@@ -45,15 +45,18 @@ const ProfileInfoSection = ({
           <span className='text-xs text-gray-500'>@{user?.username}</span>
           <span className='w-96 text-center text-sm'>{user?.bio}</span>
         </div>
-        <div
-          className='mt-2 flex space-x-4'
-          onClick={() => setShowFollowerModal(true)}
-        >
-          <button className='flex flex-col items-center'>
+        <div className='mt-2 flex space-x-4'>
+          <button
+            className='flex flex-col items-center'
+            onClick={() => setShowFollowerModal(true)}
+          >
             <span className='text-sm font-semibold'>{followers.length}</span>
             <span className='text-sm'>Followers</span>
           </button>
-          <button className='flex flex-col items-center'>
+          <button
+            className='flex flex-col items-center'
+            onClick={() => setShowFollowingModal(true)}
+          >
             <span className='text-sm font-semibold'>{following.length}</span>
             <span className='text-sm'>Following</span>
           </button>
@@ -81,14 +84,18 @@ const ProfileInfoSection = ({
           )}
         </div>
       </div>
-      {/* <FollowsModal
-        showModal={showFollowerModal}
-        setShowModal={setShowFollowerModal}
-      />
       <FollowsModal
         showModal={showFollowerModal}
         setShowModal={setShowFollowerModal}
-      /> */}
+        users={followers}
+        title='Followers'
+      />
+      <FollowsModal
+        showModal={showFollowingModal}
+        setShowModal={setShowFollowingModal}
+        users={following}
+        title='Following'
+      />
     </div>
   )
 }
