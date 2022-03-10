@@ -26,6 +26,7 @@ export default async function handler(
       }
     case 'PUT':
       const { name, username, bio, gender } = req.body
+
       if (!name || !username) {
         return res
           .status(400)
@@ -36,7 +37,7 @@ export default async function handler(
           where: { id: session.user.id },
           data: {
             name,
-            username,
+            username: username.toLowerCase(),
             bio,
             gender,
           },
