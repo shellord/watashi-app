@@ -41,7 +41,7 @@ export default async function handler(
             gender,
           },
         })
-        res.status(200).json(updateUser)
+        return res.status(200).json(updateUser)
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           if (error.code === 'P2002') {
@@ -49,9 +49,9 @@ export default async function handler(
           }
           return res.status(400).json({ error: error.message })
         }
-        res.status(500).json({ error: 'Database Error' })
+        return res.status(500).json({ error: 'Database Error' })
       }
     default:
-      res.status(405).json({ error: 'Method Not Allowed' })
+      return res.status(405).json({ error: 'Method Not Allowed' })
   }
 }
