@@ -6,6 +6,7 @@ type Props = {
   user: User
   isSameUser: boolean
   onFollow: () => void
+  onUnFollow: () => void
   isFollowing: boolean
 }
 
@@ -13,6 +14,7 @@ const ProfileInfoSection = ({
   user,
   isSameUser,
   onFollow,
+  onUnFollow,
   isFollowing,
 }: Props) => {
   return (
@@ -47,16 +49,24 @@ const ProfileInfoSection = ({
         </div>
         <div className='mt-3'>
           {!isSameUser && isFollowing && (
-            <div>
-              <button className='btn' onClick={onFollow}>
+            <div className='group'>
+              <button className='btn group-hover:hidden' onClick={onFollow}>
                 Following
+              </button>
+              <button
+                className='btn-secondary hidden group-hover:flex'
+                onClick={onUnFollow}
+              >
+                Unfollow
               </button>
             </div>
           )}
           {!isSameUser && !isFollowing && (
-            <button className='btn' onClick={onFollow}>
-              Follow
-            </button>
+            <div>
+              <button className='btn' onClick={onFollow}>
+                Follow
+              </button>
+            </div>
           )}
         </div>
       </div>

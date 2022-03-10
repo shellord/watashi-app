@@ -15,3 +15,7 @@ export const fetchFollows = async (id: string) => {
   const follows = await axios.get<Follows>(`/api/follows/${id}`)
   return follows.data
 }
+
+export const unfollowUser = async (id: string) => {
+  await axios.delete(`/api/follows/${id}`)
+}

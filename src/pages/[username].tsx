@@ -8,6 +8,7 @@ import ListItemCard from '@/components/list/ListItemCard'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useFollowUser } from '@/hooks/useFollowUser'
 import { useGetFollows } from '@/hooks/useGetFollows'
+import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -16,14 +17,20 @@ const ProfilePage = () => {
   const { user, status } = useGetUser(username)
   const { data: lists, status: listStatus } = useGetUserList(username)
   const { user: currentUser, status: currentUserStatus } = useCurrentUser()
-  const followUserMutation = useFollowUser()
 
   const userId = user?.id as string
   const { data: follows, status: followsStatus } = useGetFollows(userId)
+  const followUserMutation = useFollowUser(userId)
+  const unFollowUserMutation = useUnFollowUser(userId)
 
   const onFollowHandler = () => {
     if (!user || !user.id) return
     followUserMutation.mutate(user.id)
+  }
+
+  const onUnFollowHandler = () => {
+    if (!user || !user.id) return
+    unFollowUserMutation.mutate(user.id)
   }
 
   if (!user && status !== 'loading') {
@@ -46,6 +53,7 @@ const ProfilePage = () => {
             isSameUser={user.id === currentUser.id}
             onFollow={onFollowHandler}
             isFollowing={follows.followers.includes(currentUser.id)}
+            onUnFollow={onUnFollowHandler}
           />
         )}
       </div>
