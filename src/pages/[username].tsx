@@ -41,6 +41,10 @@ const ProfilePage = () => {
     )
   }
 
+  const isFollowing =
+    follows?.followers.find((follower) => follower.id === currentUser?.id) !==
+    undefined
+
   return (
     <>
       <Head>
@@ -52,8 +56,10 @@ const ProfilePage = () => {
             user={user}
             isSameUser={user.id === currentUser.id}
             onFollow={onFollowHandler}
-            isFollowing={follows.followers.includes(currentUser.id)}
+            isFollowing={isFollowing}
             onUnFollow={onUnFollowHandler}
+            followers={follows.followers}
+            following={follows.following}
           />
         )}
       </div>

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { User } from '@/types/user'
+import FollowsModal from '@/components/Profile/FollowsModal'
 
 type Props = {
   user: User
@@ -8,6 +9,8 @@ type Props = {
   onFollow: () => void
   onUnFollow: () => void
   isFollowing: boolean
+  followers: User[]
+  following: User[]
 }
 
 const ProfileInfoSection = ({
@@ -16,7 +19,12 @@ const ProfileInfoSection = ({
   onFollow,
   onUnFollow,
   isFollowing,
+  followers,
+  following,
 }: Props) => {
+  const [showFollowerModal, setShowFollowerModal] = useState(false)
+  const [showFollowingModal, setShowFollowingModal] = useState(false)
+
   return (
     <div className='bg-white pb-2'>
       <div className='relative flex flex-col items-center'>
@@ -37,15 +45,18 @@ const ProfileInfoSection = ({
           <span className='text-xs text-gray-500'>@{user?.username}</span>
           <span className='w-96 text-center text-sm'>{user?.bio}</span>
         </div>
-        <div className='mt-2 flex space-x-4'>
-          <div className='flex flex-col text-center'>
-            <span className='text-sm font-semibold'>0</span>
+        <div
+          className='mt-2 flex space-x-4'
+          onClick={() => setShowFollowerModal(true)}
+        >
+          <button className='flex flex-col items-center'>
+            <span className='text-sm font-semibold'>{followers.length}</span>
             <span className='text-sm'>Followers</span>
-          </div>
-          <div className='flex flex-col text-center'>
-            <span className='text-sm font-semibold'>0</span>
+          </button>
+          <button className='flex flex-col items-center'>
+            <span className='text-sm font-semibold'>{following.length}</span>
             <span className='text-sm'>Following</span>
-          </div>
+          </button>
         </div>
         <div className='mt-3'>
           {!isSameUser && isFollowing && (
@@ -70,6 +81,14 @@ const ProfileInfoSection = ({
           )}
         </div>
       </div>
+      {/* <FollowsModal
+        showModal={showFollowerModal}
+        setShowModal={setShowFollowerModal}
+      />
+      <FollowsModal
+        showModal={showFollowerModal}
+        setShowModal={setShowFollowerModal}
+      /> */}
     </div>
   )
 }

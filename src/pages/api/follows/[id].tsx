@@ -16,31 +16,27 @@ export default async function handler(
     case 'GET': {
       const { id } = req.query as { id: string }
       try {
-        const following = await prisma.follows.findMany({
-          where: {
-            follower: {
-              id,
-            },
-          },
-          select: {
-            followingId: true,
-          },
-        })
-        const followers = await prisma.follows.findMany({
+        const following = await prisma.user.findMany({
           where: {
             following: {
-              id,
+              some: {
+                followerId: id,
+              },
             },
           },
-          select: {
-            followerId: true,
+        })
+        const followers = await prisma.user.findMany({
+          where: {
+            followers: {
+              some: {
+                followingId: id,
+              },
+            },
           },
         })
-        const followingIds = following.map(({ followingId }) => followingId)
-        const followerIds = followers.map(({ followerId }) => followerId)
         return res
           .status(200)
-          .json({ following: followingIds, followers: followerIds })
+          .json({ followers: followers, following: following })
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return res.status(400).json({ error: error.message })

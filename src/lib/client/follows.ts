@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { User } from '@/types/user'
 
 type Follows = {
-  following: string[]
-  followers: string[]
+  followers: User[]
+  following: User[]
 }
 
 export const followUser = async (id: string) => {
