@@ -2,7 +2,7 @@ import Modal from '@/components/ui/Modal'
 import { User } from '@/types/user'
 import React from 'react'
 import { IoMdClose } from 'react-icons/io'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type Props = {
   showModal: boolean
@@ -12,6 +12,13 @@ type Props = {
 }
 
 const FollowsModal = ({ showModal, setShowModal, users, title }: Props) => {
+  const router = useRouter()
+
+  const onUserClickHandler = (username: string) => {
+    setShowModal(false)
+    router.push(`/${username}`)
+  }
+
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className='absolute top-36 w-full max-w-lg p-5'>
@@ -24,11 +31,14 @@ const FollowsModal = ({ showModal, setShowModal, users, title }: Props) => {
           </div>
           <div className='mt-3'>
             {users.map((user) => (
-              <Link key={user.id} href={`/${user.username}`}>
+              <button
+                key={user.id}
+                onClick={() => onUserClickHandler(user.username as string)}
+              >
                 <a>
                   <p>{user.name}</p>
                 </a>
-              </Link>
+              </button>
             ))}
           </div>
         </div>
