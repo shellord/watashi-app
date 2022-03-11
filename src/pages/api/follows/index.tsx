@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   const session = await getSession({ req })
   if (!session) {
-    return res.status(401).json({ error: 'Unauthorized' })
+    return res.status(401).json({ error: 'You need to Login to Follow' })
   }
 
   switch (req.method) {

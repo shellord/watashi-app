@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { User } from '@/types/user'
 
 type Follows = {
@@ -7,9 +7,19 @@ type Follows = {
 }
 
 export const followUser = async (id: string) => {
-  await axios.post('/api/follows', {
-    id,
-  })
+  try {
+    await axios.post('/api/follows', {
+      id,
+    })
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.error)
+      }
+    }
+    throw Error('Something went wrong')
+  }
 }
 
 export const fetchFollows = async (id: string) => {

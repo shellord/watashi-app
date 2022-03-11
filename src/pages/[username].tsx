@@ -45,16 +45,18 @@ const ProfilePage = () => {
     follows?.followers.find((follower) => follower.id === currentUser?.id) !==
     undefined
 
+  const isSameUser = currentUser?.id === user?.id
+
   return (
     <>
       <Head>
         <title>{user?.username}</title>
       </Head>
       <div className='mt-2 overflow-hidden rounded shadow'>
-        {user && user.id && currentUser && currentUser.id && follows && (
+        {user && user.id && follows && (
           <ProfileInfoSection
             user={user}
-            isSameUser={user.id === currentUser.id}
+            isSameUser={isSameUser}
             onFollow={onFollowHandler}
             isFollowing={isFollowing}
             onUnFollow={onUnFollowHandler}

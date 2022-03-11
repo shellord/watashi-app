@@ -7,11 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
-  if (!session) {
-    return res.status(401).json({ error: 'Unauthorized' })
-  }
-
   switch (req.method) {
     case 'GET': {
       const { id } = req.query as { id: string }
@@ -46,6 +41,10 @@ export default async function handler(
     }
 
     case 'DELETE': {
+      const session = await getSession({ req })
+      if (!session) {
+        return res.status(401).json({ error: 'Unauthorized' })
+      }
       try {
         const { id } = req.query as { id: string }
         if (!id) {

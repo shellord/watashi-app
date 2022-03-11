@@ -6,11 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
   const { username } = req.query as { username: string }
-  if (!session) {
-    return res.status(401).json({ error: 'Unauthorized' })
-  }
   try {
     const list = await prisma.user.findUnique({
       where: { username },
