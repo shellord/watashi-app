@@ -1,4 +1,3 @@
-// import useSession from '@/lib/next-auth-react-query'
 import { useSession } from 'next-auth/react'
 
 const Test = () => {
