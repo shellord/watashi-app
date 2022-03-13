@@ -23,10 +23,10 @@ export default async function handler(
   }
 
   try {
-    const tmdbResults = await tmdbSearch(API_KEY, query, false, 'movie')
+    const tmdbResults = await tmdbSearch(API_KEY, query, false, 'tv')
     const list: ListItem[] = tmdbResults.results.map((item: any) => ({
       id: item.id.toString(),
-      title: item.title,
+      title: item.name,
       poster_path: item.poster_path,
     }))
     res.status(200).json(list)

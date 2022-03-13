@@ -10,7 +10,8 @@ import { useCurrentUserList } from '@/hooks/useCurrentUserList'
 import ListItemCard from '@/components/list/ListItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
-import useSearchTMDB from '@/hooks/useSearchTMDB'
+import useSearchMovie from '@/hooks/useSearchMovie'
+import useSearchTV from '@/hooks/useSearchTV'
 import PlusIcon from '@/components/list/PlusIcon'
 import { ListItem } from '@/types/list'
 import { useUpdateList } from '@/hooks/useUpdateList'
@@ -26,7 +27,7 @@ const EditList: NextPage = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
-  const { data } = useSearchTMDB(debouncedSearchQuery)
+
   const updateListMutation = useUpdateList()
   const deleteListMutation = useDeleteList()
 
@@ -36,6 +37,18 @@ const EditList: NextPage = () => {
 
   const { id } = router.query
   const listToEdit = lists?.find((list) => list.id === id)
+
+  const { data: movieResults } = useSearchMovie(
+    debouncedSearchQuery,
+    listToEdit?.category === 'MOVIE'
+  )
+  const { data: tvResults } = useSearchTV(
+    debouncedSearchQuery,
+    listToEdit?.category === 'TV'
+  )
+
+  const data = listToEdit?.category === 'MOVIE' ? movieResults : tvResults
+
   useEffect(() => {
     const finalList: ListItem[] = []
 
@@ -54,7 +67,6 @@ const EditList: NextPage = () => {
 
   const addToList = (item: ListItem) => {
     if (list.includes(item)) return
-    console.log(item)
     setList([...list, item])
   }
   const removeFromList = (item: ListItem) => {
@@ -78,6 +90,7 @@ const EditList: NextPage = () => {
       id: listToEdit.id,
       name: listName,
       items: listIds,
+      category: listToEdit.category,
     })
   }
 

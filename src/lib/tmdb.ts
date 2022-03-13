@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { ListItem } from '@/types/list'
 
-export const tmdb = async (
+export const tmdbSearch = async (
   apiKey: string,
   query: string,
   includeAdult: boolean = false,
@@ -18,8 +18,12 @@ export const tmdb = async (
   }
 }
 
-export const getDetails = async (apiKey: string, itemId: string) => {
-  const url = `https://api.themoviedb.org/3/movie/${itemId}?api_key=${apiKey}`
+export const getDetails = async (
+  apiKey: string,
+  itemId: string,
+  category: 'movie' | 'tv'
+) => {
+  const url = `https://api.themoviedb.org/3/${category}/${itemId}?api_key=${apiKey}`
   const res = await axios.get(url)
   if (res.status === 200) {
     return res.data
@@ -32,11 +36,38 @@ export const getDetailsOfMovies = async (apiKey: string, itemIds: string[]) => {
   try {
     await Promise.all(
       itemIds.map(async (itemId) => {
-        const res = await getDetails(apiKey, itemId)
+        const res = await getDetails(apiKey, itemId, 'movie')
         if (res)
           results.push({
             id: itemId,
             title: res.title,
+            poster_path: res.poster_path,
+          })
+      })
+    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.status_message)
+      }
+    }
+    throw Error('Something went wrong')
+  }
+
+  return results
+}
+
+export const getDetailsOfTV = async (apiKey: string, itemIds: string[]) => {
+  const results: ListItem[] = []
+  try {
+    await Promise.all(
+      itemIds.map(async (itemId) => {
+        const res = await getDetails(apiKey, itemId, 'tv')
+        if (res)
+          results.push({
+            id: itemId,
+            title: res.name,
             poster_path: res.poster_path,
           })
       })

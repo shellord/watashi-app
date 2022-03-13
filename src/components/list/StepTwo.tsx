@@ -4,7 +4,8 @@ import { BiArrowBack } from 'react-icons/bi'
 import ListItemCard from '@/components/list/ListItemCard'
 import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
-import useSearchTMDB from '@/hooks/useSearchTMDB'
+import useSearchMovie from '@/hooks/useSearchMovie'
+import useSearchTV from '@/hooks/useSearchTV'
 import PlusIcon from '@/components/list/PlusIcon'
 import DeleteIcon from '@/components/list/DeleteIcon'
 import type { Category } from '@prisma/client'
@@ -20,7 +21,15 @@ type Props = {
 const StepTwo = ({ selected, setStep, list, setList }: Props) => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
-  const { data } = useSearchTMDB(debouncedSearchQuery)
+
+  const { data: movieResults } = useSearchMovie(
+    debouncedSearchQuery,
+    selected === 'MOVIE'
+  )
+  const { data: tvResults } = useSearchTV(
+    debouncedSearchQuery,
+    selected === 'TV'
+  )
 
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
@@ -34,6 +43,7 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
     setList(list.filter((i) => i.id !== item.id))
   }
 
+  const data = selected === 'MOVIE' ? movieResults : tvResults
   return (
     <>
       <button onClick={() => setStep(1)}>

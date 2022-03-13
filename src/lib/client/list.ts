@@ -1,16 +1,17 @@
 import axios, { AxiosError } from 'axios'
 import { List, Item, Category } from '@prisma/client'
 
-export type CreateList = {
+export type CreateListInput = {
   name: string
   category: string
   items: string[]
 }
 
-export type UpdateList = {
+export type UpdateListInput = {
   id: string
   name: string
   items: string[]
+  category: Category
 }
 
 export type UserList = {
@@ -22,7 +23,11 @@ export type UserList = {
   }[]
 }
 
-export const createList = async ({ name, category, items }: CreateList) => {
+export const createList = async ({
+  name,
+  category,
+  items,
+}: CreateListInput) => {
   try {
     const res = await axios.post('/api/list', {
       name,
@@ -41,13 +46,19 @@ export const createList = async ({ name, category, items }: CreateList) => {
   }
 }
 
-export const updateList = async ({ id, name, items }: UpdateList) => {
+export const updateList = async ({
+  id,
+  name,
+  items,
+  category,
+}: UpdateListInput) => {
   try {
     const res = await axios.put(
       '/api/list',
       {
         name,
         items,
+        category,
       },
       {
         params: {

@@ -2,8 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { prisma } from '@/lib/prisma'
 
-import { getDetailsOfMovies } from '@/lib/tmdb'
+import { getDetailsOfMovies, getDetailsOfTV } from '@/lib/tmdb'
 import { Prisma, Category } from '@prisma/client'
+import { ListItem } from '@/types/list'
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,52 +40,63 @@ export default async function handler(
       if (!category) {
         return res.status(400).json({ error: 'Category should not be blank' })
       }
-      if (category === 'MOVIE') {
-        try {
-          const results = await getDetailsOfMovies(
-            process.env.TMDB_API_KEY!,
-            items
-          )
 
-          await prisma.user.update({
-            where: { id: session.user.id },
-            data: {
-              list: {
-                create: {
-                  name,
-                  category,
-                  items: {
-                    create: results.map((item) => ({
-                      itemId: item.id,
-                      title: item.title,
-                      posterPath: item.poster_path,
-                    })),
-                  },
+      try {
+        let results: ListItem[] = []
+
+        if (category === 'MOVIE') {
+          results = await getDetailsOfMovies(process.env.TMDB_API_KEY!, items)
+        }
+
+        if (category === 'TV') {
+          results = await getDetailsOfTV(process.env.TMDB_API_KEY!, items)
+        }
+
+        await prisma.user.update({
+          where: { id: session.user.id },
+          data: {
+            list: {
+              create: {
+                name,
+                category,
+                items: {
+                  create: results.map((item) => ({
+                    itemId: item.id,
+                    title: item.title,
+                    posterPath: item.poster_path,
+                  })),
                 },
               },
             },
-          })
+          },
+        })
 
-          return res.status(200).json(results)
-        } catch (error) {
-          if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            return res.status(400).json({ error: error.message })
-          }
-          return res.status(500).json({ error: 'Database Error' })
+        return res.status(200).json(results)
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return res.status(400).json({ error: error.message })
         }
+        return res.status(500).json({ error: 'Database Error' })
       }
     }
 
     case 'PUT': {
-      const { name, items } = req.body as {
+      const { name, items, category } = req.body as {
         name: string
         items: string[]
+        category: Category
       }
+      const { id: listId } = req.query as { id: string }
+
       try {
-        const results = await getDetailsOfMovies(
-          process.env.TMDB_API_KEY!,
-          items
-        )
+        let results: ListItem[] = []
+        if (category === 'MOVIE') {
+          results = await getDetailsOfMovies(process.env.TMDB_API_KEY!, items)
+        }
+
+        if (category === 'TV') {
+          results = await getDetailsOfTV(process.env.TMDB_API_KEY!, items)
+        }
 
         await prisma.user.update({
           where: { id: session.user.id },
@@ -103,7 +115,7 @@ export default async function handler(
                   },
                 },
                 where: {
-                  id: req.query.id as string,
+                  id: listId,
                 },
               },
             },
@@ -131,7 +143,6 @@ export default async function handler(
         })
         return res.status(200).json({ message: 'Success' })
       } catch (error) {
-        console.log(error)
         return res.status(500).json({ error: 'Database Error' })
       }
     }

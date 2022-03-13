@@ -9,3 +9,12 @@ export const searchMovie = async (query: string) => {
   })
   return res.data
 }
+
+export const searchTV = async (query: string) => {
+  const res = await axios.get<ListItem[]>('/api/search/tv', {
+    params: {
+      query,
+    },
+  })
+  return res.data
+}
