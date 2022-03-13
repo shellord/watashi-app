@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+
 import { searchTV } from '@/lib/client/search'
 
 export default function useSearchTV(searchQuery: string, enabled: boolean) {

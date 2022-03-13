@@ -1,5 +1,6 @@
 import { User } from '@/types/user'
 import axios, { AxiosError } from 'axios'
+
 import { generateAvatar } from '@/lib/avatar'
 
 export const fetchCurrentUser = async (): Promise<User | null> => {

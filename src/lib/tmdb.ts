@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios'
 import { ListItem } from '@/types/list'
+import axios, { AxiosError } from 'axios'
 
 export const tmdbSearch = async (
   apiKey: string,

@@ -1,10 +1,9 @@
-import Image from 'next/image'
+import type { User } from '@/types/user'
 import { signOut } from 'next-auth/react'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { useCallback, useRef, useState } from 'react'
 import { FiLogOut, FiSettings } from 'react-icons/fi'
-import Link from 'next/link'
-
-import type { User } from '@/types/user'
 
 type Props = {
   user: User

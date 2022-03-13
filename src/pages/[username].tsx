@@ -1,14 +1,15 @@
-import { useGetUser } from '@/hooks/useGetUser'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
-import { useGetUserList } from '@/hooks/useGetUserList'
-import ListItemCard from '@/components/list/ListItemCard'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useFollowUser } from '@/hooks/useFollowUser'
 import { useGetFollows } from '@/hooks/useGetFollows'
+import { useGetUser } from '@/hooks/useGetUser'
+import { useGetUserList } from '@/hooks/useGetUserList'
 import { useUnFollowUser } from '@/hooks/useUnFollowUser'
+
+import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
+import ListItemCard from '@/components/list/ListItemCard'
 
 const ProfilePage = () => {
   const router = useRouter()

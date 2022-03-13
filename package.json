@@ -5,7 +5,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npm run lint-eslint && npm run lint-prettier",
+    "lint-eslint": "eslint --ignore-path .gitignore src/**/*{ts,tsx} --fix",
+    "lint-prettier": "prettier --write \"src/**/*.(js|jsx|ts|tsx)\"",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.1",
@@ -21,11 +33,14 @@
     "react-toastify": "^8.1.1"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "17.0.16",
     "@types/react": "17.0.39",
     "autoprefixer": "^10.4.2",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
     "postcss": "^8.4.6",
     "prettier-plugin-tailwindcss": "^0.1.6",
     "prisma": "^3.10.0",

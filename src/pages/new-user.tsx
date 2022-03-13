@@ -1,5 +1,5 @@
-import { getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 
 import EditProfile from '@/components/Profile/EditProfile'

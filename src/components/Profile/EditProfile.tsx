@@ -1,14 +1,15 @@
-import { BsGenderMale, BsGenderFemale, BsGenderTrans } from 'react-icons/bs'
-import { FcEditImage } from 'react-icons/fc'
 import Image from 'next/image'
 import { useState } from 'react'
+import { BsGenderFemale, BsGenderMale, BsGenderTrans } from 'react-icons/bs'
+import { FcEditImage } from 'react-icons/fc'
 
-import Modal from '@/components/ui/Modal'
-import PhotoUpload from '@/components/Profile/PhotoUpload'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
-import { useUpdateUser } from '@/hooks/useUpdateUser'
 import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
+import { useUpdateUser } from '@/hooks/useUpdateUser'
+
 import PhotoModal from '@/components/Profile/PhotoModal'
+import PhotoUpload from '@/components/Profile/PhotoUpload'
+import Modal from '@/components/ui/Modal'
 
 const EditProfile = () => {
   const [showMainModal, setShowMainModal] = useState(false)

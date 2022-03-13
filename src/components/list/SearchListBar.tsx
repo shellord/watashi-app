@@ -1,5 +1,5 @@
-import { BiSearch } from 'react-icons/bi'
 import type { Category } from '@prisma/client'
+import { BiSearch } from 'react-icons/bi'
 
 type Props = {
   selected: Category

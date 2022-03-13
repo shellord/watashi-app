@@ -1,5 +1,6 @@
-import { useQuery, UseQueryOptions } from 'react-query'
 import { User } from '@/types/user'
+import { UseQueryOptions, useQuery } from 'react-query'
+
 import { fetchUser } from '@/lib/client/user'
 
 export const useGetUser = (

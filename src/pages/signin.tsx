@@ -1,13 +1,14 @@
-import { getProviders, getSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from 'next'
-import ProviderButton from '@/components/ui/ProviderButton'
+import { getProviders, getSession } from 'next-auth/react'
 import Image from 'next/image'
-import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+
+import ProviderButton from '@/components/ui/ProviderButton'
 
 const Signin = ({ providers }: ServerSideProps) => {
   const router = useRouter()

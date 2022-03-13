@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
-import { Point, Area } from 'react-easy-crop/types'
+import { Area, Point } from 'react-easy-crop/types'
 import { MdClose } from 'react-icons/md'
 
-import { getCroppedImg } from '@/lib/cropImage'
 import { useUpdateProfilePhoto } from '@/hooks/useUpdateProfilePhoto'
+
+import { getCroppedImg } from '@/lib/cropImage'
 
 type Props = {
   setshowUploadModal: React.Dispatch<React.SetStateAction<boolean>>

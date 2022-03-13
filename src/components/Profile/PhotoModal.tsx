@@ -1,5 +1,6 @@
-import Modal from '@/components/ui/Modal'
 import React from 'react'
+
+import Modal from '@/components/ui/Modal'
 
 type Props = {
   showMainModal: boolean

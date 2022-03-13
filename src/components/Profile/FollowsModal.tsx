@@ -1,8 +1,9 @@
-import Modal from '@/components/ui/Modal'
 import { User } from '@/types/user'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { IoMdClose } from 'react-icons/io'
-import { useRouter } from 'next/router'
+
+import Modal from '@/components/ui/Modal'
 
 type Props = {
   showModal: boolean

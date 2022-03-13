@@ -1,8 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { tmdbSearch } from '@/lib/tmdb'
-import { AxiosError } from 'axios'
-import { getSession } from 'next-auth/react'
 import type { ListItem } from '@/types/list'
+import { AxiosError } from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/react'
+
+import { tmdbSearch } from '@/lib/tmdb'
 
 const API_KEY = process.env.TMDB_API_KEY!
 

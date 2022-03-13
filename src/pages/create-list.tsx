@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import type { ListItem } from '@/types/list'
+import type { Category } from '@prisma/client'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+
+import { useCreateList } from '@/hooks/useCreateList'
 
 import StepOne from '@/components/list/StepOne'
 import StepTwo from '@/components/list/StepTwo'
-import { useCreateList } from '@/hooks/useCreateList'
-import type { Category } from '@prisma/client'
-import type { ListItem } from '@/types/list'
 
 const AddList: NextPage = () => {
   const [category, setCategory] = useState<Category>('MOVIE')

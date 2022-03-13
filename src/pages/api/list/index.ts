@@ -1,10 +1,10 @@
+import { ListItem } from '@/types/list'
+import { Category, Prisma } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import { prisma } from '@/lib/prisma'
 
+import { prisma } from '@/lib/prisma'
 import { getDetailsOfMovies, getDetailsOfTV } from '@/lib/tmdb'
-import { Prisma, Category } from '@prisma/client'
-import { ListItem } from '@/types/list'
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios'
 import { User } from '@/types/user'
+import axios, { AxiosError } from 'axios'
 
 type Follows = {
   followers: User[]

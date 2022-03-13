@@ -1,10 +1,10 @@
-import { MdMusicNote, MdOutlineMovie, MdTv } from 'react-icons/md'
-import { BsBook } from 'react-icons/bs'
+import { Category } from '@prisma/client'
 import Link from 'next/link'
+import { BiArrowBack } from 'react-icons/bi'
+import { BsBook } from 'react-icons/bs'
+import { MdMusicNote, MdOutlineMovie, MdTv } from 'react-icons/md'
 
 import CategoryButton from '@/components/list/CategoryButton'
-import { Category } from '@prisma/client'
-import { BiArrowBack } from 'react-icons/bi'
 
 type Props = {
   setCategory: React.Dispatch<React.SetStateAction<Category>>

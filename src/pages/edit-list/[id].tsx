@@ -1,23 +1,24 @@
+import { ListItem } from '@/types/list'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { BiArrowBack } from 'react-icons/bi'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { BiArrowBack } from 'react-icons/bi'
 
-import DeleteIcon from '@/components/list/DeleteIcon'
 import { useCurrentUserList } from '@/hooks/useCurrentUserList'
-import ListItemCard from '@/components/list/ListItemCard'
-import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
+import { useDeleteList } from '@/hooks/useDeleteList'
 import useSearchMovie from '@/hooks/useSearchMovie'
 import useSearchTV from '@/hooks/useSearchTV'
-import PlusIcon from '@/components/list/PlusIcon'
-import { ListItem } from '@/types/list'
 import { useUpdateList } from '@/hooks/useUpdateList'
-import Modal from '@/components/ui/Modal'
+
+import DeleteIcon from '@/components/list/DeleteIcon'
 import DeleteListModal from '@/components/list/DeleteListModal'
-import { useDeleteList } from '@/hooks/useDeleteList'
+import ListItemCard from '@/components/list/ListItemCard'
+import PlusIcon from '@/components/list/PlusIcon'
+import SearchListBar from '@/components/list/SearchListBar'
+import Modal from '@/components/ui/Modal'
 
 const EditList: NextPage = () => {
   const { data: lists, status } = useCurrentUserList()

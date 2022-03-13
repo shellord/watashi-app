@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/router'
 
 import { updateUser } from '@/lib/client/user'
 

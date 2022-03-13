@@ -1,8 +1,8 @@
 import { useMutation } from 'react-query'
 import { useQueryClient } from 'react-query'
+import { toast } from 'react-toastify'
 
 import { followUser } from '@/lib/client/follows'
-import { toast } from 'react-toastify'
 
 export const useFollowUser = (id: string) => {
   const queryClient = useQueryClient()

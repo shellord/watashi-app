@@ -1,5 +1,5 @@
+import { Category, Item, List } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
-import { List, Item, Category } from '@prisma/client'
 
 export type CreateListInput = {
   name: string

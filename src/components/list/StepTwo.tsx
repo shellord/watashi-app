@@ -1,15 +1,16 @@
+import type { ListItem } from '@/types/list'
+import type { Category } from '@prisma/client'
 import { useState } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 
-import ListItemCard from '@/components/list/ListItemCard'
-import SearchListBar from '@/components/list/SearchListBar'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchMovie from '@/hooks/useSearchMovie'
 import useSearchTV from '@/hooks/useSearchTV'
-import PlusIcon from '@/components/list/PlusIcon'
+
 import DeleteIcon from '@/components/list/DeleteIcon'
-import type { Category } from '@prisma/client'
-import type { ListItem } from '@/types/list'
+import ListItemCard from '@/components/list/ListItemCard'
+import PlusIcon from '@/components/list/PlusIcon'
+import SearchListBar from '@/components/list/SearchListBar'
 
 type Props = {
   selected: Category

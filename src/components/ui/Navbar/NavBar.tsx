@@ -4,6 +4,7 @@ import { IoSearchOutline } from 'react-icons/io5'
 import { IoAddCircleOutline } from 'react-icons/io5'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
+
 import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
 
 const NavBar = () => {

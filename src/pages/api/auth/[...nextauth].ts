@@ -1,9 +1,10 @@
-import NextAuth from 'next-auth/next'
-import GoogleProvider from 'next-auth/providers/google'
-import FacebookProvider from 'next-auth/providers/facebook'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { prisma } from '@/lib/prisma'
+import NextAuth from 'next-auth/next'
+import FacebookProvider from 'next-auth/providers/facebook'
+import GoogleProvider from 'next-auth/providers/google'
+
 import { generateAvatar } from '@/lib/avatar'
+import { prisma } from '@/lib/prisma'
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
