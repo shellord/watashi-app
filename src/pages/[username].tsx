@@ -5,9 +5,11 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useFollowUser } from '@/hooks/useFollowUser'
 import { useGetFollows } from '@/hooks/useGetFollows'
 import { useGetUser } from '@/hooks/useGetUser'
+import { useGetUserComments } from '@/hooks/useGetUserComments'
 import { useGetUserList } from '@/hooks/useGetUserList'
 import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
+import Comments from '@/components/Comments/'
 import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
 import ListItemCard from '@/components/list/ListItemCard'
 
@@ -18,7 +20,9 @@ const ProfilePage = () => {
   const { user, status } = useGetUser(username)
   const { data: lists, status: listStatus } = useGetUserList(username)
   const { user: currentUser, status: currentUserStatus } = useCurrentUser()
-
+  const { data: comments, status: commentsStatus } =
+    useGetUserComments(username)
+  console.log(comments)
   const userId = user?.id as string
   const { data: follows, status: followsStatus } = useGetFollows(userId)
   const followUserMutation = useFollowUser(userId)
@@ -48,6 +52,13 @@ const ProfilePage = () => {
 
   const isSameUser = currentUser?.id === user?.id
 
+  const EmptyList = () => (
+    <div className='flex h-56 items-center justify-center bg-white p-2 shadow flex-col'>
+      <h1 className='text-lg'>{user?.name} doesn&apos;t have any list yet </h1>
+      <h1 className='text-xl'>🫤</h1>
+    </div>
+  )
+
   return (
     <>
       <Head>
@@ -66,7 +77,7 @@ const ProfilePage = () => {
           />
         )}
       </div>
-      {lists && lists.list.length > 0 && (
+      {lists && lists.list.length > 0 ? (
         <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
           {lists.list.map((list) => (
             <div key={list.id}>
@@ -83,7 +94,14 @@ const ProfilePage = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <div className='mt-5'>
+          <EmptyList />
+        </div>
       )}
+      <div className='shadow mt-2'>
+        <Comments />
+      </div>
     </>
   )
 }
