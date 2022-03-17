@@ -1,9 +1,15 @@
-import { Comments } from '@prisma/client'
+import { User } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
+
+export type FetchUserCommentsResponse = {
+  author: User
+  text: string
+  id: string
+}[]
 
 export const fetchUserComments = async (
   username: string
-): Promise<Comments[] | null> => {
+): Promise<FetchUserCommentsResponse | null> => {
   const user = await axios.get(`/api/comments/${username}`)
   if (user.status === 200) {
     return user.data

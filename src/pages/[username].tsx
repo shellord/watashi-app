@@ -9,7 +9,7 @@ import { useGetUserComments } from '@/hooks/useGetUserComments'
 import { useGetUserList } from '@/hooks/useGetUserList'
 import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
-import Comments from '@/components/Comments/'
+import CommentList from '@/components/Comments/CommentList'
 import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
 import ListItemCard from '@/components/list/ListItemCard'
 
@@ -100,7 +100,7 @@ const ProfilePage = () => {
         </div>
       )}
       <div className='shadow mt-2'>
-        <Comments />
+        {comments && <CommentList comments={comments} />}
       </div>
     </>
   )

@@ -22,7 +22,13 @@ export default async function handler(
             username,
           },
           select: {
-            comments: true,
+            comments: {
+              select: {
+                text: true,
+                id: true,
+                author: true,
+              },
+            },
           },
         })
         return res.status(200).json(data?.comments)
