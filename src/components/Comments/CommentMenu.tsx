@@ -28,7 +28,7 @@ const CommentMenu = ({ id, isSameUser }: Props) => {
   return (
     <div className='relative' ref={menuRef}>
       <button
-        className='hover:bg-gray-50 rounded'
+        className='hover:bg-gray-50 rounded p-2'
         onClick={() => setShowMenu(!showMenu)}
       >
         <HiOutlineDotsHorizontal className='text-gray-600' size={18} />
