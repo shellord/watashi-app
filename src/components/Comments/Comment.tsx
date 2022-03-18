@@ -18,7 +18,7 @@ const Comment = ({ comments }: Props) => {
           </p>
         </div>
       )}
-      <div className='space-y-3 h-28'>
+      <div className='space-y-3 min-h-28'>
         {reversedComments.map((comment) => (
           <div key={comment.id}>
             <CommentItem
