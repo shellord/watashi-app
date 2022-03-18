@@ -37,22 +37,22 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  username      String?    @unique
-  email         String?    @unique
+  username      String?   @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   bio           String?
   gender        Gender?
-  status        Status     @default(ACTIVE)
+  status        Status    @default(ACTIVE)
   accounts      Account[]
   sessions      Session[]
   list          List[]
-  followers     Follows[]  @relation("follower")
-  following     Follows[]  @relation("following")
-  comments      Comments[]
-  myComments    Comments[] @relation("author")
+  followers     Follows[] @relation("follower")
+  following     Follows[] @relation("following")
+  comments      Comment[]
+  myComments    Comment[] @relation("author")
 }
 
 model VerificationToken {
@@ -90,14 +90,14 @@ model Follows {
   @@id([followerId, followingId])
 }
 
-model Comments {
-  id       String @id @default(cuid())
-  text     String
-  userId   String
-  authorId String
-
-  author User @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  userId    String
+  authorId  String
+  createdAt DateTime @default(now())
+  author    User     @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {

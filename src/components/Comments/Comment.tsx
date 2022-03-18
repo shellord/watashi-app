@@ -1,24 +1,38 @@
-import Image from 'next/image'
+import CommentItem from '@/components/Comments/CommentItem'
+import CommentsContainer from '@/components/Comments/CommentsContainer'
 
-type Props = {
-  text: string
-  authorImageUrl: string
+import type { FetchUserCommentsResponse } from '@/lib/client/comment'
+
+export type Props = {
+  comments: FetchUserCommentsResponse
 }
-const Comment = ({ text, authorImageUrl }: Props) => {
+const Comment = ({ comments }: Props) => {
+  const reversedComments = [...comments].reverse()
   return (
-    <div className='flex items-center'>
-      <div className='w-5 h-5 relative'>
-        <Image
-          src={authorImageUrl}
-          alt='author'
-          className='rounded-full'
-          layout='fill'
-        />
+    <CommentsContainer>
+      {comments.length === 0 && (
+        <div className='flex items-center flex-col'>
+          <p>No Comments yet</p>
+          <p className='flex items-center'>
+            Be the First one to comment <span className='text-2xl'>😀</span>{' '}
+          </p>
+        </div>
+      )}
+      <div className='space-y-3 h-28'>
+        {reversedComments.map((comment) => (
+          <div key={comment.id}>
+            <CommentItem
+              id={comment.id}
+              text={comment.text}
+              authorImageUrl={comment.author.image as string}
+              authorUsername={comment.author.username as string}
+              authorName={comment.author.name as string}
+              createdAt={comment.createdAt}
+            />
+          </div>
+        ))}
       </div>
-      <div className='ml-2'>
-        <p>{text}</p>
-      </div>
-    </div>
+    </CommentsContainer>
   )
 }
 

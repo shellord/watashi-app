@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { useAddComment } from '@/hooks/useAddComment'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useFollowUser } from '@/hooks/useFollowUser'
 import { useGetFollows } from '@/hooks/useGetFollows'
@@ -9,7 +10,8 @@ import { useGetUserComments } from '@/hooks/useGetUserComments'
 import { useGetUserList } from '@/hooks/useGetUserList'
 import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
-import CommentList from '@/components/Comments/CommentList'
+import Comment from '@/components/Comments/Comment'
+import CommentField from '@/components/Comments/CommentField'
 import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
 import ListItemCard from '@/components/list/ListItemCard'
 
@@ -22,12 +24,11 @@ const ProfilePage = () => {
   const { user: currentUser, status: currentUserStatus } = useCurrentUser()
   const { data: comments, status: commentsStatus } =
     useGetUserComments(username)
-  console.log(comments)
   const userId = user?.id as string
   const { data: follows, status: followsStatus } = useGetFollows(userId)
   const followUserMutation = useFollowUser(userId)
   const unFollowUserMutation = useUnFollowUser(userId)
-
+  const addCommentMutation = useAddComment()
   const onFollowHandler = () => {
     if (!user || !user.id) return
     followUserMutation.mutate(user.id)
@@ -36,6 +37,14 @@ const ProfilePage = () => {
   const onUnFollowHandler = () => {
     if (!user || !user.id) return
     unFollowUserMutation.mutate(user.id)
+  }
+
+  const onCommentHandler = (text: string) => {
+    if (!user || !user.username) return
+    addCommentMutation.mutate({
+      username: user.username,
+      text,
+    })
   }
 
   if (!user && status !== 'loading') {
@@ -99,8 +108,20 @@ const ProfilePage = () => {
           <EmptyList />
         </div>
       )}
-      <div className='shadow mt-2'>
-        {comments && <CommentList comments={comments} />}
+      <div className='shadow mt-2 bg-white p-2'>
+        <p className='font-semibold border-b pb-2 text-lg'>Comments</p>
+
+        {currentUser && currentUser.image ? (
+          <div className='mt-3'>
+            <CommentField
+              imageUrl={currentUser.image}
+              onComment={onCommentHandler}
+            />
+          </div>
+        ) : (
+          <div className='mt-3'>Login to comment</div>
+        )}
+        {comments && <Comment comments={comments} />}
       </div>
     </>
   )

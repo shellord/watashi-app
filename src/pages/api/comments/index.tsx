@@ -16,12 +16,38 @@ export default async function handler(
   switch (req.method) {
     case 'GET': {
       try {
-        const comments = await prisma.comments.findMany({
+        const comments = await prisma.comment.findMany({
           where: {
             userId: session.user.id,
           },
         })
         return res.status(200).json(comments)
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return res.status(400).json({ error: error.message })
+        }
+        return res.status(500).json({ error: 'Database Error' })
+      }
+    }
+    case 'DELETE': {
+      const { id } = req.query as { id: string }
+      if (!id) {
+        return res.status(400).json({ message: 'id is required' })
+      }
+      try {
+        await prisma.user.update({
+          where: {
+            id: session.user.id,
+          },
+          data: {
+            myComments: {
+              delete: {
+                id,
+              },
+            },
+          },
+        })
+        return res.status(200).json({ message: 'success' })
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return res.status(400).json({ error: error.message })
