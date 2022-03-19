@@ -36,9 +36,38 @@ export default async function handler(
             },
           },
         })
+        await prisma.user.update({
+          where: {
+            id: session.user.id,
+          },
+          data: {
+            activity: {
+              create: {
+                targetId: id,
+                targetType: 'USER',
+                verb: 'FOLLOW',
+              },
+            },
+          },
+        })
+
+        await prisma.user.update({
+          where: {
+            id,
+          },
+          data: {
+            notifications: {
+              create: {
+                actorId: session.user.id as string,
+                verb: 'FOLLOW',
+              },
+            },
+          },
+        })
 
         return res.status(200).json({ message: 'success' })
       } catch (error) {
+        console.log(error)
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           if (error.code === 'P2025') {
             return res.status(400).json({ error: 'user ID is invalid!' })

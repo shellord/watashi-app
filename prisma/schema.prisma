@@ -37,22 +37,24 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  username      String?   @unique
-  email         String?   @unique
+  username      String?        @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   bio           String?
   gender        Gender?
-  status        Status    @default(ACTIVE)
+  status        Status         @default(ACTIVE)
   accounts      Account[]
   sessions      Session[]
   list          List[]
-  followers     Follows[] @relation("follower")
-  following     Follows[] @relation("following")
+  followers     Follows[]      @relation("follower")
+  following     Follows[]      @relation("following")
   comments      Comment[]
-  myComments    Comment[] @relation("author")
+  myComments    Comment[]      @relation("author")
+  activity      Activity[]
+  notifications Notification[]
 }
 
 model VerificationToken {
@@ -100,6 +102,29 @@ model Comment {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Activity {
+  id         String             @id @default(cuid())
+  actorID    String
+  targetId   String
+  targetType ActivityTargetType
+  verb       ActivityVerb
+  createdAt  DateTime           @default(now())
+  actor      User               @relation(fields: [actorID], references: [id])
+}
+
+model Notification {
+  id         String                  @id @default(cuid())
+  userId     String
+  actorId    String
+  seen       Boolean                 @default(false)
+  targetId   String?
+  targetType NotificationTargetType?
+  verb       NotificationVerb
+  read       DateTime?
+  createdAt  DateTime                @default(now())
+  user       User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 enum Gender {
   MALE
   FEMALE
@@ -116,4 +141,31 @@ enum Category {
   MUSIC
   BOOK
   TV
+}
+
+enum ActivityTargetType {
+  LIST
+  COMMENT
+  USER
+}
+
+enum ActivityVerb {
+  LIKED
+  ADDED
+  REPLY
+  FOLLOW
+  COMMENT
+}
+
+enum NotificationTargetType {
+  LIST
+  COMMENT
+}
+
+enum NotificationVerb {
+  LIKED
+  ADDED
+  REPLY
+  FOLLOW
+  COMMENT
 }
