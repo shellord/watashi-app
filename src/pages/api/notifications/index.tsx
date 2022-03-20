@@ -20,10 +20,14 @@ export default async function handler(
           where: {
             id: session.user.id,
           },
+
           include: {
             notifications: {
               include: {
                 actor: true,
+              },
+              orderBy: {
+                createdAt: 'desc',
               },
             },
           },
