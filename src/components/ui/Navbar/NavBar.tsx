@@ -32,7 +32,7 @@ const NavBar = () => {
                   <IoAddCircleOutline size={28} />
                 </a>
               </Link>
-              <Link href='/test'>
+              <Link href='/notifications'>
                 <a>
                   <IoMdNotificationsOutline size={28} />
                 </a>

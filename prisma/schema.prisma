@@ -37,24 +37,25 @@ model Session {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  username      String?        @unique
-  email         String?        @unique
-  emailVerified DateTime?
-  image         String?
-  bio           String?
-  gender        Gender?
-  status        Status         @default(ACTIVE)
-  accounts      Account[]
-  sessions      Session[]
-  list          List[]
-  followers     Follows[]      @relation("follower")
-  following     Follows[]      @relation("following")
-  comments      Comment[]
-  myComments    Comment[]      @relation("author")
-  activity      Activity[]
-  notifications Notification[]
+  id                  String         @id @default(cuid())
+  name                String?
+  username            String?        @unique
+  email               String?        @unique
+  emailVerified       DateTime?
+  image               String?
+  bio                 String?
+  gender              Gender?
+  status              Status         @default(ACTIVE)
+  accounts            Account[]
+  sessions            Session[]
+  list                List[]
+  followers           Follows[]      @relation("follower")
+  following           Follows[]      @relation("following")
+  comments            Comment[]
+  myComments          Comment[]      @relation("author")
+  activity            Activity[]
+  notifications       Notification[] @relation("user")
+  notificationActorOf Notification[] @relation("actor")
 }
 
 model VerificationToken {
@@ -122,7 +123,8 @@ model Notification {
   verb       NotificationVerb
   read       DateTime?
   createdAt  DateTime                @default(now())
-  user       User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User                    @relation("user", fields: [userId], references: [id], onDelete: Cascade)
+  actor      User                    @relation("actor", fields: [actorId], references: [id], onDelete: Cascade)
 }
 
 enum Gender {
