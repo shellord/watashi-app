@@ -13,3 +13,8 @@ export const fetchNotifications = async () => {
   )
   return response.data
 }
+
+export const markNotificationAsSeen = async () => {
+  const response = await axios.patch('/api/notifications')
+  return response.data
+}

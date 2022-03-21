@@ -41,6 +41,33 @@ export default async function handler(
         return res.status(500).json({ error: 'Database Error' })
       }
     }
+    case 'PATCH': {
+      try {
+        const data = await prisma.user.update({
+          where: {
+            id: session.user.id,
+          },
+          data: {
+            notifications: {
+              updateMany: {
+                data: {
+                  seen: true,
+                },
+                where: {
+                  seen: false,
+                },
+              },
+            },
+          },
+        })
+        return res.status(200).json({ notifications: data })
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return res.status(400).json({ error: error.message })
+        }
+        return res.status(500).json({ error: 'Database Error' })
+      }
+    }
     default: {
       return res.status(400).json({ error: 'Invalid Method' })
     }

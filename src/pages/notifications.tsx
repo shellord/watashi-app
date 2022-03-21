@@ -1,16 +1,20 @@
-import moment from 'moment'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+import { useEffect } from 'react'
 
 import { useGetNotifications } from '@/hooks/useGetNotifications'
+import { useMarkNotificationsSeen } from '@/hooks/useMarkNotifcationsSeen'
 
 import FollowNotification from '@/components/notifications/FollowNotification'
 
 const Notifications: NextPage = () => {
   const { data, status, error } = useGetNotifications()
-  console.log(data?.notifications)
+  const markNotificationsSeenData = useMarkNotificationsSeen()
+
+  useEffect(() => {
+    markNotificationsSeenData.mutate()
+  }, [])
+
   return (
     <>
       <Head>

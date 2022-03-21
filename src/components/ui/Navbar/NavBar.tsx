@@ -4,11 +4,19 @@ import { IoSearchOutline } from 'react-icons/io5'
 import { IoAddCircleOutline } from 'react-icons/io5'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
+import { useGetNotifications } from '@/hooks/useGetNotifications'
 
 import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
+  const { data: notifications, status: unseenNotificationStatus } =
+    useGetNotifications()
+
+  const unseenNotificationCount = notifications?.notifications.filter(
+    (notification) => !notification.seen
+  ).length
+
   return (
     <div className='sticky top-0 z-20  bg-white shadow-sm'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
@@ -34,7 +42,14 @@ const NavBar = () => {
               </Link>
               <Link href='/notifications'>
                 <a>
-                  <IoMdNotificationsOutline size={28} />
+                  <div className='relative'>
+                    <IoMdNotificationsOutline size={28} />
+                    {unseenNotificationCount && unseenNotificationCount > 0 ? (
+                      <span className='absolute top-0 -right-2 -translate-y-2 bg-red-500 rounded-full px-2 py-1 text-xs'>
+                        {unseenNotificationCount}
+                      </span>
+                    ) : null}
+                  </div>
                 </a>
               </Link>
               <NavbarMenu user={user} />
