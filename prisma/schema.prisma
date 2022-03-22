@@ -67,12 +67,14 @@ model VerificationToken {
 }
 
 model List {
-  id       String   @id @default(cuid())
-  name     String
-  category Category
-  items    Item[]
-  ownerId  String
-  owner    User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  id        String     @id @default(cuid())
+  name      String
+  category  Category
+  items     Item[]
+  ownerId   String
+  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  targetsOf Activity[]
 }
 
 model Item {
@@ -111,6 +113,7 @@ model Activity {
   verb       ActivityVerb
   createdAt  DateTime           @default(now())
   actor      User               @relation(fields: [actorID], references: [id])
+  target     List               @relation(fields: [targetId], references: [id])
 }
 
 model Notification {

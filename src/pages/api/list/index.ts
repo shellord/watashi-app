@@ -52,7 +52,7 @@ export default async function handler(
           results = await getDetailsOfTV(process.env.TMDB_API_KEY!, items)
         }
 
-        await prisma.user.update({
+        const newList = await prisma.user.update({
           where: { id: session.user.id },
           data: {
             list: {
@@ -66,6 +66,27 @@ export default async function handler(
                     posterPath: item.poster_path,
                   })),
                 },
+              },
+            },
+          },
+          select: {
+            list: {
+              take: 1,
+              orderBy: {
+                createdAt: 'desc',
+              },
+            },
+          },
+        })
+
+        await prisma.user.update({
+          where: { id: session.user.id },
+          data: {
+            activity: {
+              create: {
+                targetType: 'LIST',
+                targetId: newList.list[0].id,
+                verb: 'ADDED',
               },
             },
           },

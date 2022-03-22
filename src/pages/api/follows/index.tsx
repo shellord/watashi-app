@@ -36,20 +36,6 @@ export default async function handler(
             },
           },
         })
-        await prisma.user.update({
-          where: {
-            id: session.user.id,
-          },
-          data: {
-            activity: {
-              create: {
-                targetId: id,
-                targetType: 'USER',
-                verb: 'FOLLOW',
-              },
-            },
-          },
-        })
 
         await prisma.user.update({
           where: {

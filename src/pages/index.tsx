@@ -9,13 +9,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Watashi</title>
       </Head>
-      <div>
+      <div className='bg-white shadow p-2 rounded'>
         <p className='text-black'>Hello World</p>
-        <Link href='/test'>
-          <a>
-            <button>Go to test page</button>
-          </a>
-        </Link>
       </div>
     </>
   )
