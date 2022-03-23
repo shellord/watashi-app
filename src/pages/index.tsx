@@ -1,9 +1,17 @@
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
-import Link from 'next/link'
+
+import { useGetActivities } from '@/hooks/useGetActivities'
 
 const Home: NextPage = () => {
+  const {
+    data: activities,
+    status: activitiesStatus,
+    error: activitiesError,
+  } = useGetActivities()
+  console.log(activities)
+
   return (
     <>
       <Head>

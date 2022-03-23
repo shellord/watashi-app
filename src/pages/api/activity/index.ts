@@ -26,6 +26,14 @@ export default async function handler(
                 following: {
                   select: {
                     activity: {
+                      include: {
+                        actor: true,
+                        target: {
+                          include: {
+                            items: true,
+                          },
+                        },
+                      },
                       orderBy: {
                         createdAt: 'desc',
                       },
@@ -36,9 +44,11 @@ export default async function handler(
             },
           },
         })
-        const activityFeeds = activities?.followers.map((following) => {
-          return following.following.activity
-        })
+        const activityFeeds = activities?.followers
+          .map((following) => {
+            return following.following.activity
+          })
+          .flat()
 
         return res.status(200).json({ activityFeeds })
       } catch (error) {
