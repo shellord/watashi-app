@@ -1,6 +1,5 @@
 import { signIn } from 'next-auth/react'
-import Image from 'next/image'
-import { FaFacebook, FaGoogle } from 'react-icons/fa'
+import { FaFacebook } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 
 type Props = {
