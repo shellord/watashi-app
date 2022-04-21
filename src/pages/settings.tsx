@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 
-import EditProfile from '@/components/Profile/EditProfile'
+import EditProfile from '@/components/profile/EditProfile'
 
 const NewUser: NextPage = () => {
   return (

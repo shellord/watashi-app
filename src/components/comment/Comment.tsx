@@ -1,5 +1,5 @@
-import CommentItem from '@/components/Comments/CommentItem'
-import CommentsContainer from '@/components/Comments/CommentsContainer'
+import CommentItem from '@/components/comment/CommentItem'
+import CommentsContainer from '@/components/comment/CommentsContainer'
 
 import type { FetchUserCommentsResponse } from '@/lib/client/comment'
 

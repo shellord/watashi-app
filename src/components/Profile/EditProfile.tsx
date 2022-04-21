@@ -7,8 +7,8 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useDeleteProfilePhoto } from '@/hooks/useDeleteProfilePhoto'
 import { useUpdateUser } from '@/hooks/useUpdateUser'
 
-import PhotoModal from '@/components/Profile/PhotoModal'
-import PhotoUpload from '@/components/Profile/PhotoUpload'
+import PhotoModal from '@/components/profile/PhotoModal'
+import PhotoUpload from '@/components/profile/PhotoUpload'
 import Modal from '@/components/ui/Modal'
 
 const EditProfile = () => {

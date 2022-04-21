@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 
-import CommentMenu from '@/components/Comments/CommentMenu'
+import CommentMenu from '@/components/comment/CommentMenu'
 
 type Props = {
   id: string

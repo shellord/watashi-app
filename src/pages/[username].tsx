@@ -10,10 +10,10 @@ import { useGetUserComments } from '@/hooks/useGetUserComments'
 import { useGetUserList } from '@/hooks/useGetUserList'
 import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
-import Comment from '@/components/Comments/Comment'
-import CommentField from '@/components/Comments/CommentField'
-import ProfileInfoSection from '@/components/Profile/ProfileInfoSection'
+import Comment from '@/components/comment/Comment'
+import CommentField from '@/components/comment/CommentField'
 import ListItemCard from '@/components/list/ListItemCard'
+import ProfileInfoSection from '@/components/profile/ProfileInfoSection'
 
 const ProfilePage = () => {
   const router = useRouter()

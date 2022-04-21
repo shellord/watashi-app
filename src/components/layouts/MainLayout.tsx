@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import NavBar from '@/components/ui/Navbar'
+import NavBar from '@/components/ui/navbar'
 
 const MainLayout = ({ children }: PropsWithChildren<{}>) => {
   return (

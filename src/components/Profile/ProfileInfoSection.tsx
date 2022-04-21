@@ -2,7 +2,7 @@ import { User } from '@/types/user'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import FollowsModal from '@/components/Profile/FollowsModal'
+import FollowsModal from '@/components/profile/FollowsModal'
 
 type Props = {
   user: User

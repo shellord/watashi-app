@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 
-import DeleteCommentModal from '@/components/Comments/DeleteCommentModal'
+import DeleteCommentModal from '@/components/comment/DeleteCommentModal'
 
 type Props = {
   id: string

@@ -6,7 +6,7 @@ import { IoAddCircleOutline } from 'react-icons/io5'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useGetNotifications } from '@/hooks/useGetNotifications'
 
-import NavbarMenu from '@/components/ui/Navbar/NavbarMenu'
+import NavbarMenu from '@/components/ui/navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
