@@ -27,7 +27,7 @@ const CommentItem = ({
   return (
     <div className='flex items-center'>
       <Link href={`/${authorUsername}`}>
-        <a className='w-[2.4rem] h-[2.4rem] relative  '>
+        <a className='w-[2.4rem] h-[2.4rem] relative flex-shrink-0'>
           <Image
             src={authorImageUrl}
             alt='author'
