@@ -9,11 +9,11 @@ import FollowNotification from '@/components/notifications/FollowNotification'
 
 const Notifications: NextPage = () => {
   const { data, status, error } = useGetNotifications()
-  const { mutate: markNotificationsSeen } = useMarkNotificationsSeen()
+  const markNotificationsSeenData = useMarkNotificationsSeen()
 
   useEffect(() => {
-    markNotificationsSeen()
-  }, [markNotificationsSeen])
+    markNotificationsSeenData.mutate()
+  }, [markNotificationsSeenData])
 
   return (
     <>
