@@ -12,7 +12,7 @@ import { useUnFollowUser } from '@/hooks/useUnFollowUser'
 
 import Comment from '@/components/comment/Comment'
 import CommentField from '@/components/comment/CommentField'
-import ListItemCard from '@/components/list/ListItemCard'
+import ListContainer from '@/components/list/ListContainer'
 import ProfileInfoSection from '@/components/profile/ProfileInfoSection'
 
 const ProfilePage = () => {
@@ -90,16 +90,7 @@ const ProfilePage = () => {
         <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
           {lists.list.map((list) => (
             <div key={list.id}>
-              <div className='mb-3 border-b pb-2'>
-                <p className='text-lg font-semibold'>{list.name}</p>
-              </div>
-              <div className='flex space-x-3 overflow-x-auto'>
-                {list.items.map((item) => (
-                  <div key={item.id}>
-                    <ListItemCard title={item.title} image={item.posterPath} />
-                  </div>
-                ))}
-              </div>
+              <ListContainer listName={list.name} listItems={list.items} />
             </div>
           ))}
         </div>

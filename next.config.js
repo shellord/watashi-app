@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['ui-avatars.com', 'res.cloudinary.com', 'image.tmdb.org'],
+    dangerouslyAllowSVG: true,
   },
 }
 

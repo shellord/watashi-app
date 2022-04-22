@@ -4,21 +4,32 @@ import Head from 'next/head'
 
 import { useGetActivities } from '@/hooks/useGetActivities'
 
+import Activity from '@/components/activity/Activity'
+
 const Home: NextPage = () => {
-  const {
-    data: activities,
-    status: activitiesStatus,
-    error: activitiesError,
-  } = useGetActivities()
-  console.log(activities)
+  const { data: activities, status: activitiesStatus } = useGetActivities()
 
   return (
     <>
       <Head>
         <title>Watashi</title>
       </Head>
-      <div className='bg-white shadow p-2 rounded'>
-        <p className='text-black'>Hello World</p>
+      <div className='space-y-5'>
+        {activitiesStatus === 'loading' && <p>Loading...</p>}
+        {activities?.activityFeeds?.map((activity) => {
+          return (
+            <div key={activity.id}>
+              <Activity
+                name={activity.actor.name!}
+                username={activity.actor.username!}
+                userImage={activity.actor.image!}
+                listName={activity.target.name}
+                createdAt={activity.createdAt}
+                listItems={activity.target.items}
+              />
+            </div>
+          )
+        })}
       </div>
     </>
   )
