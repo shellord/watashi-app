@@ -13,7 +13,7 @@ const Notifications: NextPage = () => {
 
   useEffect(() => {
     markNotificationsSeenData.mutate()
-  }, [markNotificationsSeenData])
+  }, [])
 
   return (
     <>
