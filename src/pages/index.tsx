@@ -8,7 +8,6 @@ import Activity from '@/components/activity/Activity'
 
 const Home: NextPage = () => {
   const { data: activities, status: activitiesStatus } = useGetActivities()
-
   return (
     <>
       <Head>
