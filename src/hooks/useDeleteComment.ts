@@ -10,7 +10,9 @@ export const useDeleteComment = () => {
       queryClient.invalidateQueries('comments')
     },
     onError: (error: Error) => {
-      toast.error(`Error: ${error.message}`)
+      toast.error(`Error: ${error.message}`, {
+        autoClose: 3000,
+      })
     },
   })
 }

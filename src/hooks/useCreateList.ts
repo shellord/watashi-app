@@ -24,6 +24,7 @@ export const useCreateList = () => {
         render: `Error: ${error.message}`,
         type: 'error',
         isLoading: false,
+        autoClose: 3000,
       })
     },
   })
