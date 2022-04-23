@@ -14,6 +14,7 @@ import Comment from '@/components/comment/Comment'
 import CommentField from '@/components/comment/CommentField'
 import ListContainer from '@/components/list/ListContainer'
 import ProfileInfoSection from '@/components/profile/ProfileInfoSection'
+import ProfileInfoSectionSkelton from '@/components/skeletons/ProfileInfoSectionSkelton'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -74,7 +75,7 @@ const ProfilePage = () => {
         <title>{user?.username}</title>
       </Head>
       <div className='mt-2 overflow-hidden rounded shadow'>
-        {user && user.id && follows && (
+        {user && user.id && follows ? (
           <ProfileInfoSection
             user={user}
             isSameUser={isSameUser}
@@ -84,6 +85,8 @@ const ProfilePage = () => {
             followers={follows.followers}
             following={follows.following}
           />
+        ) : (
+          <ProfileInfoSectionSkelton />
         )}
       </div>
       {lists && lists.list.length > 0 ? (
