@@ -15,6 +15,7 @@ import CommentField from '@/components/comment/CommentField'
 import ListContainer from '@/components/list/ListContainer'
 import ProfileInfoSection from '@/components/profile/ProfileInfoSection'
 import ProfileInfoSectionSkelton from '@/components/skeletons/ProfileInfoSectionSkelton'
+import SkeletonList from '@/components/skeletons/SkeletonList'
 
 const ProfilePage = () => {
   const router = useRouter()
@@ -89,6 +90,12 @@ const ProfilePage = () => {
           <ProfileInfoSectionSkelton />
         )}
       </div>
+
+      {!lists && (
+        <div className='bg-white mt-2 p-3'>
+          <SkeletonList />
+        </div>
+      )}
       {lists && lists.list.length > 0 ? (
         <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
           {lists.list.map((list) => (
