@@ -1,7 +1,12 @@
 import Link from 'next/link'
-import { IoMdNotificationsOutline } from 'react-icons/io'
-import { IoSearchOutline } from 'react-icons/io5'
-import { IoAddCircleOutline } from 'react-icons/io5'
+import { useRouter } from 'next/router'
+import { IoMdNotifications, IoMdNotificationsOutline } from 'react-icons/io'
+import {
+  IoAddCircle,
+  IoAddCircleOutline,
+  IoSearch,
+  IoSearchOutline,
+} from 'react-icons/io5'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useGetNotifications } from '@/hooks/useGetNotifications'
@@ -10,6 +15,7 @@ import NavbarMenu from '@/components/ui/navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
+  const router = useRouter()
   const { data: notifications, status: unseenNotificationStatus } =
     useGetNotifications()
 
@@ -30,20 +36,33 @@ const NavBar = () => {
         >
           {status === 'success' && user ? (
             <div className='flex items-center space-x-4'>
-              <Link href='#'>
+              <Link href='/search'>
                 <a>
-                  <IoSearchOutline size={28} />
+                  {router.pathname === '/search' ? (
+                    <IoSearch size={28} />
+                  ) : (
+                    <IoSearchOutline size={28} />
+                  )}
                 </a>
               </Link>
               <Link href='/my-list'>
                 <a>
-                  <IoAddCircleOutline size={28} />
+                  {router.pathname === '/my-list' ? (
+                    <IoAddCircle size={28} />
+                  ) : (
+                    <IoAddCircleOutline size={28} />
+                  )}
                 </a>
               </Link>
               <Link href='/notifications'>
                 <a>
                   <div className='relative'>
-                    <IoMdNotificationsOutline size={28} />
+                    {router.pathname === '/notifications' ? (
+                      <IoMdNotifications size={28} />
+                    ) : (
+                      <IoMdNotificationsOutline size={28} />
+                    )}
+
                     {unseenNotificationCount && unseenNotificationCount > 0 ? (
                       <span className='absolute top-0 -right-2 -translate-y-2 bg-red-500 rounded-full px-2 py-1 text-xs'>
                         {unseenNotificationCount}
