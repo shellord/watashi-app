@@ -23,11 +23,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
 
-  const { data: movieResults } = useSearchMovie(
+  const { data: movieResults, isFetching: isMovieFetching } = useSearchMovie(
     debouncedSearchQuery,
     selected === 'MOVIE'
   )
-  const { data: tvResults } = useSearchTV(
+  const { data: tvResults, isFetching: isTvetching } = useSearchTV(
     debouncedSearchQuery,
     selected === 'TV'
   )
@@ -43,6 +43,8 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
   const removeFromList = (item: ListItem) => {
     setList(list.filter((i) => i.id !== item.id))
   }
+
+  const isFetching = isMovieFetching || isTvetching
 
   const data = selected === 'MOVIE' ? movieResults : tvResults
   return (
@@ -77,7 +79,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
       )}
 
       <div className='mt-2 pb-2'>
-        <SearchListBar selected={selected} onChange={onSearchChange} />
+        <SearchListBar
+          selected={selected}
+          onChange={onSearchChange}
+          showFetchingIndicator={isFetching}
+        />
       </div>
 
       <div className='mt-3 flex items-start space-x-3 overflow-x-auto'>
