@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Image from 'next/image'
 import { useState } from 'react'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
@@ -9,7 +10,8 @@ const Search: NextPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
 
-  const { data: users, isFetching } = useSearchUser(debouncedSearchQuery)
+  const { data: userSearchResult, isFetching } =
+    useSearchUser(debouncedSearchQuery)
 
   return (
     <div>
@@ -26,6 +28,18 @@ const Search: NextPage = () => {
             </div>
           )}
         </div>
+      </div>
+
+      <div className='mt-3'>
+        {userSearchResult?.users.map((user) => (
+          <div
+            key={user.id}
+            className='flex items-center space-x-5 bg-white p-3 rounded shadow justify-center'
+          >
+            <Image src={user.image!} alt='userImage' width={50} height={50} />
+            <p className='font-semibold'> {user.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   )
