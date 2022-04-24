@@ -39,15 +39,16 @@ const EditList: NextPage = () => {
   const { id } = router.query
   const listToEdit = lists?.find((list) => list.id === id)
 
-  const { data: movieResults } = useSearchMovie(
+  const { data: movieResults, isFetching: isFetchingMovie } = useSearchMovie(
     debouncedSearchQuery,
     listToEdit?.category === 'MOVIE'
   )
-  const { data: tvResults } = useSearchTV(
+  const { data: tvResults, isFetching: isFetchingTV } = useSearchTV(
     debouncedSearchQuery,
     listToEdit?.category === 'TV'
   )
 
+  const isFetching = isFetchingMovie || isFetchingTV
   const data = listToEdit?.category === 'MOVIE' ? movieResults : tvResults
 
   useEffect(() => {
@@ -146,6 +147,7 @@ const EditList: NextPage = () => {
           <SearchListBar
             selected={listToEdit.category}
             onChange={onSearchChange}
+            showFetchingIndicator={isFetching}
           />
         </div>
         <div className='mt-3 flex items-start space-x-3 overflow-x-auto'>
