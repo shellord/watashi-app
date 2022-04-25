@@ -1,6 +1,7 @@
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
+import { GoVerified } from 'react-icons/go'
 
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 
@@ -13,6 +14,7 @@ type Props = {
   authorUsername: string
   authorName: string
   createdAt: Date
+  isAuthorVerified: boolean
 }
 const CommentItem = ({
   id,
@@ -21,6 +23,7 @@ const CommentItem = ({
   authorUsername,
   authorName,
   createdAt,
+  isAuthorVerified,
 }: Props) => {
   const { user: currentUser } = useCurrentUser()
   const isSameUser = currentUser?.username === authorUsername
@@ -40,7 +43,14 @@ const CommentItem = ({
       <div className='ml-2 flex flex-col w-full'>
         <div className='flex justify-between'>
           <div className='flex items-center'>
-            <p className='font-semibold'>{authorName}</p>
+            <div className='flex items-center'>
+              <p className='font-semibold'>{authorName}</p>
+              {isAuthorVerified && (
+                <span className='ml-1'>
+                  <GoVerified className='text-blue-500' />
+                </span>
+              )}
+            </div>
             <div className='ml-2'>
               <p className='text-xs text-gray-600'>
                 {moment(createdAt).fromNow()}

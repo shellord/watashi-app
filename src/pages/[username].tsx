@@ -85,6 +85,7 @@ const ProfilePage = () => {
             onUnFollow={onUnFollowHandler}
             followers={follows.followers}
             following={follows.following}
+            isVerified={user.isVerified}
           />
         ) : (
           <ProfileInfoSectionSkelton />

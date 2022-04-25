@@ -1,4 +1,4 @@
-import { User } from '@/types/user'
+import { User } from '@prisma/client'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { IoMdClose } from 'react-icons/io'

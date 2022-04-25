@@ -6,6 +6,7 @@ import type { FetchUserCommentsResponse } from '@/lib/client/comment'
 export type Props = {
   comments: FetchUserCommentsResponse
 }
+
 const Comment = ({ comments }: Props) => {
   const reversedComments = [...comments].reverse()
   return (
@@ -28,6 +29,7 @@ const Comment = ({ comments }: Props) => {
               authorUsername={comment.author.username as string}
               authorName={comment.author.name as string}
               createdAt={comment.createdAt}
+              isAuthorVerified={comment.author.isVerified}
             />
           </div>
         ))}

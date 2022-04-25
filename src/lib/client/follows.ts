@@ -1,4 +1,4 @@
-import { User } from '@/types/user'
+import { User } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
 
 type Follows = {

@@ -32,6 +32,7 @@ const Notifications: NextPage = () => {
                   username={notification.actor.username as string}
                   image={notification.actor.image as string}
                   createdAt={notification.createdAt}
+                  isActorVerified={notification.actor.isVerified}
                 />
               )}
               {notification.verb === 'COMMENT' && (
@@ -40,6 +41,7 @@ const Notifications: NextPage = () => {
                   username={notification.actor.username as string}
                   image={notification.actor.image as string}
                   createdAt={notification.createdAt}
+                  isActorVerified={notification.actor.isVerified}
                 />
               )}
             </div>

@@ -1,6 +1,7 @@
-import { User } from '@/types/user'
+import { User } from '@prisma/client'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { GoVerified } from 'react-icons/go'
 
 import FollowsModal from '@/components/profile/FollowsModal'
 
@@ -12,6 +13,7 @@ type Props = {
   isFollowing: boolean
   followers: User[]
   following: User[]
+  isVerified: boolean
 }
 
 const ProfileInfoSection = ({
@@ -22,10 +24,10 @@ const ProfileInfoSection = ({
   isFollowing,
   followers,
   following,
+  isVerified,
 }: Props) => {
   const [showFollowerModal, setShowFollowerModal] = useState(false)
   const [showFollowingModal, setShowFollowingModal] = useState(false)
-
   return (
     <div className='bg-white pb-2'>
       <div className='relative flex flex-col items-center'>
@@ -42,7 +44,14 @@ const ProfileInfoSection = ({
           )}
         </div>
         <div className='mt-10 flex flex-col items-center'>
-          <span className='mt-2 text-lg font-bold'>{user?.name}</span>
+          <div className='flex items-center mt-2'>
+            <span className='text-lg font-bold'>{user?.name}</span>
+            {isVerified && (
+              <span className='flex items-center ml-1'>
+                <GoVerified className='text-blue-500' />
+              </span>
+            )}
+          </div>
           <span className='text-xs text-gray-500'>@{user?.username}</span>
           <span className='w-96 text-center text-sm'>{user?.bio}</span>
         </div>
