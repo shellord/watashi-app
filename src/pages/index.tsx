@@ -37,6 +37,7 @@ const Home: NextPage = () => {
                 listName={activity.target.name}
                 createdAt={activity.createdAt}
                 listItems={activity.target.items}
+                isActorVerified={activity.actor.isVerified}
               />
             </div>
           )

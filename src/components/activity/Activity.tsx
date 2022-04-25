@@ -2,6 +2,7 @@ import type { Item } from '@prisma/client'
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
+import { GoVerified } from 'react-icons/go'
 
 import ListContainer from '@/components/list/ListContainer'
 
@@ -12,6 +13,7 @@ type Props = {
   listItems: Item[]
   userImage: string
   createdAt: Date
+  isActorVerified: boolean
 }
 
 const Activity = ({
@@ -21,6 +23,7 @@ const Activity = ({
   listItems,
   userImage,
   createdAt,
+  isActorVerified,
 }: Props) => {
   return (
     <div className='bg-white p-2 rounded-lg shadow'>
@@ -39,7 +42,14 @@ const Activity = ({
 
         <div className='ml-3'>
           <Link href={`/${username}`}>
-            <a className='font-bold'>{name}</a>
+            <a className='font-bold flex items-center'>
+              {name}
+              {isActorVerified && (
+                <span className='ml-1'>
+                  <GoVerified className='text-blue-500' />
+                </span>
+              )}
+            </a>
           </Link>
           <p className='text-sm'>{moment(createdAt).fromNow()}</p>
         </div>
