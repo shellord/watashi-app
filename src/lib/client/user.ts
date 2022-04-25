@@ -19,7 +19,12 @@ export const fetchUser = async (username: string): Promise<User | null> => {
   return null
 }
 
-export const updateUser = async ({ name, username, bio, gender }: User) => {
+export const updateUser = async ({
+  name,
+  username,
+  bio,
+  gender,
+}: Partial<User>) => {
   try {
     const res = await axios.put<User>('/api/user', {
       name,
