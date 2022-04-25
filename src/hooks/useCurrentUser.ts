@@ -1,4 +1,4 @@
-import { User } from '@/types/user'
+import { User } from '@prisma/client'
 import { UseQueryOptions, useQuery } from 'react-query'
 
 import { fetchCurrentUser } from '@/lib/client/user'
