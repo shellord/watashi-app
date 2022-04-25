@@ -1,4 +1,4 @@
-const colors = {
+const backgroundColors = {
   red: 'FF0000',
   orange: 'FFA500',
   yellow: 'FFFF00',
@@ -8,15 +8,17 @@ const colors = {
   violet: 'EE82EE',
 }
 
+const textColor = 'FFFFFF'
+
 const getRandomColor = () => {
-  const keys = Object.keys(colors)
+  const keys = Object.keys(backgroundColors)
   const randomKey = keys[
     Math.floor(Math.random() * keys.length)
-  ] as keyof typeof colors
-  return colors[randomKey]
+  ] as keyof typeof backgroundColors
+  return backgroundColors[randomKey]
 }
 
 export const generateAvatar = (name: string) => {
   const color = getRandomColor()
-  return `https://ui-avatars.com/api/?background=${color}&name=${name}&size=128&length=1`
+  return `https://ui-avatars.com/api/?background=${backgroundColors}&name=${name}&size=128&length=1&color=${textColor}`
 }

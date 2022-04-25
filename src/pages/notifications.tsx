@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useGetNotifications } from '@/hooks/useGetNotifications'
 import { useMarkNotificationsSeen } from '@/hooks/useMarkNotifcationsSeen'
 
+import CommentNotification from '@/components/notifications/CommentNotification'
 import FollowNotification from '@/components/notifications/FollowNotification'
 
 const Notifications: NextPage = () => {
@@ -27,6 +28,14 @@ const Notifications: NextPage = () => {
             <div key={notification.id}>
               {notification.verb === 'FOLLOW' && (
                 <FollowNotification
+                  name={notification.actor.name as string}
+                  username={notification.actor.username as string}
+                  image={notification.actor.image as string}
+                  createdAt={notification.createdAt}
+                />
+              )}
+              {notification.verb === 'COMMENT' && (
+                <CommentNotification
                   name={notification.actor.name as string}
                   username={notification.actor.username as string}
                   image={notification.actor.image as string}

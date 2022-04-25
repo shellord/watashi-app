@@ -97,7 +97,7 @@ const EditProfile = () => {
             placeholder='Write something about yourself'
             rows={3}
             maxLength={200}
-            value={user?.bio?.toString()}
+            defaultValue={user?.bio?.toString()}
           />
         </div>
         <div className='mt-2 flex flex-col text-sm'>
@@ -112,7 +112,7 @@ const EditProfile = () => {
                 name='gender'
                 className='peer appearance-none'
                 id='male'
-                defaultChecked
+                defaultChecked={user?.gender === 'MALE'}
               />
               <label
                 htmlFor='male'
@@ -129,6 +129,7 @@ const EditProfile = () => {
                 name='gender'
                 className='peer appearance-none'
                 id='female'
+                defaultChecked={user?.gender === 'FEMALE'}
               />
               <label
                 htmlFor='female'
@@ -145,6 +146,7 @@ const EditProfile = () => {
                 name='gender'
                 className='peer appearance-none'
                 id='other'
+                defaultChecked={user?.gender === 'OTHER'}
               />
               <label
                 htmlFor='other'

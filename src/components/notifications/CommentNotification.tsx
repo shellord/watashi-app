@@ -9,18 +9,18 @@ type Props = {
   createdAt: Date
 }
 
-const FollowNotification = ({ name, username, image, createdAt }: Props) => {
+const CommentNotification = ({ name, username, image, createdAt }: Props) => {
   return (
     <div className='flex justify-between items-center'>
-      <div className='flex items-center space-x-1'>
-        <div className='relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 '>
+      <div className='flex items-center  space-x-1'>
+        <div className='relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0'>
           <Image src={image} alt='avatar' layout='fill' />
         </div>
         <div>
           <Link href={`/${username}`}>
             <a className='font-semibold'>{name}</a>
           </Link>
-          <span className='ml-1'>followed you</span>
+          <span className='ml-1'>Commented on your profile</span>
         </div>
       </div>
       <div>
@@ -30,4 +30,4 @@ const FollowNotification = ({ name, username, image, createdAt }: Props) => {
   )
 }
 
-export default FollowNotification
+export default CommentNotification

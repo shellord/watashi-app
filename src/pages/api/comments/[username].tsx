@@ -80,6 +80,24 @@ export default async function handler(
             },
           },
         })
+
+        //If the user is not commenting on their own profile, send a notification
+        if (user.id !== session.user.id) {
+          await prisma.user.update({
+            where: {
+              id: user.id,
+            },
+            data: {
+              notifications: {
+                create: {
+                  actorId: session.user.id as string,
+                  verb: 'COMMENT',
+                },
+              },
+            },
+          })
+        }
+
         return res.status(200).json({ message: 'success' })
       } catch (error) {
         return res.status(500).json({ error: 'Database Error' })
