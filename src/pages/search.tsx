@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
@@ -36,8 +37,22 @@ const Search: NextPage = () => {
             key={user.id}
             className='flex items-center space-x-5 bg-white p-3 rounded shadow justify-center'
           >
-            <Image src={user.image!} alt='userImage' width={50} height={50} />
-            <p className='font-semibold'> {user.name}</p>
+            <Link href={`/${user.username}`}>
+              <a>
+                <div className='w-56 flex items-center'>
+                  <Image
+                    src={user.image!}
+                    alt='userImage'
+                    width={50}
+                    height={50}
+                    className='rounded-full'
+                  />
+                  <div className='ml-5'>
+                    <p className='font-semibold'> {user.name}</p>
+                  </div>
+                </div>
+              </a>
+            </Link>
           </div>
         ))}
       </div>

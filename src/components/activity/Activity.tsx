@@ -26,7 +26,7 @@ const Activity = ({
   isActorVerified,
 }: Props) => {
   return (
-    <div className='bg-white p-2 rounded-lg shadow'>
+    <div className='bg-white p-3 rounded-lg shadow'>
       <div className='flex'>
         <Link href={`/${username}`}>
           <a>
