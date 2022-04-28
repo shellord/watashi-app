@@ -22,6 +22,7 @@ const Search: NextPage = () => {
             placeholder='Search'
             className='ml-2 w-full bg-gray-100 outline-none'
             onChange={(event) => setSearchQuery(event.target.value)}
+            autoFocus
           />
           {isFetching && (
             <div className='animate-spin'>
