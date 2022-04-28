@@ -1,3 +1,4 @@
+import type { ListItem } from '@/types/list'
 import { AxiosError } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
@@ -26,7 +27,12 @@ export default async function handler(
   try {
     const spotify = await connectSpotify(CLIENT_ID, CLIENT_SECRET)
     const data = await spotify.searchMusic(query)
-    res.status(200).json(data)
+    const list: ListItem[] = data.tracks.items.map((item: any) => ({
+      id: item.id.toString(),
+      title: item.name,
+      poster_path: item.album.images[1].url,
+    }))
+    res.status(200).json(list)
   } catch (error) {
     const err = error as AxiosError
     res.status(500).json({ error: err.message })
