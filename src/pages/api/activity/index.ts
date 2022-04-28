@@ -33,6 +33,9 @@ export default async function handler(
                           },
                         },
                       },
+                      orderBy: {
+                        createdAt: 'desc',
+                      },
                     },
                   },
                 },
@@ -45,7 +48,6 @@ export default async function handler(
             return following.following.activity
           })
           .flat()
-          .reverse()
 
         return res.status(200).json({ activityFeeds })
       } catch (error) {
