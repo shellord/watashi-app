@@ -45,7 +45,11 @@ const MyList = () => {
               <div className='mt-2 flex space-x-3 overflow-x-scroll'>
                 {list.items.map((item) => (
                   <div key={item.id} className=''>
-                    <ListItemCard title={item.title} image={item.posterPath} />
+                    <ListItemCard
+                      title={item.title}
+                      image={item.posterPath}
+                      category={list.category}
+                    />
                   </div>
                 ))}
               </div>

@@ -1,4 +1,4 @@
-import type { Item } from '@prisma/client'
+import type { Category, Item } from '@prisma/client'
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,6 +14,7 @@ type Props = {
   userImage: string
   createdAt: Date
   isActorVerified: boolean
+  category: Category
 }
 
 const Activity = ({
@@ -24,6 +25,7 @@ const Activity = ({
   userImage,
   createdAt,
   isActorVerified,
+  category,
 }: Props) => {
   return (
     <div className='bg-white p-3 rounded-lg shadow'>
@@ -56,7 +58,11 @@ const Activity = ({
       </div>
 
       <div>
-        <ListContainer listName={listName} listItems={listItems} />
+        <ListContainer
+          listName={listName}
+          listItems={listItems}
+          category={category}
+        />
       </div>
     </div>
   )

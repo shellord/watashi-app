@@ -1,11 +1,12 @@
 import ListItemCard from './ListItemCard'
-import type { Item } from '@prisma/client'
+import type { Category, Item } from '@prisma/client'
 
 type Props = {
   listName: String
   listItems: Item[]
+  category: Category
 }
-const ListContainer = ({ listName, listItems }: Props) => {
+const ListContainer = ({ listName, listItems, category }: Props) => {
   return (
     <>
       <div className='mb-3 border-b pb-2'>
@@ -14,7 +15,11 @@ const ListContainer = ({ listName, listItems }: Props) => {
       <div className='flex space-x-3 overflow-x-auto'>
         {listItems.map((item) => (
           <div key={item.id}>
-            <ListItemCard title={item.title} image={item.posterPath} />
+            <ListItemCard
+              title={item.title}
+              image={item.posterPath}
+              category={category}
+            />
           </div>
         ))}
       </div>

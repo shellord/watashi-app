@@ -38,6 +38,7 @@ const Home: NextPage = () => {
                 createdAt={activity.createdAt}
                 listItems={activity.target.items}
                 isActorVerified={activity.actor.isVerified}
+                category={activity.target.category}
               />
             </div>
           )

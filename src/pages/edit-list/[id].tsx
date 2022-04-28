@@ -10,6 +10,7 @@ import { useCurrentUserList } from '@/hooks/useCurrentUserList'
 import useDebounce from '@/hooks/useDebounce'
 import { useDeleteList } from '@/hooks/useDeleteList'
 import useSearchMovie from '@/hooks/useSearchMovie'
+import useSearchMusic from '@/hooks/useSearchMusic'
 import useSearchTV from '@/hooks/useSearchTV'
 import { useUpdateList } from '@/hooks/useUpdateList'
 
@@ -48,8 +49,18 @@ const EditList: NextPage = () => {
     listToEdit?.category === 'TV'
   )
 
-  const isFetching = isFetchingMovie || isFetchingTV
-  const data = listToEdit?.category === 'MOVIE' ? movieResults : tvResults
+  const { data: musicResults, isFetching: isFetchingMusic } = useSearchMusic(
+    debouncedSearchQuery,
+    listToEdit?.category === 'MUSIC'
+  )
+
+  const isFetching = isFetchingMovie || isFetchingTV || isFetchingMusic
+  const data =
+    listToEdit?.category === 'MOVIE'
+      ? movieResults
+      : listToEdit?.category === 'TV'
+      ? tvResults
+      : musicResults
 
   useEffect(() => {
     const finalList: ListItem[] = []
@@ -137,7 +148,11 @@ const EditList: NextPage = () => {
                   <DeleteIcon />
                 </div>
                 <div className=''>
-                  <ListItemCard title={item.title} image={item.poster_path} />
+                  <ListItemCard
+                    title={item.title}
+                    image={item.poster_path}
+                    category={listToEdit?.category}
+                  />
                 </div>
               </button>
             ))}
@@ -162,7 +177,11 @@ const EditList: NextPage = () => {
                   <PlusIcon />
                 </div>
                 <div>
-                  <ListItemCard title={item.title} image={item.poster_path} />
+                  <ListItemCard
+                    title={item.title}
+                    image={item.poster_path}
+                    category={listToEdit?.category}
+                  />
                 </div>
               </button>
             ))}

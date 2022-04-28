@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['ui-avatars.com', 'res.cloudinary.com', 'image.tmdb.org'],
+    domains: [
+      'ui-avatars.com',
+      'res.cloudinary.com',
+      'image.tmdb.org',
+      'i.scdn.co',
+    ],
     dangerouslyAllowSVG: true,
   },
 }

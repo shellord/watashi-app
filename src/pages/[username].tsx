@@ -101,7 +101,11 @@ const ProfilePage = () => {
         <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
           {lists.list.map((list) => (
             <div key={list.id}>
-              <ListContainer listName={list.name} listItems={list.items} />
+              <ListContainer
+                listName={list.name}
+                listItems={list.items}
+                category={list.category}
+              />
             </div>
           ))}
         </div>

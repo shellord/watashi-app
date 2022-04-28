@@ -24,6 +24,15 @@ export const searchTV = async (query: string) => {
   return res.data
 }
 
+export const searchMusic = async (query: string) => {
+  const res = await axios.get<ListItem[]>('/api/search/music', {
+    params: {
+      query,
+    },
+  })
+  return res.data
+}
+
 export const searchUser = async (query: string) => {
   const res = await axios.get<SearchUserResult>('/api/search/user', {
     params: {

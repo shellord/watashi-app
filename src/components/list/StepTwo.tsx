@@ -5,6 +5,7 @@ import { BiArrowBack } from 'react-icons/bi'
 
 import useDebounce from '@/hooks/useDebounce'
 import useSearchMovie from '@/hooks/useSearchMovie'
+import useSearchMusic from '@/hooks/useSearchMusic'
 import useSearchTV from '@/hooks/useSearchTV'
 
 import DeleteIcon from '@/components/list/DeleteIcon'
@@ -32,6 +33,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
     selected === 'TV'
   )
 
+  const { data: musicResults, isFetching: isMusicFetching } = useSearchMusic(
+    debouncedSearchQuery,
+    selected === 'MUSIC'
+  )
+
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
   }
@@ -44,9 +50,15 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
     setList(list.filter((i) => i.id !== item.id))
   }
 
-  const isFetching = isMovieFetching || isTvetching
+  const isFetching = isMovieFetching || isTvetching || isMusicFetching
 
-  const data = selected === 'MOVIE' ? movieResults : tvResults
+  const data =
+    selected === 'MOVIE'
+      ? movieResults
+      : selected === 'TV'
+      ? tvResults
+      : musicResults
+
   return (
     <>
       <button onClick={() => setStep(1)}>
@@ -71,7 +83,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
                 <DeleteIcon />
               </div>
               <div>
-                <ListItemCard title={item.title} image={item.poster_path} />
+                <ListItemCard
+                  title={item.title}
+                  image={item.poster_path}
+                  category={selected}
+                />
               </div>
             </button>
           ))}
@@ -98,7 +114,11 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
                 <PlusIcon />
               </div>
               <div>
-                <ListItemCard title={item.title} image={item.poster_path} />
+                <ListItemCard
+                  title={item.title}
+                  image={item.poster_path}
+                  category={selected}
+                />
               </div>
             </button>
           ))}

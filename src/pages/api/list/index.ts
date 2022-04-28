@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
 import { prisma } from '@/lib/prisma'
+import { connectSpotify } from '@/lib/spotify'
 import { getDetailsOfMovies, getDetailsOfTV } from '@/lib/tmdb'
 
 export default async function handler(
@@ -52,6 +53,14 @@ export default async function handler(
           results = await getDetailsOfTV(process.env.TMDB_API_KEY!, items)
         }
 
+        if (category === 'MUSIC') {
+          const spotify = await connectSpotify(
+            process.env.SPOTIFY_CLIENT_ID!,
+            process.env.SPOTIFY_CLIENT_SECRET!
+          )
+
+          results = await spotify.getDetailsOfMusics(items)
+        }
         const newList = await prisma.user.update({
           where: { id: session.user.id },
           data: {
