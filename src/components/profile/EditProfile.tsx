@@ -59,7 +59,7 @@ const EditProfile = () => {
         </div>
         <div className='flex flex-col'>
           <label htmlFor='name' className='flex'>
-            Name
+            Display Name
           </label>
           <input
             id='name'
@@ -76,16 +76,21 @@ const EditProfile = () => {
           <label htmlFor='username' className='flex'>
             Username
           </label>
-          <input
-            id='username'
-            className='input-field flex'
-            type='text'
-            placeholder='Username'
-            defaultValue={user?.username?.toString()}
-            maxLength={20}
-            autoComplete='off'
-            required
-          />
+          <div className='flex items-center'>
+            <div className='bg-gray-400 p-2 rounded-l'>
+              <p>watashi.app/</p>
+            </div>
+            <input
+              id='username'
+              className='input-field flex rounded-l-none w-full'
+              type='text'
+              placeholder='Username'
+              defaultValue={user?.username?.toString()}
+              maxLength={20}
+              autoComplete='off'
+              required
+            />
+          </div>
         </div>
         <div className='mt-2 flex flex-col'>
           <label htmlFor='bio' className='flex flex-1'>

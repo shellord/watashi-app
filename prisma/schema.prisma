@@ -57,6 +57,9 @@ model User {
   notifications       Notification[] @relation("user")
   notificationActorOf Notification[] @relation("actor")
   isVerified          Boolean        @default(false)
+  instagramUsername   String?
+  snapchatUsername    String?
+  twitterUsername     String?
 }
 
 model VerificationToken {

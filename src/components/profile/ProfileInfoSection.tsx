@@ -52,7 +52,7 @@ const ProfileInfoSection = ({
               </span>
             )}
           </div>
-          <span className='text-xs text-gray-500'>@{user?.username}</span>
+          <span className='text-sm text-gray-500'>@{user?.username}</span>
           <span className='w-96 text-center text-sm'>{user?.bio}</span>
         </div>
         <div className='mt-2 flex space-x-4'>
