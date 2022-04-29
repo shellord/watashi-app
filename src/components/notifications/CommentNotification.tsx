@@ -21,9 +21,11 @@ const CommentNotification = ({
   return (
     <div className='flex justify-between items-center'>
       <div className='flex items-center  space-x-1'>
-        <div className='relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0'>
-          <Image src={image} alt='avatar' layout='fill' />
-        </div>
+        <Link href={`/${username}`}>
+          <a className='relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 '>
+            <Image src={image} alt='avatar' layout='fill' />
+          </a>
+        </Link>
         <div>
           <Link href={`/${username}`}>
             <a className='flex items-center font-semibold'>

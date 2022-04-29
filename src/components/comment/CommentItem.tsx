@@ -44,7 +44,9 @@ const CommentItem = ({
         <div className='flex justify-between'>
           <div className='flex items-center'>
             <div className='flex items-center'>
-              <p className='font-semibold'>{authorName}</p>
+              <Link href={`/${authorUsername}`}>
+                <a className='font-semibold'>{authorName}</a>
+              </Link>
               {isAuthorVerified && (
                 <span className='ml-1'>
                   <GoVerified className='text-blue-500' />
