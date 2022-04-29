@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, User } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
@@ -26,7 +26,15 @@ export default async function handler(
         return res.status(500).json({ error: 'Database Error' })
       }
     case 'PUT':
-      const { name, username, bio, gender } = req.body
+      const {
+        name,
+        username,
+        bio,
+        gender,
+        instagramUsername,
+        snapchatUsername,
+        twitterUsername,
+      } = req.body as User
 
       if (!name || !username) {
         return res
@@ -41,6 +49,9 @@ export default async function handler(
             username: username.toLowerCase(),
             bio,
             gender,
+            instagramUsername,
+            snapchatUsername,
+            twitterUsername,
           },
         })
         return res.status(200).json(updateUser)

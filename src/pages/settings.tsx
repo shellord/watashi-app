@@ -9,7 +9,7 @@ const NewUser: NextPage = () => {
       <Head>
         <title>Welcome to Watashi</title>
       </Head>
-      <div className='shadow-s mt-2 rounded bg-white p-2 px-5 sm:px-10'>
+      <div className='shadow mt-2 rounded bg-white p-2 px-5 sm:px-10'>
         <p className='text-md text-center text-sm font-semibold'>
           Setup your profile
         </p>

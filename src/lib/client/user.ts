@@ -24,6 +24,9 @@ export const updateUser = async ({
   username,
   bio,
   gender,
+  instagramUsername,
+  snapchatUsername,
+  twitterUsername,
 }: Partial<User>) => {
   try {
     const res = await axios.put<User>('/api/user', {
@@ -31,6 +34,9 @@ export const updateUser = async ({
       username,
       bio,
       gender,
+      instagramUsername,
+      snapchatUsername,
+      twitterUsername,
     })
     return res
   } catch (error) {
