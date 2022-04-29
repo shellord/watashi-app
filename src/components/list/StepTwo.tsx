@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 
 import useDebounce from '@/hooks/useDebounce'
+import useSearchBook from '@/hooks/useSearchBook'
 import useSearchMovie from '@/hooks/useSearchMovie'
 import useSearchMusic from '@/hooks/useSearchMusic'
 import useSearchTV from '@/hooks/useSearchTV'
@@ -38,6 +39,10 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
     selected === 'MUSIC'
   )
 
+  const { data: bookResults, isFetching: isBookFetching } = useSearchBook(
+    debouncedSearchQuery,
+    selected === 'BOOK'
+  )
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
   }
@@ -50,14 +55,17 @@ const StepTwo = ({ selected, setStep, list, setList }: Props) => {
     setList(list.filter((i) => i.id !== item.id))
   }
 
-  const isFetching = isMovieFetching || isTvetching || isMusicFetching
+  const isFetching =
+    isMovieFetching || isTvetching || isMusicFetching || isBookFetching
 
   const data =
     selected === 'MOVIE'
       ? movieResults
       : selected === 'TV'
       ? tvResults
-      : musicResults
+      : selected === 'MUSIC'
+      ? musicResults
+      : bookResults
 
   return (
     <>

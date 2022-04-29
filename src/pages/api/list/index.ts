@@ -3,6 +3,7 @@ import { Category, Prisma } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
+import { getDetailsOfBooks } from '@/lib/books'
 import { prisma } from '@/lib/prisma'
 import { connectSpotify } from '@/lib/spotify'
 import { getDetailsOfMovies, getDetailsOfTV } from '@/lib/tmdb'
@@ -61,6 +62,11 @@ export default async function handler(
 
           results = await spotify.getDetailsOfMusics(items)
         }
+
+        if (category === 'BOOK') {
+          results = await getDetailsOfBooks(items)
+        }
+
         const newList = await prisma.user.update({
           where: { id: session.user.id },
           data: {

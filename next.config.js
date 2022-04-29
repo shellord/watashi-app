@@ -7,6 +7,7 @@ const nextConfig = {
       'res.cloudinary.com',
       'image.tmdb.org',
       'i.scdn.co',
+      'books.google.com',
     ],
     dangerouslyAllowSVG: true,
   },

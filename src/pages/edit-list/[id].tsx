@@ -9,6 +9,7 @@ import { BiArrowBack } from 'react-icons/bi'
 import { useCurrentUserList } from '@/hooks/useCurrentUserList'
 import useDebounce from '@/hooks/useDebounce'
 import { useDeleteList } from '@/hooks/useDeleteList'
+import useSearchBook from '@/hooks/useSearchBook'
 import useSearchMovie from '@/hooks/useSearchMovie'
 import useSearchMusic from '@/hooks/useSearchMusic'
 import useSearchTV from '@/hooks/useSearchTV'
@@ -54,13 +55,20 @@ const EditList: NextPage = () => {
     listToEdit?.category === 'MUSIC'
   )
 
+  const { data: bookResults, isFetching: isFetchingBook } = useSearchBook(
+    debouncedSearchQuery,
+    listToEdit?.category === 'BOOK'
+  )
+
   const isFetching = isFetchingMovie || isFetchingTV || isFetchingMusic
   const data =
     listToEdit?.category === 'MOVIE'
       ? movieResults
       : listToEdit?.category === 'TV'
       ? tvResults
-      : musicResults
+      : listToEdit?.category === 'MUSIC'
+      ? musicResults
+      : bookResults
 
   useEffect(() => {
     const finalList: ListItem[] = []

@@ -41,3 +41,12 @@ export const searchUser = async (query: string) => {
   })
   return res.data
 }
+
+export const searchBook = async (query: string) => {
+  const res = await axios.get<ListItem[]>('/api/search/book', {
+    params: {
+      query,
+    },
+  })
+  return res.data
+}
