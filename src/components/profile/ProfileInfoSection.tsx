@@ -1,6 +1,8 @@
 import { User } from '@prisma/client'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
+import { FaInstagram, FaSnapchat, FaTwitter } from 'react-icons/fa'
 import { GoVerified } from 'react-icons/go'
 
 import FollowsModal from '@/components/profile/FollowsModal'
@@ -71,7 +73,7 @@ const ProfileInfoSection = ({
             <span className='text-sm'>Following</span>
           </button>
         </div>
-        <div className='mt-3'>
+        <div className='mt-3 mb-2'>
           {!isSameUser && isFollowing && (
             <div className='group'>
               <button className='btn group-hover:hidden' onClick={onFollow}>
@@ -86,11 +88,39 @@ const ProfileInfoSection = ({
             </div>
           )}
           {!isSameUser && !isFollowing && (
-            <div>
+            <div className='mb-2'>
               <button className='btn' onClick={onFollow}>
                 Follow
               </button>
             </div>
+          )}
+        </div>
+
+        <div className='flex space-x-3'>
+          {user.instagramUsername && (
+            <Link href={`https://www.instagram.com/${user.instagramUsername}`}>
+              <a target='_blank'>
+                <FaInstagram size={20} />
+              </a>
+            </Link>
+          )}
+
+          {user.twitterUsername && (
+            <Link href={`https://twitter.com/${user.twitterUsername}`}>
+              <a target='_blank'>
+                <FaTwitter size={20} />
+              </a>
+            </Link>
+          )}
+
+          {user.snapchatUsername && (
+            <Link
+              href={`https://www.snapchat.com/add/${user.snapchatUsername}`}
+            >
+              <a target='_blank'>
+                <FaSnapchat size={20} />
+              </a>
+            </Link>
           )}
         </div>
       </div>

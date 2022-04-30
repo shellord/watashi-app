@@ -1,6 +1,7 @@
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 import { useGetActivities } from '@/hooks/useGetActivities'
 
@@ -24,7 +25,11 @@ const Home: NextPage = () => {
         <title>Watashi</title>
       </Head>
       <div className='space-y-5'>
-        {activitiesStatus === 'loading' && <p>Loading...</p>}
+        {activitiesStatus === 'loading' && (
+          <div className='flex justify-center'>
+            <AiOutlineLoading3Quarters size={20} className='animate-spin' />
+          </div>
+        )}
         {activities?.activityFeeds.length === 0 &&
           activitiesStatus === 'success' && <EmptyActivityFeed />}
         {activities?.activityFeeds?.map((activity) => {
