@@ -18,6 +18,9 @@ export default async function handler(
             category: true,
             items: true,
           },
+          orderBy: {
+            order: 'asc',
+          },
         },
       },
     })

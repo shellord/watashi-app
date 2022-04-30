@@ -10,7 +10,7 @@ const backgroundColors = {
 
 const textColor = 'FFFFFF'
 
-const getRandomColor = () => {
+const getRandomBackgroundColor = () => {
   const keys = Object.keys(backgroundColors)
   const randomKey = keys[
     Math.floor(Math.random() * keys.length)
@@ -19,6 +19,6 @@ const getRandomColor = () => {
 }
 
 export const generateAvatar = (name: string) => {
-  const color = getRandomColor()
-  return `https://ui-avatars.com/api/?background=${backgroundColors}&name=${name}&size=128&length=1&color=${textColor}`
+  const bgColor = getRandomBackgroundColor()
+  return `https://ui-avatars.com/api/?background=${bgColor}&name=${name}&size=128&length=1&color=${textColor}`
 }

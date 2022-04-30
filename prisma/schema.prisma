@@ -79,6 +79,7 @@ model List {
   owner     User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   createdAt DateTime  @default(now())
   activity  Activity?
+  order     Int
 }
 
 model Item {

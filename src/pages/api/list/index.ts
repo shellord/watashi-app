@@ -25,6 +25,9 @@ export default async function handler(
           include: {
             items: true,
           },
+          orderBy: {
+            order: 'asc',
+          },
         })
         return res.status(200).json(list)
       } catch (error) {
@@ -69,6 +72,9 @@ export default async function handler(
             process.env.GOOGLE_BOOKS_API_KEY!
           )
         }
+        const listCount = await prisma.list.count({
+          where: { ownerId: session.user.id },
+        })
 
         const newList = await prisma.user.update({
           where: { id: session.user.id },
@@ -77,6 +83,7 @@ export default async function handler(
               create: {
                 name,
                 category,
+                order: listCount + 1,
                 items: {
                   create: results.map((item) => ({
                     itemId: item.id,
