@@ -16,6 +16,16 @@ const Notifications: NextPage = () => {
     markNotificationsSeen()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const EmptyNotifications = () => {
+    return (
+      <div>
+        <p>
+          You have no notifications
+          <span className='text-xl'>🤷‍♂️</span>
+        </p>
+      </div>
+    )
+  }
   return (
     <>
       <Head>
@@ -23,6 +33,9 @@ const Notifications: NextPage = () => {
       </Head>
       <div className='shadow mt-2 rounded bg-white p-2'>
         {status === 'loading' && <div className='mt-4'>Loading</div>}
+        {data?.notifications.length === 0 && status === 'success' && (
+          <EmptyNotifications />
+        )}
         <div className='space-y-3'>
           {data?.notifications?.map((notification) => (
             <div key={notification.id}>
