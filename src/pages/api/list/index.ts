@@ -64,7 +64,10 @@ export default async function handler(
         }
 
         if (category === 'BOOK') {
-          results = await getDetailsOfBooks(items)
+          results = await getDetailsOfBooks(
+            items,
+            process.env.GOOGLE_BOOKS_API_KEY!
+          )
         }
 
         const newList = await prisma.user.update({

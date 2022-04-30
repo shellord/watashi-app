@@ -22,7 +22,7 @@ export default async function handler(
   }
 
   try {
-    const data = await searchBook(query)
+    const data = await searchBook(query, process.env.GOOGLE_BOOKS_API_KEY!)
     const list: ListItem[] = data.items.map((item: any) => ({
       id: item.id.toString(),
       title: item.volumeInfo.title,

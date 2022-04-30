@@ -1,24 +1,25 @@
 import { ListItem } from '@/types/list'
 import axios, { AxiosError } from 'axios'
 
-export const searchBook = async (query: string) => {
+export const searchBook = async (query: string, apiKey: string) => {
   const response = await axios.get(
     'https://www.googleapis.com/books/v1/volumes',
     {
       params: {
         q: query,
+        key: apiKey,
       },
     }
   )
   return response.data
 }
 
-export const getDetailsOfBooks = async (itemIds: string[]) => {
+export const getDetailsOfBooks = async (itemIds: string[], apiKey: string) => {
   const results: ListItem[] = []
   try {
     await Promise.all(
       itemIds.map(async (itemId) => {
-        const res = await getDetails(itemId)
+        const res = await getDetails(itemId, apiKey)
         if (res)
           results.push({
             id: res.id,
@@ -39,9 +40,14 @@ export const getDetailsOfBooks = async (itemIds: string[]) => {
 
   return results
 }
-export const getDetails = async (itemId: string) => {
+export const getDetails = async (itemId: string, apiKey: string) => {
   const response = await axios.get(
-    `https://www.googleapis.com/books/v1/volumes/${itemId}`
+    `https://www.googleapis.com/books/v1/volumes/${itemId}`,
+    {
+      params: {
+        key: apiKey,
+      },
+    }
   )
   return response.data
 }
