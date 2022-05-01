@@ -75,3 +75,11 @@ export const deleteProfilePhoto = async (name: string) => {
     throw Error('Something went wrong')
   }
 }
+
+export const fetchSuggestedUsers = async () => {
+  const res = await axios.get<User[]>('/api/suggested-users')
+  if (res.status === 200) {
+    return res.data
+  }
+  return null
+}

@@ -5,12 +5,16 @@ import { useState } from 'react'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 import useDebounce from '@/hooks/useDebounce'
+import useGetSuggestedUsers from '@/hooks/useGetSuggestedUsers'
 import useSearchUser from '@/hooks/useSearchUser'
+
+import { UserCard } from '@/components/cards/UserCard'
 
 const Search: NextPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 600)
-
+  const { data: suggestedUsers, status: suggestedUsersStatus } =
+    useGetSuggestedUsers()
   const { data: userSearchResult, isFetching } =
     useSearchUser(debouncedSearchQuery)
 
@@ -33,30 +37,51 @@ const Search: NextPage = () => {
       </div>
 
       <div className='mt-3'>
-        {userSearchResult?.users.map((user) => (
-          <div
-            key={user.id}
-            className='flex items-center space-x-5 bg-white p-3 rounded shadow justify-center'
-          >
-            <Link href={`/${user.username}`}>
-              <a>
-                <div className='w-56 flex items-center'>
-                  <Image
-                    src={user.image!}
-                    alt='userImage'
-                    width={50}
-                    height={50}
-                    className='rounded-full'
-                  />
-                  <div className='ml-5'>
-                    <p className='font-semibold'> {user.name}</p>
+        {searchQuery.length !== 0 &&
+          userSearchResult?.users.map((user) => (
+            <div
+              key={user.id}
+              className='flex items-center space-x-5 bg-white p-3 rounded shadow justify-center'
+            >
+              <Link href={`/${user.username}`}>
+                <a>
+                  <div className='w-56 flex items-center'>
+                    <Image
+                      src={user.image!}
+                      alt='userImage'
+                      width={50}
+                      height={50}
+                      className='rounded-full'
+                    />
+                    <div className='ml-5'>
+                      <p className='font-semibold'> {user.name}</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          </div>
-        ))}
+                </a>
+              </Link>
+            </div>
+          ))}
       </div>
+      {searchQuery.length === 0 && (
+        <div className='bg-white p-2 rounded-sm shadow'>
+          <div className='mb-3 border-b pb-3'>
+            <p className='font-bold'>Cool people to follow</p>
+          </div>
+          {suggestedUsersStatus === 'success' && (
+            <div className='flex flex-wrap'>
+              {suggestedUsers?.map((user) => (
+                <div key={user.id} className='w-1/2 sm:w-1/3 p-1'>
+                  <UserCard
+                    name={user.name!}
+                    username={user.username!}
+                    image={user.image!}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
