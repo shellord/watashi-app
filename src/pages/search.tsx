@@ -72,6 +72,7 @@ const Search: NextPage = () => {
               {suggestedUsers?.map((user) => (
                 <div key={user.id} className='w-1/2 sm:w-1/3 p-1'>
                   <UserCard
+                    id={user.id}
                     name={user.name!}
                     username={user.username!}
                     image={user.image!}

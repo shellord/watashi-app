@@ -16,9 +16,22 @@ export default async function handler(
   try {
     const users = await prisma.user.findMany({
       where: {
-        id: {
-          not: session.user.id,
-        },
+        AND: [
+          {
+            id: {
+              not: session.user.id,
+            },
+          },
+          {
+            following: {
+              every: {
+                followerId: {
+                  not: session.user.id,
+                },
+              },
+            },
+          },
+        ],
       },
     })
     const randomUsers = users.sort(() => 0.5 - Math.random())
