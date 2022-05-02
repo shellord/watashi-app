@@ -20,18 +20,19 @@ export default async function handler(
         OR: [
           {
             name: {
-              contains: query,
+              startsWith: query,
               mode: 'insensitive',
             },
           },
           {
             username: {
-              contains: query,
+              startsWith: query,
               mode: 'insensitive',
             },
           },
         ],
       },
+      take: 20,
     })
     res.status(200).json({ users })
   } catch (error) {
