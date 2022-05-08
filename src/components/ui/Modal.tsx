@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 type Props = {
   showModal: boolean
@@ -12,6 +12,11 @@ const Modal = ({ showModal, setShowModal, children }: Props) => {
   const closeModal = (event: React.MouseEvent) => {
     modalRef.current === event.target && setShowModal(false)
   }
+
+  useEffect(() => {
+    if (showModal) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'visible'
+  }, [showModal])
 
   return (
     <div
