@@ -2,8 +2,10 @@ import { User } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { BiLink } from 'react-icons/bi'
 import { FaInstagram, FaSnapchat, FaTwitter } from 'react-icons/fa'
 import { GoVerified } from 'react-icons/go'
+import { toast } from 'react-toastify'
 
 import FollowsModal from '@/components/profile/FollowsModal'
 
@@ -30,10 +32,24 @@ const ProfileInfoSection = ({
 }: Props) => {
   const [showFollowerModal, setShowFollowerModal] = useState(false)
   const [showFollowingModal, setShowFollowingModal] = useState(false)
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href)
+    toast.success('Copied to clipboard!', {
+      autoClose: 1000,
+      hideProgressBar: true,
+    })
+  }
+
   return (
     <div className='bg-white pb-2'>
       <div className='relative flex flex-col items-center'>
         <div className='flex h-28 w-full bg-gray-300' />
+        <div className='absolute right-0 mr-3 mt-3'>
+          <button onClick={handleCopyLink}>
+            <BiLink className='text-black' size={28} />
+          </button>
+        </div>
         <div className='absolute top-[3.5rem]'>
           {user.image && (
             <Image
