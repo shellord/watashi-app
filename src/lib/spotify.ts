@@ -80,5 +80,6 @@ export const connectSpotify = async (
   return {
     searchMusic,
     getDetailsOfMusics,
+    getDetails,
   }
 }
