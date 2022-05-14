@@ -11,4 +11,4 @@ A social media app for creators and influencers to share their interests with fa
 
 ## Todo
 
- [ ] Show Item Details when user click on it.
+- [ ] Show Item Details when user click on it.
