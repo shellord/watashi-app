@@ -12,5 +12,5 @@ A social media app for creators and influencers to share their interests with fa
 ## Todo
 
 - [ ] Show Item Details when user click on it. 
-    ex: when user click on a movie card,show a modal with movie descriptions and trailer link
+    [ ex: when user click on a movie card,show a modal with movie descriptions and trailer link ]
 - [ ] Add Replies to comments.
