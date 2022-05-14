@@ -8,3 +8,7 @@ A social media app for creators and influencers to share their interests with fa
 - Follow other users
 - Create your movie,anime or music list
 - Comment on profiles
+
+## Todo
+
+ [-] Show Item Details when user click on it.
