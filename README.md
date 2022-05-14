@@ -15,3 +15,4 @@ A social media app for creators and influencers to share their interests with fa
     [ ex: when user click on a movie card,show a modal with movie descriptions and trailer link ]
 - [ ] Add replies to comments.
 - [ ] Add pagination to comments.
+- [ ] Add realtime notification and activity feed.
