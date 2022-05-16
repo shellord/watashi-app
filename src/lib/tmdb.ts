@@ -23,7 +23,7 @@ export const getDetails = async (
   itemId: string,
   category: 'movie' | 'tv'
 ) => {
-  const url = `https://api.themoviedb.org/3/${category}/${itemId}?api_key=${apiKey}`
+  const url = `https://api.themoviedb.org/3/${category}/${itemId}?api_key=${apiKey}&append_to_response=videos`
   const res = await axios.get(url)
   if (res.status === 200) {
     return res.data

@@ -1,8 +1,8 @@
 import ListItemCard from './ListItemCard'
+import MovieBottomSheet from './bottom-sheets/MovieBottomSheet'
+import MovieDetailsModal from './modals/MovieDetailsModal'
 import type { Category, Item } from '@prisma/client'
 import { useState } from 'react'
-
-import Modal from '@/components/ui/Modal'
 
 type Props = {
   listName: String
@@ -13,8 +13,14 @@ type Props = {
 const ListContainer = ({ listName, listItems, category }: Props) => {
   const isMobile = window.innerWidth < 768 ? true : false
   const [showModal, setShowModal] = useState(false)
+  const [showBottomSheet, setShowBottomSheet] = useState(false)
+
   const showItemDetailsModalHandler = (item: Item) => {
-    !isMobile && setShowModal(true)
+    if (!isMobile) {
+      setShowBottomSheet(true)
+    } else {
+      setShowModal(true)
+    }
   }
   return (
     <>
@@ -35,11 +41,11 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
         ))}
       </div>
 
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className='absolute top-96 w-full max-w-lg p-5'>
-          <div className='bg-white rounded-lg'>Hello</div>
-        </div>
-      </Modal>
+      <MovieDetailsModal showModal={showModal} setShowModal={setShowModal} />
+      <MovieBottomSheet
+        open={showBottomSheet}
+        setShowBottomSheet={setShowBottomSheet}
+      />
     </>
   )
 }
