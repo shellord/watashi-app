@@ -21,7 +21,7 @@ export const UserCard = ({ id, name, username, image }: Props) => {
             />
           </div>
           <div className='flex items-center flex-col'>
-            <p className='font-semibold '>{name}</p>
+            <p className='font-semibold truncate'>{name}</p>
             <p className='text-sm text-gray-500'>@{username}</p>
           </div>
         </a>

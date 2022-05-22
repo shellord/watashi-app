@@ -35,7 +35,7 @@ export default async function handler(
       },
     })
     const randomUsers = users.sort(() => 0.5 - Math.random())
-    const suggestedUsers = randomUsers.slice(0, 10)
+    const suggestedUsers = randomUsers.slice(0, 20)
 
     return res.status(200).json(suggestedUsers)
   } catch (error) {
