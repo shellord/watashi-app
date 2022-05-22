@@ -16,12 +16,14 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
   const [showBottomSheet, setShowBottomSheet] = useState(false)
 
   const showItemDetailsModalHandler = (item: Item) => {
+    return
     if (!isMobile) {
       setShowBottomSheet(true)
     } else {
       setShowModal(true)
     }
   }
+
   return (
     <>
       <div className='mb-3 border-b pb-2'>
