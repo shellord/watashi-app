@@ -30,6 +30,7 @@ export default NextAuth({
       return session
     },
   },
+
   events: {
     createUser: async ({ user }) => {
       const { id, name } = user
@@ -45,5 +46,11 @@ export default NextAuth({
         },
       })
     },
+  },
+  logger: {
+    debug: (message: string) => console.log(message),
+    info: (message: string) => console.log(message),
+    warn: (message: string) => console.warn(message),
+    error: (message: string) => console.error(message),
   },
 })
