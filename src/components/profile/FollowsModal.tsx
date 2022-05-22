@@ -30,7 +30,7 @@ const FollowsModal = ({ showModal, setShowModal, users, title }: Props) => {
               <IoMdClose size={24} />
             </button>
           </div>
-          <div className='mt-3 flex flex-col items-start'>
+          <div className='mt-3 flex flex-col items-start  max-h-96 overflow-x-scroll'>
             {users.map((user) => (
               <button
                 key={user.id}
