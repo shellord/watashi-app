@@ -184,25 +184,37 @@ const EditProfile = () => {
               <p className='text-gray-500 text-sm'>This is not required!</p>
             </div>
 
-            <div className='mt-2 flex flex-col'>
-              <label htmlFor='instagram' className='flex flex-1'>
-                Instagram
-              </label>
-              <input id='instagram' className='input-field' />
+            <div className='mt-2 flex items-center'>
+              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
+                instagram.com/
+              </span>
+              <input
+                id='instagram'
+                className='input-field'
+                defaultValue={user?.instagramUsername || ''}
+              />
             </div>
 
-            <div className='mt-2 flex flex-col'>
-              <label htmlFor='twitter' className='flex flex-1'>
-                Twitter
-              </label>
-              <input id='twitter' className='input-field' />
+            <div className='mt-2 flex '>
+              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center '>
+                twitter.com/
+              </span>
+              <input
+                id='twitter'
+                className='input-field'
+                defaultValue={user?.twitterUsername || ''}
+              />
             </div>
 
-            <div className='mt-2 flex flex-col'>
-              <label htmlFor='snapchat' className='flex flex-1'>
-                Snapchat
-              </label>
-              <input id='snapchat' className='input-field' />
+            <div className='mt-2 flex'>
+              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center '>
+                snapchat.com/
+              </span>
+              <input
+                id='snapchat'
+                className='input-field'
+                defaultValue={user?.snapchatUsername || ''}
+              />
             </div>
           </fieldset>
         </div>
