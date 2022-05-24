@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const UserSchema = z.object({
   name: z.string(),
   username: z
-    .string({})
+    .string()
     .min(4)
     .max(20)
     .regex(
