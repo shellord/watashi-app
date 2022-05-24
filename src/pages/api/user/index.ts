@@ -1,8 +1,10 @@
 import { Prisma, User } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
+import { ZodError } from 'zod'
 
 import { prisma } from '@/lib/prisma'
+import { UserSchema } from '@/lib/schema'
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,6 +44,10 @@ export default async function handler(
           .json({ error: 'Name and Username should not be blank' })
       }
       try {
+        UserSchema.parse({
+          ...req.body,
+        })
+
         const updateUser = await prisma.user.update({
           where: { id: session.user.id },
           data: {
@@ -56,6 +62,9 @@ export default async function handler(
         })
         return res.status(200).json(updateUser)
       } catch (error) {
+        if (error instanceof ZodError) {
+          return res.status(400).json({ error: error.issues[0].message })
+        }
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           if (error.code === 'P2002') {
             return res.status(400).json({ error: 'Username already taken!' })

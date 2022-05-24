@@ -196,7 +196,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex '>
-              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center '>
+              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
                 twitter.com/
               </span>
               <input
@@ -207,7 +207,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex'>
-              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center '>
+              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
                 snapchat.com/
               </span>
               <input
