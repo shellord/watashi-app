@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import '@/styles/nprogress.css'
 import { SessionProvider } from 'next-auth/react'
+import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Router from 'next/router'
@@ -30,9 +31,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
+          <ThemeProvider attribute='class'>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ThemeProvider>
         </SessionProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>

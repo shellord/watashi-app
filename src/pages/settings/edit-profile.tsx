@@ -1,15 +1,11 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 
 import EditProfile from '@/components/profile/EditProfile'
 
-const NewUser: NextPage = () => {
+const EditProfilePage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Welcome to Watashi</title>
-      </Head>
-      <div className='shadow mt-2 rounded bg-white p-2 px-5 sm:px-10'>
+      <div className='shadow mt-2 rounded bg-primary p-2 px-5 sm:px-10'>
         <p className='text-md text-center text-sm font-semibold'>
           Setup your profile
         </p>
@@ -19,4 +15,4 @@ const NewUser: NextPage = () => {
   )
 }
 
-export default NewUser
+export default EditProfilePage

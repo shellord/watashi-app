@@ -39,7 +39,7 @@ const ProfileMenu = ({ user }: Props) => {
         />
       </button>
       <div
-        className={`absolute right-1 mt-4 flex flex-col  bg-white shadow-lg transition-all ${
+        className={`absolute right-1 mt-4 flex flex-col  bg-primary shadow-lg transition-all ${
           showMenu
             ? 'translate-y-0 translate-x-0 opacity-100'
             : 'pointer-events-none -translate-y-2 translate-x-3 opacity-0'
@@ -48,7 +48,7 @@ const ProfileMenu = ({ user }: Props) => {
         <div className='my-2'>
           <Link href={`/${username}`}>
             <a>
-              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
+              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-secondary dark:hover:bg-secondary'>
                 <div className='relative h-6 w-6'>
                   <Image
                     src={image as string}
@@ -63,14 +63,14 @@ const ProfileMenu = ({ user }: Props) => {
           </Link>
           <Link href={`/settings`}>
             <a>
-              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-gray-200'>
+              <div className='flex items-center justify-center px-4 py-2 text-left hover:bg-secondary dark:hover:bg-secondary'>
                 <FiSettings size={20} />
                 <span className='ml-2'>Settings</span>
               </div>
             </a>
           </Link>
           <button
-            className='flex w-full items-center justify-center py-2 px-4  text-left hover:bg-gray-200'
+            className='flex w-full items-center justify-center py-2 px-4  text-left hover:bg-secondary dark:hover:bg-secondary'
             onClick={() => signOut()}
           >
             <FiLogOut size={20} />

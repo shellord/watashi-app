@@ -16,7 +16,7 @@ const DeleteCommentModal = ({ id, showModal, setShowModal }: Props) => {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className='absolute top-36 w-full max-w-lg p-5'>
-        <div className='bg-white rounded-lg'>
+        <div className='bg-primary rounded-lg'>
           <div className='flex justify-center items-center p-10 flex-col'>
             <p>Are you sure you want to delete this comment?</p>
             <div className='mt-5 flex space-x-2'>

@@ -54,7 +54,7 @@ const AddList: NextPage = () => {
       <Head>
         <title>Create a List</title>
       </Head>
-      <div className='rounded bg-white px-5 pb-5 pt-2 shadow'>
+      <div className='rounded bg-primary px-5 pb-5 pt-2 shadow'>
         {step === 1 && (
           <StepOne setCategory={setCategory} setListName={setlistName} />
         )}

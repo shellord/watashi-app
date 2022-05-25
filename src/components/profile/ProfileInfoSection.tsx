@@ -42,7 +42,7 @@ const ProfileInfoSection = ({
   }
 
   return (
-    <div className='bg-white pb-2'>
+    <div className='bg-primary pb-2'>
       <div className='relative flex flex-col items-center'>
         <div className='flex h-28 w-full bg-gray-300' />
         <div className='absolute right-0 mr-3 mt-3'>

@@ -21,11 +21,11 @@ const SearchListBar = ({
   showFetchingIndicator,
 }: Props) => {
   return (
-    <div className='flex w-full items-center rounded-lg bg-gray-100 p-2 focus-within:outline focus-within:outline-pink-500'>
+    <div className='flex w-full items-center rounded-lg bg-secondary p-2 focus-within:outline focus-within:outline-pink-500'>
       <BiSearch size={24} className='text-gray-500' />
       <input
         type='text'
-        className='ml-2 w-full bg-gray-100 focus:outline-none'
+        className='ml-2 w-full bg-secondary focus:outline-none'
         placeholder={placeHolders[selected]}
         onChange={onChange}
       />

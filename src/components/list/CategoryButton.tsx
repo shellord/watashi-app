@@ -18,7 +18,7 @@ const ListButton = ({ icon: Icon, label, checked, onClick }: Props) => {
       />
       <label
         htmlFor={label}
-        className='flex cursor-pointer flex-col items-center bg-gray-100 p-5 text-black peer-checked:bg-pink-500 peer-checked:text-white'
+        className='flex cursor-pointer flex-col items-center bg-secondary p-5 text-primary peer-checked:bg-pink-500 peer-checked:text-white'
       >
         <Icon fontSize={28} />
         <span className='mt-2'>{label}</span>
