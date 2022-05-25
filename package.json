@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.3",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.13.0",
     "axios": "^0.25.0",

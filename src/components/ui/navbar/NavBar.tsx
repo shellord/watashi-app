@@ -1,4 +1,3 @@
-import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { IoMdNotifications, IoMdNotificationsOutline } from 'react-icons/io'
@@ -23,7 +22,6 @@ const NavBar = () => {
   const unseenNotificationCount = notifications?.notifications.filter(
     (notification) => !notification.seen
   ).length
-  const { theme, setTheme } = useTheme()
 
   return (
     <div className='sticky top-0 z-20 bg-primary shadow-sm dark:shadow-2xl'>
@@ -80,10 +78,6 @@ const NavBar = () => {
               <a className='inline text-lg font-bold text-pink-500'>Sign in</a>
             </Link>
           )}
-        </div>
-        <div className='absolute right-0 space-x-5'>
-          <button onClick={() => setTheme('light')}>Light Mode</button>
-          <button onClick={() => setTheme('dark')}>Dark Mode</button>
         </div>
       </div>
     </div>
