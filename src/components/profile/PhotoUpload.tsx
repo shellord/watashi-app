@@ -65,7 +65,7 @@ const PhotoUpload = ({ setshowUploadModal }: Props) => {
   }
   return (
     <div className='absolute top-36 w-full max-w-xs p-5'>
-      <div className='flex flex-col items-center rounded-3xl  bg-white'>
+      <div className='flex flex-col items-center rounded-3xl bg-primary'>
         <button
           className='flex w-full justify-end  pr-4 pt-4 text-pink-500'
           onClick={() => setshowUploadModal(false)}

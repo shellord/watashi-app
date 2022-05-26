@@ -62,8 +62,8 @@ const EditProfile = () => {
           </button>
         </div>
         <div>
-          <fieldset className='border  border-gray-200 p-3'>
-            <legend className='text-sm text-gray-600 font-semibold'>
+          <fieldset className='border border-gray-200 dark:border-gray-700  p-3'>
+            <legend className='text-sm text-secondary font-semibold'>
               Basic Information
             </legend>
             <div className='flex flex-col'>
@@ -86,7 +86,7 @@ const EditProfile = () => {
                 Username
               </label>
               <div className='flex items-center'>
-                <div className='bg-gray-400 p-2 rounded-l'>
+                <div className='bg-gray-400 dark:bg-gray-600 p-2 rounded-l'>
                   <p>watashi.app/</p>
                 </div>
                 <input
@@ -130,7 +130,7 @@ const EditProfile = () => {
                   />
                   <label
                     htmlFor='male'
-                    className='flex cursor-pointer items-center rounded-l bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+                    className='flex cursor-pointer items-center rounded-l bg-gray-100 dark:bg-gray-700 py-2 px-4 font-semibold text-primary  peer-checked:bg-pink-500 peer-checked:text-white '
                   >
                     <BsGenderMale />
                     <span className='ml-2'>Male</span>
@@ -147,7 +147,7 @@ const EditProfile = () => {
                   />
                   <label
                     htmlFor='female'
-                    className='flex cursor-pointer items-center rounded-none bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+                    className='flex cursor-pointer items-center rounded-none bg-gray-100 dark:bg-gray-700 py-2 px-4 font-semibold text-primary  peer-checked:bg-pink-500 peer-checked:text-white '
                   >
                     <BsGenderFemale />
                     <span className='ml-2'>Female</span>
@@ -164,7 +164,7 @@ const EditProfile = () => {
                   />
                   <label
                     htmlFor='other'
-                    className='flex cursor-pointer items-center rounded-r bg-gray-100 py-2 px-4 font-semibold text-gray-800  peer-checked:bg-pink-500 peer-checked:text-white '
+                    className='flex cursor-pointer items-center rounded-r bg-gray-100 dark:bg-gray-700 py-2 px-4 font-semibold text-primary  peer-checked:bg-pink-500 peer-checked:text-white '
                   >
                     <BsGenderTrans />
                     <span className='ml-2'>Other</span>
@@ -176,8 +176,8 @@ const EditProfile = () => {
         </div>
 
         <div className='mt-3'>
-          <fieldset className='border  border-gray-200 p-3'>
-            <legend className='text-sm text-gray-600 font-semibold'>
+          <fieldset className='border  border-gray-200 dark:border-gray-700 p-3'>
+            <legend className='text-sm text-secondary font-semibold'>
               Connections
             </legend>
             <div>
@@ -185,7 +185,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex items-center'>
-              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
                 instagram.com/
               </span>
               <input
@@ -196,7 +196,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex '>
-              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
                 twitter.com/
               </span>
               <input
@@ -207,7 +207,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex'>
-              <span className='flex bg-gray-400 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
                 snapchat.com/
               </span>
               <input

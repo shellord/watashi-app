@@ -28,7 +28,7 @@ const Activity = ({
   category,
 }: Props) => {
   return (
-    <div className='bg-white p-3 rounded-lg shadow'>
+    <div className='bg-primary p-3 rounded-lg shadow'>
       <div className='flex'>
         <Link href={`/${username}`}>
           <a>

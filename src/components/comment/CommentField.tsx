@@ -14,7 +14,7 @@ const CommentField = ({ imageUrl, onComment }: Props) => {
   }
 
   return (
-    <div className='bg-white'>
+    <div className='bg-primary'>
       <form onSubmit={onSubmitHandler}>
         <div className='flex'>
           <div className='relative w-[2.4rem] h-[2.4rem] flex-shrink-0'>

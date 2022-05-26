@@ -6,7 +6,7 @@ type Props = {
 const DeleteListModal = ({ setShowDeleteModal, onDelete }: Props) => {
   return (
     <div className='absolute top-36 w-full max-w-xl p-5'>
-      <div className='rounded-lg bg-white p-5 text-center'>
+      <div className='rounded-lg text-primary p-5 text-center'>
         <span className='font-semibold'>
           Are you sure you wanna delete this list?
         </span>

@@ -125,7 +125,7 @@ const EditList: NextPage = () => {
       <Head>
         <title>Edit List</title>
       </Head>
-      <div className='rounded bg-white p-5 shadow'>
+      <div className='rounded bg-primary p-5 shadow'>
         <div className='mb-3 flex '>
           <Link href='/my-list'>
             <a>

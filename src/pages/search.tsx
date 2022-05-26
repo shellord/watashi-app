@@ -20,11 +20,11 @@ const Search: NextPage = () => {
 
   return (
     <div>
-      <div className='bg-white shadow p-5 flex justify-center '>
-        <div className='w-96 flex items-center rounded-lg bg-gray-100 p-1 focus-within:outline focus-within:outline-pink-500 '>
+      <div className='bg-primary shadow p-5 flex justify-center '>
+        <div className='w-96 flex items-center rounded-lg bg-secondary p-1 focus-within:outline focus-within:outline-pink-500 '>
           <input
             placeholder='Search'
-            className='ml-2 w-full bg-gray-100 outline-none'
+            className='ml-2 w-full bg-secondary  outline-none'
             onChange={(event) => setSearchQuery(event.target.value)}
             autoFocus
           />
@@ -41,7 +41,7 @@ const Search: NextPage = () => {
           userSearchResult?.users.map((user) => (
             <div
               key={user.id}
-              className='flex items-center space-x-5 bg-white p-3 rounded shadow justify-center'
+              className='flex items-center space-x-5 bg-primary p-3 rounded shadow justify-center'
             >
               <Link href={`/${user.username}`}>
                 <a>
@@ -63,7 +63,7 @@ const Search: NextPage = () => {
           ))}
       </div>
       {searchQuery.length === 0 && (
-        <div className='bg-white p-2 rounded-sm shadow'>
+        <div className='bg-primary p-2 rounded-sm shadow'>
           <div className='mb-3 border-b pb-3'>
             <p className='font-bold'>Cool people to follow</p>
           </div>

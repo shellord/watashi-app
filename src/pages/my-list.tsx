@@ -18,8 +18,8 @@ const MyList = () => {
   const { mutate: changeOrder } = useChangeListOrder()
 
   return (
-    <div className='rounded bg-white p-2 shadow'>
-      <div className='flex items-center justify-between border-b pb-2'>
+    <div className='rounded bg-primary p-2 shadow'>
+      <div className='flex items-center justify-between border-b dark:border-gray-500 pb-2'>
         <p className='heading'>My Lists</p>
         <Link href='/create-list'>
           <a>
@@ -36,7 +36,10 @@ const MyList = () => {
       {lists && (
         <div className='mt-3 space-y-3'>
           {lists.map((list) => (
-            <div key={list.id} className='border-b pb-2 flex space-x-1'>
+            <div
+              key={list.id}
+              className='border-b dark:border-gray-500 pb-2 flex space-x-1'
+            >
               <div className='mt-10 space-y-2 flex flex-col'>
                 <button
                   disabled={list.order === 1}
@@ -76,7 +79,7 @@ const MyList = () => {
                   <p className='text-xl font-bold'>{list.name}</p>
                   <Link href={`edit-list/${list.id}`}>
                     <a>
-                      <button className='btn-secondary'>Edit</button>
+                      <button className='btn-secondary bg-primary'>Edit</button>
                     </a>
                   </Link>
                 </div>

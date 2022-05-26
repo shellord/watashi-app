@@ -34,18 +34,18 @@ const CommentMenu = ({ id, isSameUser }: Props) => {
         <HiOutlineDotsHorizontal className='text-gray-600' size={18} />
       </button>
       {showMenu && (
-        <div className='absolute right-0 border w-36 rounded-lg shadow p-1 bg-white z-20'>
+        <div className='absolute right-0 border dark:border-gray-600 w-36 rounded-lg shadow p-1 bg-primary z-20'>
           <div className='flex flex-col'>
             {isSameUser && (
               <button
-                className='hover:bg-pink-50 rounded-lg text-left p-2'
+                className='hover:bg-pink-50 dark:hover:bg-gray-700 rounded-lg text-left p-2'
                 onClick={() => setShowDeleteModal(true)}
               >
                 Delete
               </button>
             )}
 
-            <button className='hover:bg-pink-50 rounded-lg p-2 text-left'>
+            <button className='hover:bg-pink-50 dark:hover:bg-gray-700 rounded-lg p-2 text-left'>
               Report
             </button>
           </div>

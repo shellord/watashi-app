@@ -12,14 +12,14 @@ const Comment = ({ comments }: Props) => {
   return (
     <CommentsContainer>
       {comments.length === 0 && (
-        <div className='flex items-center flex-col'>
+        <div className='flex items-center flex-col bg-primary'>
           <p>No Comments yet</p>
           <p className='flex items-center'>
             Be the First one to comment <span className='text-2xl'>😀</span>{' '}
           </p>
         </div>
       )}
-      <div className='space-y-3 min-h-28'>
+      <div className='space-y-3 min-h-28 bg-primary'>
         {reversedComments.map((comment) => (
           <div key={comment.id}>
             <CommentItem

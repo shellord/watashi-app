@@ -31,7 +31,7 @@ const Notifications: NextPage = () => {
       <Head>
         <title>Notifications</title>
       </Head>
-      <div className='shadow mt-2 rounded bg-white p-2'>
+      <div className='shadow mt-2 rounded bg-primary p-2'>
         {status === 'loading' && <div className='mt-4'>Loading</div>}
         {data?.notifications.length === 0 && status === 'success' && (
           <EmptyNotifications />

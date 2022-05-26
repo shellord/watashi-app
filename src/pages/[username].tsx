@@ -51,7 +51,7 @@ const ProfilePage = () => {
 
   if (!user && status !== 'loading') {
     return (
-      <div className='flex h-56 items-center justify-center bg-white p-2'>
+      <div className='flex h-56 items-center justify-center text-primary p-2'>
         <h1 className='text-xl'>User doesn&apos;t Exist!</h1>
       </div>
     )
@@ -64,7 +64,7 @@ const ProfilePage = () => {
   const isSameUser = currentUser?.id === user?.id
 
   const EmptyList = () => (
-    <div className='flex h-56 items-center justify-center bg-white p-2 shadow flex-col'>
+    <div className='flex h-56 items-center justify-center bg-primary p-2 shadow flex-col'>
       <h1 className='text-lg'>{user?.name} doesn&apos;t have any list yet </h1>
       <h1 className='text-xl'>🫤</h1>
     </div>
@@ -93,12 +93,12 @@ const ProfilePage = () => {
       </div>
 
       {!lists && (
-        <div className='bg-white mt-2 p-3'>
+        <div className='bg-primary mt-2 p-3'>
           <SkeletonList />
         </div>
       )}
       {lists && lists.list.length > 0 ? (
-        <div className='mt-2 space-y-3 rounded bg-white p-3 shadow'>
+        <div className='mt-2 space-y-3 rounded bg-primary p-3 shadow'>
           {lists.list.map((list) => (
             <div key={list.id}>
               <ListContainer
@@ -114,7 +114,7 @@ const ProfilePage = () => {
           <EmptyList />
         </div>
       )}
-      <div className='shadow mt-2 bg-white p-2'>
+      <div className='shadow mt-2 bg-primary p-2'>
         <p className='font-semibold border-b pb-2 text-lg'>Comments</p>
 
         {currentUser && currentUser.image ? (
@@ -125,7 +125,7 @@ const ProfilePage = () => {
             />
           </div>
         ) : (
-          <div className='mt-3'>Login to comment</div>
+          <div className='mt-3 text-primary'>Login to comment</div>
         )}
         {comments && <Comment comments={comments} />}
       </div>
