@@ -12,8 +12,8 @@
 
  .dark{
    --text-primary:#ffffff;
-   --bg-secondary:#111827;
    --bg-primary:#1f2937;
+   --bg-secondary:#111827;
  }
  
  body{

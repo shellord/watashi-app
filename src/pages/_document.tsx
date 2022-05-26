@@ -13,7 +13,16 @@ export default function Document() {
         <meta name='keywords' content='Keywords' />
         <link rel='manifest' href='/manifest.webmanifest' />
         <link rel='apple-touch-icon' href='images/logo.png '></link>
-        <meta name='theme-color' content='#ffffff' />
+        <meta
+          name='theme-color'
+          content='#ffffff'
+          media='(prefers-color-scheme: light)'
+        />
+        <meta
+          name='theme-color'
+          content='#1f2937'
+          media='(prefers-color-scheme: dark)'
+        />
       </Head>
       <body>
         <Main />
