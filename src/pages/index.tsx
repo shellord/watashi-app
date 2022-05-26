@@ -9,7 +9,7 @@ import Activity from '@/components/activity/Activity'
 
 const EmptyActivityFeed = () => {
   return (
-    <div className='bg-white p-5 rounded shadow'>
+    <div className='bg-primary p-5 rounded shadow'>
       <p>No activities yet 📭  </p>
       <p className='text-gray-500'>Follow users to see their activities 👀 </p>
     </div>

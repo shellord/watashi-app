@@ -23,8 +23,8 @@ const FollowsModal = ({ showModal, setShowModal, users, title }: Props) => {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className='absolute top-36 w-full max-w-lg p-5'>
-        <div className='rounded-lg bg-white p-5'>
-          <div className='flex items-center justify-between border-b pb-2'>
+        <div className='rounded-lg bg-primary p-5'>
+          <div className='flex items-center justify-between border-b dark:border-b-gray-600 pb-2'>
             <p className='text-lg font-semibold'>{title}</p>
             <button onClick={() => setShowModal(false)}>
               <IoMdClose size={24} />
