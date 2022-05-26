@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { FaDiscord, FaTwitter } from 'react-icons/fa'
 import { HiUser } from 'react-icons/hi'
 import { MdDarkMode, MdLanguage } from 'react-icons/md'
 
@@ -12,6 +13,14 @@ export type LinkButtonProps = {
   icon: React.ComponentType<React.ComponentProps<'svg'>>
   label: string
   right?: React.ReactElement
+  target?: '_blank' | '_self' | '_parent' | '_top'
+}
+
+export type ActionButtonProps = {
+  icon: React.ComponentType<React.ComponentProps<'svg'>>
+  label: string
+  onClick: () => void
+  right?: React.ReactElement
 }
 
 export const LinkButton = ({
@@ -19,9 +28,10 @@ export const LinkButton = ({
   href,
   label,
   right,
+  target,
 }: LinkButtonProps) => (
   <Link href={href}>
-    <a>
+    <a target={target ? target : '_self'}>
       <div className='flex items-center w-full py-4'>
         <span>
           <Icon className='w-6 h-6' />
@@ -31,6 +41,21 @@ export const LinkButton = ({
       </div>
     </a>
   </Link>
+)
+
+export const ActionButton = ({
+  onClick,
+  icon: Icon,
+  right,
+  label,
+}: ActionButtonProps) => (
+  <button className='flex items-center w-full py-4' onClick={onClick}>
+    <span>
+      <Icon className='w-6 h-6' />
+    </span>
+    <p className='flex w-full justify-center font-semibold'>{label}</p>
+    {right && <span className='flex items-center'>{right}</span>}
+  </button>
 )
 
 const Settings: NextPage = () => {
@@ -63,14 +88,18 @@ const Settings: NextPage = () => {
               icon={HiUser}
               label='Edit Profile'
             />
-            <LinkButton href='' icon={MdLanguage} label='🇺🇸 English' />
+            <ActionButton
+              icon={MdLanguage}
+              label='🇺🇸 English'
+              onClick={() => null}
+            />
           </div>
         </div>
 
         <div className='shadow rounded bg-primary p-2 px-5 sm:px-10'>
           <p className='text-center  font-semibold'>Dark Mode</p>
-          <LinkButton
-            href='/settings/dark-mode'
+          <ActionButton
+            onClick={() => null}
             icon={MdDarkMode}
             label={enabledDarkMode ? 'Disable Dark Mode' : 'Enable Dark Mode'}
             right={
@@ -90,6 +119,24 @@ const Settings: NextPage = () => {
               </Switch>
             }
           />
+        </div>
+
+        <div className='shadow rounded bg-primary p-2 px-5 sm:px-10'>
+          <p className='text-center font-semibold'>Community</p>
+          <div className='mt-3 divide-y flex flex-col'>
+            <LinkButton
+              href='https://twitter.com/watashiapp'
+              target='_blank'
+              icon={FaTwitter}
+              label='Follow us on Twitter'
+            />
+            <LinkButton
+              href='https://discord.gg/g7C7mgZ5Qp'
+              target='_blank'
+              icon={FaDiscord}
+              label='Join our Discord'
+            />
+          </div>
         </div>
       </div>
     </>
