@@ -27,7 +27,7 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
   return (
     <>
       <div className='mb-3 border-b dark:border-black pb-2'>
-        <p className='text-lg font-bold'>{listName}s</p>
+        <p className='text-lg font-bold'>{listName}</p>
       </div>
       <div className='flex space-x-3 overflow-x-auto'>
         {listItems.map((item) => (
