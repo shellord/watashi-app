@@ -1,4 +1,5 @@
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
@@ -63,6 +64,22 @@ const Notifications: NextPage = () => {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default Notifications

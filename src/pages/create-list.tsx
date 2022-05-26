@@ -1,6 +1,7 @@
 import type { ListItem } from '@/types/list'
 import type { Category } from '@prisma/client'
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -89,6 +90,21 @@ const AddList: NextPage = () => {
       </div>
     </>
   )
+}
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default AddList

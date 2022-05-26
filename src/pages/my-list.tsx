@@ -1,3 +1,5 @@
+import { GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 
@@ -101,6 +103,22 @@ const MyList = () => {
       )}
     </div>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default MyList

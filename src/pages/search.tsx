@@ -1,4 +1,5 @@
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -85,6 +86,22 @@ const Search: NextPage = () => {
       )}
     </div>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default Search

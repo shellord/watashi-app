@@ -1,4 +1,5 @@
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 import { BiArrowBack } from 'react-icons/bi'
 
@@ -24,6 +25,22 @@ const EditProfilePage: NextPage = () => {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context
+  const session = await getSession({ req })
+  if (!session) {
+    return {
+      redirect: { destination: '/signin' },
+      props: {},
+    }
+  }
+  return {
+    props: {
+      session,
+    },
+  }
 }
 
 export default EditProfilePage
