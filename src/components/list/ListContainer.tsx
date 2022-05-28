@@ -1,8 +1,9 @@
+import BottomSheet from './BottomSheet'
 import ListItemCard from './ListItemCard'
-import MovieBottomSheet from './bottom-sheets/MovieBottomSheet'
-import MovieDetailsModal from './modals/MovieDetailsModal'
 import type { Category, Item } from '@prisma/client'
 import { useState } from 'react'
+
+import ItemDetailsModal from '@/components/list/modals/ItemDetailsModal'
 
 type Props = {
   listName: String
@@ -44,10 +45,10 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
       </div>
 
       {/* For Desktop */}
-      <MovieDetailsModal showModal={showModal} setShowModal={setShowModal} />
+      <ItemDetailsModal showModal={showModal} setShowModal={setShowModal} />
 
       {/* For Mobile */}
-      <MovieBottomSheet
+      <BottomSheet
         open={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
       />

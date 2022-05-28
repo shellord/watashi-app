@@ -5,7 +5,7 @@ type Props = {
   setShowBottomSheet: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const MovieBottomSheet = ({ open, setShowBottomSheet }: Props) => {
+const BottomSheet = ({ open, setShowBottomSheet }: Props) => {
   const onDismiss = () => {
     setShowBottomSheet(false)
   }
@@ -29,4 +29,4 @@ const MovieBottomSheet = ({ open, setShowBottomSheet }: Props) => {
   )
 }
 
-export default MovieBottomSheet
+export default BottomSheet

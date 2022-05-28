@@ -5,7 +5,7 @@ type Props = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const MovieDetailsModal = ({ showModal, setShowModal }: Props) => {
+const ItemDetailsModal = ({ showModal, setShowModal }: Props) => {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className='absolute top-96 w-full max-w-lg p-5'>
@@ -15,4 +15,4 @@ const MovieDetailsModal = ({ showModal, setShowModal }: Props) => {
   )
 }
 
-export default MovieDetailsModal
+export default ItemDetailsModal
