@@ -43,7 +43,10 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
         ))}
       </div>
 
+      {/* For Desktop */}
       <MovieDetailsModal showModal={showModal} setShowModal={setShowModal} />
+
+      {/* For Mobile */}
       <MovieBottomSheet
         open={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}

@@ -185,7 +185,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex items-center'>
-              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 py-2 px-0 sm:p-2 rounded-l w-1/3 justify-end text-sm sm:text-base'>
                 instagram.com/
               </span>
               <input
@@ -196,7 +196,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex '>
-              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 py-2 px-0 sm:p-2 rounded-l w-1/3 justify-end text-sm sm:text-base'>
                 twitter.com/
               </span>
               <input
@@ -207,7 +207,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-2 flex'>
-              <span className='flex bg-gray-400 dark:bg-gray-600 p-2 rounded-l w-1/3 justify-center'>
+              <span className='flex bg-gray-400 dark:bg-gray-600 py-2 px-0 sm:p-2 rounded-l w-1/3 justify-end text-sm sm:text-base'>
                 snapchat.com/
               </span>
               <input
