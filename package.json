@@ -23,6 +23,7 @@
     "@headlessui/react": "^1.6.3",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.13.0",
+    "@use-gesture/react": "^10.2.15",
     "axios": "^0.25.0",
     "clsx": "^1.1.1",
     "framer-motion": "^6.3.3",
@@ -37,6 +38,7 @@
     "react-icons": "^4.3.1",
     "react-modal-sheet": "^1.5.1",
     "react-query": "^3.34.14",
+    "react-spring": "^9.4.5",
     "react-toastify": "^8.1.1",
     "ws": "^8.6.0",
     "zod": "^3.17.3"
