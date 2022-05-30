@@ -22,6 +22,7 @@
 }
 
 @layer components {
+ 
   label {
     @apply text-sm text-gray-500;
   }

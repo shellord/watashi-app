@@ -157,3 +157,22 @@ export const changeOrder = async ({ order, listId }: changeOrderInput) => {
     throw Error('Something went wrong')
   }
 }
+
+export const fetchItemDetails = async (category: string, id: string) => {
+  try {
+    const res = await axios.get(`/api/details/${category.toLowerCase()}`, {
+      params: {
+        id: id,
+      },
+    })
+    return res.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError
+      if (serverError && serverError.response) {
+        throw Error(serverError.response.data.error)
+      }
+    }
+    throw Error('Something went wrong')
+  }
+}

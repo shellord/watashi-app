@@ -1,9 +1,8 @@
-import BottomSheet from './BottomSheet'
 import ListItemCard from './ListItemCard'
 import type { Category, Item } from '@prisma/client'
 import { useState } from 'react'
 
-import ItemDetailsModal from '@/components/list/modals/ItemDetailsModal'
+import { BottomSheet } from '@/components/ui/BottomSheet'
 
 type Props = {
   listName: String
@@ -12,17 +11,12 @@ type Props = {
 }
 
 const ListContainer = ({ listName, listItems, category }: Props) => {
-  const isMobile = window.innerWidth < 768 ? true : false
-  const [showModal, setShowModal] = useState(false)
   const [showBottomSheet, setShowBottomSheet] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<Item>()
 
   const showItemDetailsModalHandler = (item: Item) => {
-    return
-    if (!isMobile) {
-      setShowBottomSheet(true)
-    } else {
-      setShowModal(true)
-    }
+    setSelectedItem(item)
+    setShowBottomSheet(true)
   }
 
   return (
@@ -44,14 +38,14 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
         ))}
       </div>
 
-      {/* For Desktop */}
-      <ItemDetailsModal showModal={showModal} setShowModal={setShowModal} />
-
-      {/* For Mobile */}
       <BottomSheet
-        open={showBottomSheet}
-        setShowBottomSheet={setShowBottomSheet}
-      />
+        show={showBottomSheet}
+        setShow={setShowBottomSheet}
+        className='bg-primary max-w-2xl mx-auto'
+        key={'bottom-sheet'}
+      >
+        hello
+      </BottomSheet>
     </>
   )
 }
