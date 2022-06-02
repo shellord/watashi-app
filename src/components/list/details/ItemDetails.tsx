@@ -15,14 +15,18 @@ const ItemDetails = ({ category, itemId }: Props) => {
     return <div>Loading...</div>
   }
 
-  const trailerLink =
-    category === ('TV' || 'MOVIE') && data.videos.results[0]
+  let trailerLink = null
+  if (category === 'MOVIE' || category === 'MUSIC') {
+    trailerLink = data.videos.results[0]
       ? `https://youtube.com/watch?v=${data.videos.results[0].key}`
       : null
+  }
 
   return (
     <div>
-      {category === ('BOOK' || 'MUSIC') && <p>Details Not available yet</p>}
+      {category === 'MUSIC' && <p>Details Not available yet</p>}
+      {category === 'BOOK' && <p>Details Not available yet</p>}
+
       {category === 'MOVIE' && (
         <MovieDetails
           name={data.title}

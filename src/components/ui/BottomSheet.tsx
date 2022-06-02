@@ -11,6 +11,12 @@ type Props = {
 }
 
 export const BottomSheet = ({ show, className, setShow, children }: Props) => {
+  useEffect(() => {
+    show
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'unset')
+  }, [show])
+
   const height = window.innerHeight / 2
 
   const [{ y }, api] = useSpring(() => ({ y: height }))
