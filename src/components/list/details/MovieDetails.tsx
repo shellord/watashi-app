@@ -35,26 +35,24 @@ const MovieDetails = ({
   const imageUrl = image ? `${IMAGE_URL}${image}` : '/images/150.png'
 
   return (
-    <div className='mt-10 mx-5 pb-2'>
+    <div className='mt-10 mx-5 pb-10'>
       <div className='flex flex-col sm:flex-row items-center sm:items-start'>
         <div className='relative h-44 w-32 flex-shrink-0 sm:mt-2'>
           <Image src={imageUrl} alt={name} layout='fill' />
         </div>
         <div className='ml-5 relative'>
-          <div className='sticky inset-0 bg-primary'>
-            <p className='font-bold text-xl text-center sm:text-left'>{name}</p>
-            <div className='flex space-x-1 flex-col items-center sm:items-start'>
-              <span className='text-xl font-semibold flex items-center'>
-                <HiStar className='text-yellow-500' size={20} />
-                {rating}
-                <span className='text-gray-500 text-base'>/10</span>
-              </span>
-              <div className='flex w-full justify-center sm:justify-start'>
-                <div className='flex space-x-2 flex-wrap '>
-                  {genres.map((genre) => {
-                    return <GenreBadge genre={genre.name} key={genre.id} />
-                  })}
-                </div>
+          <p className='font-bold text-xl text-center sm:text-left'>{name}</p>
+          <div className='flex space-x-1 flex-col items-center sm:items-start'>
+            <span className='text-xl font-semibold flex items-center'>
+              <HiStar className='text-yellow-500' size={20} />
+              {rating}
+              <span className='text-gray-500 text-base'>/10</span>
+            </span>
+            <div className='flex w-full justify-center sm:justify-start'>
+              <div className='flex space-x-2 flex-wrap '>
+                {genres.map((genre) => {
+                  return <GenreBadge genre={genre.name} key={genre.id} />
+                })}
               </div>
             </div>
           </div>

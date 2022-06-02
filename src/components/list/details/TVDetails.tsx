@@ -39,7 +39,7 @@ const TVDetails = ({
   const imageUrl = image ? `${IMAGE_URL}${image}` : '/images/150.png'
 
   return (
-    <div className='mt-10 mx-5 pb-2'>
+    <div className='mt-10 mx-5 pb-10'>
       <div className='flex flex-col sm:flex-row items-center'>
         <div className='relative h-44 w-32 flex-shrink-0'>
           <Image src={imageUrl} alt={name} layout='fill' />
