@@ -22,6 +22,7 @@ const ItemDetails = ({ category, itemId }: Props) => {
 
   return (
     <div>
+      {category === ('BOOK' || 'MUSIC') && <p>Details Not available yet</p>}
       {category === 'MOVIE' && (
         <MovieDetails
           name={data.title}
