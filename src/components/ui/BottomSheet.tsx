@@ -1,6 +1,6 @@
 import { useDrag } from '@use-gesture/react'
 import clsx from 'clsx'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { animated, config, useSpring } from 'react-spring'
 
 type Props = {
@@ -41,18 +41,24 @@ export const BottomSheet = ({ show, className, setShow, children }: Props) => {
     }
   )
 
-  const open = ({ canceled }: { canceled: boolean }) => {
-    api.start({
-      y: 0,
-      immediate: false,
-      config: canceled ? config.wobbly : config.stiff,
-    })
-  }
+  const open = useCallback(
+    ({ canceled }: { canceled: boolean }) => {
+      api.start({
+        y: 0,
+        immediate: false,
+        config: canceled ? config.wobbly : config.stiff,
+      })
+    },
+    [api]
+  )
 
-  const close = (velocity = 0) => {
-    api.start({ y: height, config: { ...config.stiff, velocity } })
-    setShow(false)
-  }
+  const close = useCallback(
+    (velocity = 0) => {
+      api.start({ y: height, config: { ...config.stiff, velocity } })
+      setShow(false)
+    },
+    [api, setShow, height]
+  )
 
   useEffect(() => {
     if (show) {
@@ -60,8 +66,7 @@ export const BottomSheet = ({ show, className, setShow, children }: Props) => {
     } else {
       close()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show])
+  }, [show, open, close])
 
   return (
     <>
@@ -86,7 +91,7 @@ export const BottomSheet = ({ show, className, setShow, children }: Props) => {
           className
         )}
       >
-        {children}
+        <div className='overflow-y-scroll flex h-1/2'>{children}</div>
       </animated.div>
     </>
   )

@@ -1,4 +1,5 @@
 import ListItemCard from './ListItemCard'
+import ItemDetails from './details/ItemDetails'
 import type { Category, Item } from '@prisma/client'
 import { useState } from 'react'
 
@@ -24,6 +25,7 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
       <div className='mb-3 border-b dark:border-black pb-2'>
         <p className='text-lg font-bold'>{listName}</p>
       </div>
+
       <div className='flex space-x-3 overflow-x-auto'>
         {listItems.map((item) => (
           <div key={item.id}>
@@ -44,7 +46,9 @@ const ListContainer = ({ listName, listItems, category }: Props) => {
         className='bg-primary max-w-2xl mx-auto'
         key={'bottom-sheet'}
       >
-        hello
+        {selectedItem && (
+          <ItemDetails itemId={selectedItem.itemId} category={category} />
+        )}
       </BottomSheet>
     </>
   )

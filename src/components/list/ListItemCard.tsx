@@ -18,7 +18,7 @@ const ListItemCard = ({ title, image, category }: Props) => {
   }
 
   return (
-    <div className='relative w-32'>
+    <div className='w-32'>
       <div className='relative h-44 overflow-hidden rounded-lg shadow-sm'>
         <Image src={imageUrl} layout='fill' alt='poster' />
       </div>
