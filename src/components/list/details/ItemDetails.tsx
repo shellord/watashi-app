@@ -1,4 +1,5 @@
 import MovieDetails from './MovieDetails'
+import TVDetails from './TVDetails'
 import { Category } from '@prisma/client'
 
 import useGetItemDetails from '@/hooks/useGetItemDetails'
@@ -14,7 +15,11 @@ const ItemDetails = ({ category, itemId }: Props) => {
   if (isLoading) {
     return <div>Loading...</div>
   }
-  const trailerkey = data.videos.results[0].key ?? null
+
+  const trailerLink = data.videos.results[0]
+    ? `https://youtube.com/watch?v=${data.videos.results[0].key}`
+    : null
+
   return (
     <div>
       {category === 'MOVIE' && (
@@ -25,7 +30,18 @@ const ItemDetails = ({ category, itemId }: Props) => {
           rating={data.vote_average}
           genres={data.genres}
           releaseDate={data.release_date}
-          trailerLink={`https://youtube.com/watch?v=${data.videos.results[0].key}`}
+          trailerLink={trailerLink}
+        />
+      )}
+      {category === 'TV' && (
+        <TVDetails
+          name={data.original_name}
+          description={data.overview}
+          image={data.poster_path}
+          rating={data.vote_average}
+          genres={data.genres}
+          releaseDate={data.first_air_date}
+          trailerLink={trailerLink}
         />
       )}
     </div>

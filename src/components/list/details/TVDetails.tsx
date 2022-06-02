@@ -20,10 +20,12 @@ type Props = {
 const IMAGE_URL = `https://image.tmdb.org/t/p/w500`
 
 const GenreBadge = ({ genre }: { genre: string }) => {
-  return <div className='bg-secondary p-1 rounded text-sm'>{genre}</div>
+  return (
+    <div className='bg-secondary p-1 rounded text-sm sm:text-base'>{genre}</div>
+  )
 }
 
-const MovieDetails = ({
+const TVDetails = ({
   name,
   description,
   image,
@@ -36,8 +38,8 @@ const MovieDetails = ({
 
   return (
     <div className='mt-10 mx-5 pb-2'>
-      <div className='flex flex-col sm:flex-row items-center sm:items-start'>
-        <div className='relative h-44 w-32 flex-shrink-0 sm:mt-2'>
+      <div className='flex flex-col sm:flex-row items-center'>
+        <div className='relative h-44 w-32 flex-shrink-0'>
           <Image src={imageUrl} alt={name} layout='fill' />
         </div>
         <div className='ml-5 relative'>
@@ -84,4 +86,4 @@ const MovieDetails = ({
   )
 }
 
-export default MovieDetails
+export default TVDetails
