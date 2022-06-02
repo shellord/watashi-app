@@ -11,20 +11,20 @@ type Props = {
 
 const ItemDetails = ({ category, itemId }: Props) => {
   const { data, isLoading } = useGetItemDetails(category, itemId)
-
   if (isLoading) {
     return <div>Loading...</div>
   }
 
-  const trailerLink = data.videos.results[0]
-    ? `https://youtube.com/watch?v=${data.videos.results[0].key}`
-    : null
+  const trailerLink =
+    category === ('TV' || 'MOVIE') && data.videos.results[0]
+      ? `https://youtube.com/watch?v=${data.videos.results[0].key}`
+      : null
 
   return (
     <div>
       {category === 'MOVIE' && (
         <MovieDetails
-          name={data.original_title}
+          name={data.title}
           description={data.overview}
           image={data.poster_path}
           rating={data.vote_average}
@@ -33,9 +33,10 @@ const ItemDetails = ({ category, itemId }: Props) => {
           trailerLink={trailerLink}
         />
       )}
+
       {category === 'TV' && (
         <TVDetails
-          name={data.original_name}
+          name={data.name}
           description={data.overview}
           image={data.poster_path}
           rating={data.vote_average}

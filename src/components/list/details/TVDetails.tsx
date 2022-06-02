@@ -21,7 +21,9 @@ const IMAGE_URL = `https://image.tmdb.org/t/p/w500`
 
 const GenreBadge = ({ genre }: { genre: string }) => {
   return (
-    <div className='bg-secondary p-1 rounded text-sm sm:text-base'>{genre}</div>
+    <div className='bg-secondary p-1 rounded text-sm  text-center flex items-center truncate'>
+      {genre}
+    </div>
   )
 }
 
@@ -43,20 +45,18 @@ const TVDetails = ({
           <Image src={imageUrl} alt={name} layout='fill' />
         </div>
         <div className='ml-5 relative'>
-          <div className='sticky inset-0 bg-primary'>
-            <p className='font-bold text-xl text-center sm:text-left'>{name}</p>
-            <div className='flex items-center space-x-1'>
+          <p className='font-bold text-xl text-center sm:text-left'>{name}</p>
+          <div className='flex space-x-1 flex-col items-center sm:items-start'>
+            <span className='text-xl font-semibold flex items-sa'>
               <HiStar className='text-yellow-500' size={20} />
-              <div className='flex justify-between w-full'>
-                <span className='text-xl font-semibold'>
-                  {rating}
-                  <span className='text-gray-500 text-base'>/10</span>
-                </span>
-                <div className='flex space-x-2'>
-                  {genres.map((genre) => {
-                    return <GenreBadge genre={genre.name} key={genre.id} />
-                  })}
-                </div>
+              {rating}
+              <span className='text-gray-500 text-base'>/10</span>
+            </span>
+            <div className='flex w-full'>
+              <div className='flex space-x-2 flex-wrap justify-center'>
+                {genres.map((genre) => {
+                  return <GenreBadge genre={genre.name} key={genre.id} />
+                })}
               </div>
             </div>
           </div>
