@@ -16,7 +16,7 @@ const ItemDetails = ({ category, itemId }: Props) => {
   }
 
   let trailerLink = null
-  if (category === 'MOVIE' || category === 'MUSIC') {
+  if (category === 'MOVIE' || category === 'TV') {
     trailerLink = data.videos.results[0]
       ? `https://youtube.com/watch?v=${data.videos.results[0].key}`
       : null
