@@ -9,7 +9,7 @@ type Props = {
 }
 export const UserCard = ({ id, name, username, image }: Props) => {
   return (
-    <div className='bg-primary shadow  p-2 flex flex-col items-center'>
+    <div className='bg-primary shadow p-2 flex flex-col items-center'>
       <Link href={`/${username}`}>
         <a className='flex flex-col items-center'>
           <div className='relative w-16 h-16'>

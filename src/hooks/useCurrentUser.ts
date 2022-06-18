@@ -9,6 +9,7 @@ export const useCurrentUser = (
   const query = useQuery(['currentUser'], fetchCurrentUser, {
     ...options,
     staleTime: Infinity,
+    refetchOnWindowFocus: false,
   })
   return { user: query.data, status: query.status } as const
 }
