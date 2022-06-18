@@ -17,7 +17,12 @@ const Landing = () => {
         <div className='flex flex-col items-center'>
           <div className='font-bold flex flex-col items-center'>
             <div className='relative w-72 h-60'>
-              <Image src='/images/profile.png' alt='profile' layout='fill' />
+              <Image
+                src='/images/profile.png'
+                alt='profile'
+                layout='fill'
+                priority
+              />
             </div>
             <div className='mt-1' />
             <p className='text-primary text-xl'>Create a profile</p>
@@ -37,6 +42,7 @@ const Landing = () => {
                   alt='profile'
                   layout='fill'
                   className='object-fill'
+                  priority
                 />
               </div>
             </div>
