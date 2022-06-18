@@ -31,7 +31,9 @@ const NavBar = () => {
         </Link>
         <div
           className={`relative ${
-            status === 'loading' ? 'top-[-1em] opacity-0' : 'opacity-1 top-0'
+            status === 'loading'
+              ? 'top-[-1em] opacity-0 pointer-events-none'
+              : 'opacity-1 top-0'
           } transition-all duration-300`}
         >
           {status === 'success' && user ? (
