@@ -10,7 +10,6 @@ import ActivityContainer from '@/components/activity/ActivityContainer'
 import Landing from '@/components/landing'
 
 const Home: NextPage<ServerSideProps> = ({ sessionData }) => {
-  console.log('session', sessionData)
   return (
     <>
       <Head>
@@ -27,12 +26,6 @@ type ServerSideProps = InferGetServerSidePropsType<typeof getServerSideProps>
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context
   const session = await getSession({ req })
-  // if (!session) {
-  //   return {
-  //     redirect: { destination: '/signin' },
-  //     props: {},
-  //   }
-  // }
   return {
     props: {
       sessionData: session,
