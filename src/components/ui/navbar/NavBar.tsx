@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { IoMdNotifications, IoMdNotificationsOutline } from 'react-icons/io'
@@ -15,6 +16,7 @@ import NavbarMenu from '@/components/ui/navbar/NavbarMenu'
 
 const NavBar = () => {
   const { user, status } = useCurrentUser()
+  const { data: userSession, status: userSessionStatus } = useSession()
   const router = useRouter()
   const { data: notifications, status: unseenNotificationStatus } =
     useGetNotifications()
@@ -23,6 +25,8 @@ const NavBar = () => {
     (notification) => !notification.seen
   ).length
 
+  const isLoggedIn = userSessionStatus === 'authenticated'
+  console.log(isLoggedIn)
   return (
     <div className='sticky top-0 z-20 bg-primary shadow-sm dark:shadow-2xl'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
@@ -31,7 +35,7 @@ const NavBar = () => {
         </Link>
         <div
           className={`relative ${
-            status === 'loading'
+            status === 'loading' && isLoggedIn
               ? 'top-[-1em] opacity-0 pointer-events-none'
               : 'opacity-1 top-0'
           } transition-all duration-300`}
