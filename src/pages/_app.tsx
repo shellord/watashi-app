@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import '@/styles/nprogress.css'
 import { SessionProvider } from 'next-auth/react'
+import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -29,6 +30,19 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'
         />
       </Head>
+      <DefaultSeo
+        openGraph={{
+          type: 'website',
+          locale: 'en_IE',
+          url: 'https://www.watashi.app/',
+          site_name: 'Watashi',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
           <ThemeProvider attribute='class'>

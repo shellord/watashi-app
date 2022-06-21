@@ -17,7 +17,7 @@ const Landing = () => {
         <div className='flex flex-col items-center'>
           <div className='font-bold flex flex-col items-center'>
             <div className='bg-black/10 dark:bg-white/10 p-1 rounded shadow'>
-              <div className='relative w-72 h-60'>
+              <div className='relative w-56 h-56'>
                 <Image
                   src='/images/profile.png'
                   alt='profile'

@@ -26,7 +26,6 @@ const NavBar = () => {
   ).length
 
   const isLoggedIn = userSessionStatus === 'authenticated'
-  console.log(isLoggedIn)
   return (
     <div className='sticky top-0 z-20 bg-primary shadow-sm dark:shadow-2xl'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
