@@ -31,16 +31,22 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         />
       </Head>
       <DefaultSeo
+        title='Watashi'
+        description='Share your interests with your friends and followers'
         openGraph={{
           type: 'website',
           locale: 'en_IE',
           url: 'https://www.watashi.app/',
           site_name: 'Watashi',
-        }}
-        twitter={{
-          handle: '@handle',
-          site: '@site',
-          cardType: 'summary_large_image',
+          images: [
+            {
+              url: 'https://www.watashi.app/images/banner.png',
+              width: 800,
+              height: 600,
+              alt: 'watashi banner',
+              type: 'image/jpeg',
+            },
+          ],
         }}
       />
       <QueryClientProvider client={queryClient}>
