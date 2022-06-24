@@ -28,7 +28,7 @@ const Signin = ({ providers }: ServerSideProps) => {
   }
 
   return (
-    <div className='flex h-[90vh] flex-col items-center justify-center overflow-scroll'>
+    <div className='flex h-[90vh] flex-col items-center justify-center overflow-hidden'>
       <div className='rounded-lg bg-white shadow-lg ring-1 ring-black/10'>
         <Image src='/images/logo.png' width={180} height={180} alt='logo' />
       </div>
