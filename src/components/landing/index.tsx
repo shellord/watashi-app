@@ -54,7 +54,7 @@ const Landing = () => {
               </div>
             </div>
             <p className='text-primary text-xl text-center'>
-              Share it with your friends and and followers
+              Share it with your friends and followers
             </p>
           </div>
         </div>

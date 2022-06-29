@@ -27,6 +27,7 @@ const EditProfile = () => {
     event.preventDefault()
     const { name, username, gender, bio, instagram, snapchat, twitter } = event
       .currentTarget.elements as any
+
     updateUserMutation.mutate({
       name: name.value,
       username: username.value,
@@ -37,7 +38,6 @@ const EditProfile = () => {
       snapchatUsername: snapchat.value || null,
     })
   }
-
   return (
     <>
       <form onSubmit={handleSubmit} className='mt-3'>
