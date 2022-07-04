@@ -13,7 +13,7 @@ A social media app for creators and influencers to share their interests with fa
 
 ## Todo
 
-- [ ] Show Item Details when user click on it.
+- [x] Show Item Details when user click on it.
       [ ex: when user click on a movie card,show a modal with movie descriptions and trailer link ]
 - [ ] Add replies to comments.
 - [ ] Add pagination to comments.
