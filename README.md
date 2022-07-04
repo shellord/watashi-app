@@ -18,3 +18,12 @@ A social media app for creators and influencers to share their interests with fa
 - [ ] Add replies to comments.
 - [ ] Add pagination to comments.
 - [ ] Add realtime notification and activity feed.
+
+## Contributors
+
+We 💖 contributors! Feel free to contribute to this project
+
+<a href="https://github.com/shellord/watashi-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=shellord/watashi-app" />
+</a>
+
