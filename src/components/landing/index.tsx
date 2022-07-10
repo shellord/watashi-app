@@ -1,15 +1,23 @@
 import Image from 'next/image'
 import { HiHeart } from 'react-icons/hi'
 
+const NumberBadge = ({ number }: { number: number }) => {
+  return (
+    <span className='flex items-center justify-center px-3 py-2 text-xs font-bold text-white bg-pink-600 rounded-full'>
+      {number}
+    </span>
+  )
+}
+
 const Landing = () => {
   return (
     <div>
       <div className='bg-primary p-4 pb-10 shadow rounded'>
         <div>
-          <p className='text-4xl sm:text-7xl font-[800] text-primary text-center'>
+          <p className='text-4xl sm:text-7xl font-[800] text-primary text-center tracking-tighter'>
             Watashi.
           </p>
-          <p className='text-lg sm:text-xl text-pink-500 text-center'>
+          <p className='text-lg sm:text-xl text-pink-500 text-center tracking-tight'>
             Share Your Interests with your friends and followers
           </p>
         </div>
@@ -27,7 +35,10 @@ const Landing = () => {
               </div>
             </div>
             <div className='mt-1' />
-            <p className='text-primary text-xl'>Create a profile</p>
+            <div className='flex gap-2'>
+              <NumberBadge number={1} />
+              <p className='text-primary text-xl'>Create a profile</p>
+            </div>
             <hr className='h-8 sm:h-12 w-[0.1rem]  bg-black dark:bg-white mt-2' />
             <div className='mt-2' />
             <div className='bg-black/10 dark:bg-white/10 p-1 rounded shadow'>
@@ -38,7 +49,10 @@ const Landing = () => {
               </div>
             </div>
             <div className='mt-1' />
-            <p className='text-primary text-xl'>Copy your profile link </p>
+            <div className='flex gap-2'>
+              <NumberBadge number={2} />
+              <p className='text-primary text-xl'>Copy your profile link </p>
+            </div>
             <hr className='h-8 sm:h-12 w-[0.1rem]  bg-black dark:bg-white mt-2' />
             <div className='shadow p-1'>
               <div className='bg-black/10 dark:bg-white/10 p-1 rounded shadow'>
@@ -53,9 +67,12 @@ const Landing = () => {
                 </div>
               </div>
             </div>
-            <p className='text-primary text-xl text-center'>
-              Share it with your friends and followers
-            </p>
+            <div className='flex gap-2'>
+              <NumberBadge number={3} />
+              <p className='text-primary text-xl text-center'>
+                Share it with your followers
+              </p>
+            </div>
           </div>
         </div>
       </div>

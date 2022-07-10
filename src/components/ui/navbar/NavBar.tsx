@@ -30,7 +30,9 @@ const NavBar = () => {
     <div className='sticky top-0 z-20 bg-primary shadow-sm dark:shadow-2xl'>
       <div className='mx-auto flex max-w-2xl items-center justify-between px-4 py-2'>
         <Link href='/'>
-          <a className='inline text-2xl font-bold text-primary'>watashi</a>
+          <a className='inline text-2xl font-bold text-primary tracking-tight'>
+            watashi
+          </a>
         </Link>
         <div
           className={`relative ${
