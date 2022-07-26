@@ -143,6 +143,7 @@ const EditList: NextPage = () => {
           id='list-name'
           className='input-field w-full sm:w-1/2'
           defaultValue={listName}
+          maxLength={40}
           onChange={(event) => setlistName(event.target.value)}
         />
         {list && list.length > 0 && (

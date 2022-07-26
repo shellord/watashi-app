@@ -32,6 +32,7 @@ const StepOne = ({ setCategory, setListName }: Props) => {
         id='list-name'
         className='input-field w-full sm:w-1/2'
         placeholder='My Favourite List'
+        maxLength={40}
         onChange={(event) => setListName(event.target.value)}
       />
       <div className='my-2 mt-3'>
