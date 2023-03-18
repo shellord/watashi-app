@@ -76,7 +76,7 @@ const MyList = () => {
                 </button>
               </div>
 
-              <div className='w-full overflow-x-scroll'>
+              <div className='w-full overflow-x-auto'>
                 <div className='flex items-center justify-between'>
                   <p className='text-xl font-bold'>{list.name}</p>
                   <Link href={`edit-list/${list.id}`}>
@@ -85,7 +85,7 @@ const MyList = () => {
                     </a>
                   </Link>
                 </div>
-                <div className='mt-2 flex space-x-3 overflow-x-scroll'>
+                <div className='mt-2 flex space-x-3 '>
                   {list.items.map((item) => (
                     <div key={item.id}>
                       <ListItemCard
