@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import '@/styles/nprogress.css'
+import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
@@ -21,7 +22,12 @@ Router.events.on('routeChangeStart', nProgress.start)
 Router.events.on('routeChangeError', nProgress.done)
 Router.events.on('routeChangeComplete', nProgress.done)
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{
+  session: Session
+}>) {
   return (
     <>
       <Head>
